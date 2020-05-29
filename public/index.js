@@ -2,3 +2,4 @@
 import { home } from './pages/home/main.js';
 
 document.querySelector('#root').appendChild(home());
+//TESTANDO
