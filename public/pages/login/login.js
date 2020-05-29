@@ -14,11 +14,11 @@ function configLogin() {
     ui.start('#firebase-auth-container', uiConfig());
 }
 
-function removeLogin() {
-    document.getElementById('firebase-auth-container').innerHTML = `
-    Que bom ver vocdê ${firebase.auth().currentUser.displayName}
-    <a href="#" onClick="logout()";>Logout </a>`
-}
+// function removeLogin() {
+//     document.getElementById('firebase-auth-container').innerHTML = `
+//     Que bom ver você ${firebase.auth().currentUser.displayName}
+//     <a href="#" onClick="logout()";>Logout </a>`
+// }
 
 function logout() {
     firebase.auth().signOut();
