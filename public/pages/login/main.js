@@ -1,4 +1,8 @@
-import { configLogin, removeLogin, logout } from "./login.js";
+import {
+  configLogin,
+  removeLogin,
+  logout
+} from "./login.js";
 export default () => {
   const container = document.createElement("div");
 
@@ -10,10 +14,10 @@ export default () => {
       <input id="password" type="password" placeholder="Password">
       <button type="submit">ENTRAR</button> 
   </form>
-  <p>Entrar com conta Google</p>
+  <p>Entrar com Google</p>
   <div id="firebase-auth-container"></div>
   <p id="load"></p>
-  <a href="/#register">Cadastre-se</a>
+  <p>Não tem uma conta? <a href="/#register">Cadastre-se</a></p>
   <div></div>
   `;
 
@@ -42,7 +46,5 @@ export default () => {
         "Error loading the Firebase SDK, check the console.";
     }
   });
-
-
   return container;
 };
