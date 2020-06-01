@@ -1,3 +1,5 @@
+export { configLogin, logout, removeLogin };
+
 function uiConfig() {
   return {
     signInFlow: "popup",
@@ -24,5 +26,3 @@ function logout() {
   firebase.auth().signOut();
   location.reload();
 }
-
-export { configLogin, logout, removeLogin };

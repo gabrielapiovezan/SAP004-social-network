@@ -1,8 +1,4 @@
-import {
-  configLogin,
-  removeLogin,
-  logout
-} from "./login.js";
+import { configLogin, removeLogin, logout } from "./login.js";
 export default () => {
   const container = document.createElement("div");
 
@@ -10,9 +6,9 @@ export default () => {
   <h1> &lt;Nome Projeto&gt; </h1>
   <h2>Welcome</h2>
   <form id="login-email">
-      <input id="email" type="email" placeholder="E-mail">
-      <input id="password" type="password" placeholder="Password">
-      <button type="submit">ENTRAR</button> 
+    <input id="email" type="email" placeholder="E-mail">
+    <input id="password" type="password" placeholder="Password">
+    <button type="submit">ENTRAR</button> 
   </form>
   <p>Entrar com Google</p>
   <div id="firebase-auth-container"></div>
