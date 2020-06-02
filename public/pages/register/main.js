@@ -13,16 +13,6 @@ export default () => {
     </form>
     `;
 
-  // const name = container.querySelector("#name");
-  // const email = container.querySelector("#email");
-  // const password = container.querySelector("#password");
-
-  // container.querySelector("#register").addEventListener("submit", () => {
-  //   console.log(name.value);
-  //   console.log(email.value);
-  //   console.log(password.value);
-  // })
-
   container.querySelector("#register").addEventListener("submit", function (event) {
     event.preventDefault();
     const email = container.querySelector("#email").value
