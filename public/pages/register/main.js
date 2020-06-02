@@ -26,3 +26,4 @@ export default () => {
     register(email, password, username);
   });
   return container;
+}
