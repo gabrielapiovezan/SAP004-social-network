@@ -1,8 +1,8 @@
-import { configLogin, removeLogin, logout } from "./login.js";
-export default () => {
-  const container = document.createElement("div");
+import { configLogin, removeLogin, loginButton, logout } from "./login.js";
 
-  container.innerHTML = `
+export default () => {
+    const container = document.createElement("div");
+    container.innerHTML = `
   <h1> &lt;Nome Projeto&gt; </h1>
   <h2>Welcome</h2>
   <form id="login-email">
@@ -17,32 +17,37 @@ export default () => {
   <div></div>
   `;
 
-  // document.getElementById("message").innerHTML = `
-  // <h2>Welcome</h2>
-  // <div id="firebase-auth-container"></div>
-  // `;
+    // document.getElementById("message").innerHTML = `
+    // <h2>Welcome</h2>
+    // <div id="firebase-auth-container"></div>
+    // `;
 
-  document.addEventListener("DOMContentLoaded", function () {
-    try {
-      //let app = firebase.app();
-      //let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-      //document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-      configLogin();
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          removeLogin()
-          logout()
+    document.addEventListener("DOMContentLoaded", function() {
+        try {
+            //let app = firebase.app();
+            //let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+            //document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
+            configLogin();
+            window.addEventListener("load", () => {
+                loginButton()
+            })
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    removeLogin()
+                    logout()
+                }
+                console.log(user);
+
+            });
+
+            // loadPost()
+        } catch (e) {
+            console.error(e);
+            document.getElementById("load").innerHTML =
+                "Error loading the Firebase SDK, check the console.";
         }
-        console.log(user);
-      });
-      // loadPost()
-    } catch (e) {
-      console.error(e);
-      document.getElementById("load").innerHTML =
-        "Error loading the Firebase SDK, check the console.";
-    }
-  });
+    });
 
 
-  return container;
+    return container;
 };
