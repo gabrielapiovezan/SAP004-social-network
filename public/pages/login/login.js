@@ -1,11 +1,13 @@
 const logout = () => {
-    // window.addEventListener("load", () => {
-    //         document.getElementById("buttonOut").addEventListener(() => {
-    //             console.log("evento")
-    //         })
-    //     })
-    firebase.auth().signOut();
-    location.reload();
+    debugger;
+    //  window.addEventListener("load", () => {
+    document.getElementById("buttonOut").addEventListener("click", () => {
+            console.log("evento")
+            firebase.auth().signOut();
+            location.reload();
+        })
+        //   })
+
 }
 
 function uiConfig() {
@@ -13,8 +15,8 @@ function uiConfig() {
         signInFlow: "popup",
         signInSuccessUrl: "#",
         signInOptions: [
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            // firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],
     };
 }
@@ -27,11 +29,11 @@ function configLogin() {
 function removeLogin() {
     document.getElementById('firebase-auth-container').innerHTML = `
       Que bom ver você ${firebase.auth().currentUser.displayName}    
-      <a href="#"  >Logout</a>
-      <button type="submit" id="buttonOut">sair</button>`
+      <a href="#" id="buttonOut"  >Logout</a>`
+
+
 
 }
-//            <a href="#" onclick="logout();">Logout </a>
 
 
 
