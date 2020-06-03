@@ -1,9 +1,12 @@
 const logout = () => {
-    debugger;
+    //  debugger;
     //  window.addEventListener("load", () => {
     document.getElementById("buttonOut").addEventListener("click", () => {
             console.log("evento")
             firebase.auth().signOut();
+            //   location.reload();
+
+            //  window.location.href = "#"
             location.reload();
         })
         //   })
@@ -30,15 +33,7 @@ function configLogin() {
 function removeLogin() {
     document.getElementById('firebase-auth-container').innerHTML = `
       Que bom ver você ${firebase.auth().currentUser.displayName}    
-<<<<<<< HEAD
       <a href="#" id="buttonOut"  >Logout</a>`
-
-
-
-=======
-      <a href="#"  >Logout</a>
-      <button type="submit" id="buttonOut">sair</button>`
->>>>>>> fda1325151ba1e14265429f5dbad9ad4b1f33f51
 }
 
 
@@ -49,7 +44,7 @@ function loginButton() {
 
         const email = document.getElementById("email").value
         const password = document.getElementById("password").value
-        const username = "gabi"
+            // const username = "gabi"
 
         // firebase.auth().createUserWithEmailAndPassword("gabi@gabi.com", "password").catch(function(error) {
         //     // Handle Errors here.
@@ -90,4 +85,6 @@ function loginButton() {
 
     })
 }
-export { configLogin, removeLogin, loginButton, logout };
+export { configLogin, loginButton, logout, removeLogin };
+
+//logout removeLogin,

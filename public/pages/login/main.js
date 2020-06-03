@@ -1,5 +1,5 @@
-import { configLogin, removeLogin, loginButton, logout } from "./login.js";
-
+import { configLogin, loginButton, logout, removeLogin } from "./login.js";
+//logout removeLogin,
 export default () => {
     const container = document.createElement("div");
     container.innerHTML = `
@@ -35,6 +35,7 @@ export default () => {
                 if (user) {
                     removeLogin()
                     logout()
+                        // window.location.href = "#home"
                 }
                 console.log(user);
 
