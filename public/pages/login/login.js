@@ -10,6 +10,7 @@ const logout = () => {
 
 }
 
+
 function uiConfig() {
     return {
         signInFlow: "popup",
@@ -29,10 +30,15 @@ function configLogin() {
 function removeLogin() {
     document.getElementById('firebase-auth-container').innerHTML = `
       Que bom ver você ${firebase.auth().currentUser.displayName}    
+<<<<<<< HEAD
       <a href="#" id="buttonOut"  >Logout</a>`
 
 
 
+=======
+      <a href="#"  >Logout</a>
+      <button type="submit" id="buttonOut">sair</button>`
+>>>>>>> fda1325151ba1e14265429f5dbad9ad4b1f33f51
 }
 
 

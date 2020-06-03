@@ -6,14 +6,14 @@ export default () => {
   <h1> &lt;Nome Projeto&gt; </h1>
   <h2>Welcome</h2>
   <form id="login-email">
-      <input id="email" type="email" placeholder="E-mail">
-      <input id="password" type="password" placeholder="Password">
-      <button type="submit">ENTRAR</button> 
+    <input id="email" type="email" placeholder="E-mail">
+    <input id="password" type="password" placeholder="Password">
+    <button type="submit">ENTRAR</button> 
   </form>
-  <p>Entrar com conta Google</p>
+  <p>Entrar com Google</p>
   <div id="firebase-auth-container"></div>
   <p id="load"></p>
-  <a href="/#register">Cadastre-se</a>
+  <p>Não tem uma conta? <a href="/#register">Cadastre-se</a></p>
   <div></div>
   `;
 
@@ -47,7 +47,5 @@ export default () => {
                 "Error loading the Firebase SDK, check the console.";
         }
     });
-
-
     return container;
 };

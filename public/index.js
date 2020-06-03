@@ -17,6 +17,6 @@ const renderPage = () => {
 };
 
 window.addEventListener("load", () => {
-    renderPage();
-    init();
+  renderPage();
+  init();
 });
