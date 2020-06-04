@@ -1,8 +1,3 @@
-// // Este é o ponto de entrada de sua aplicação
-// import { home } from './pages/home/main.js';
-
-// document.querySelector('#root').appendChild(home())
-
 import routes from "./routes.js";
 
 const container = document.querySelector("#root");
