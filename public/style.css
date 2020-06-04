@@ -1,0 +1,20 @@
+/* .button {
+    background-color: tomato;
+} */
+
+.icon {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+/* .input {
+    background-color: teal;
+}
+
+.link {
+    background-color: violet;
+} */

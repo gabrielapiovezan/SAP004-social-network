@@ -1,4 +1,8 @@
-import { login } from './data.js'
+import { login, loginGoogle } from './data.js'
+import { button } from '../elementos/objetos/button.js'
+import { input } from '../elementos/objetos/input.js'
+import { link } from '../elementos/objetos/link.js'
+
 
 export default () => {
     const container = document.createElement('div');
@@ -7,24 +11,33 @@ export default () => {
     <h1> &lt;Nome Projeto&gt; </h1>
     <h2>Welcome</h2>
     <form id="login-email">
-      <input id="email" type="email" placeholder="E-mail">
-      <input id="password" type="password" placeholder="Password">
-      <button type="submit">ENTRAR</button> 
+      ${input({type:"email",id:"email", placeholder:"E-mail"})}
+      ${input({type:"password",id:"password", placeholder:"password"})}     
+      ${button({name:"Entrar"})}
+      <div id="error"></div>
     </form>
     <p>Entrar com Google</p>
+    
+    ${input({type:"image",src:"./pages/elementos/icones/icon-google-24.png", id:"gmailBtn"})}
     <div id="firebase-auth-container"></div>
     <p id="load"></p>
-    <p>Não tem uma conta? <a href="/#register">Cadastre-se</a></p>
-    <div></div>
-    `;
+    <p>Não tem uma conta? 
+    ${link({href:"#register",name:"Cadastre-se"})}</p>`;
 
 
     container.querySelector("#login-email").addEventListener("submit", (event) => {
         event.preventDefault();
         const email = container.querySelector('#email').value;
         const password = container.querySelector('#password').value;
+        const error = container.querySelector('#error').value
         login(email, password)
-        window.location.hash = "home"
+
     })
+
+    container.querySelector("#gmailBtn").addEventListener('click', (event) => {
+        event.preventDefault();
+        loginGoogle()
+    })
+
     return container;
 }
