@@ -18,3 +18,55 @@
 .link {
     background-color: violet;
 } */
+
+/* style tela login */
+.container{
+    display: flex;
+    justify-content: space-around; 
+    flex-direction: row ;
+    margin-top: 50px; 
+  }
+
+.imgLogin{
+    max-width: 500px; 
+    max-height: 500px; 
+}
+
+.login{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap:wrap ;
+    border-radius: 10px;
+}
+
+.login button{
+    margin: 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+    width: 100px;
+    background-color: #FABA47;
+}
+
+.login-email{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;  
+    width: 100%;
+}
+
+.input{
+    width: 60%;
+    margin: 5px;
+    border-radius: 15px;
+    height: 30px;
+    background-color: rgb(231, 231, 173);
+}
+
+.gmail{
+    max-width: 24px; 
+    max-height: 24px; 
+    padding: 5px;
+    background-color: rgb(219, 215, 215);
+}
