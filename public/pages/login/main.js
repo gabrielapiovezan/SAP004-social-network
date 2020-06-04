@@ -1,8 +1,7 @@
-import { login, loginGoogle } from './data.js'
-import { button } from '../elementos/objetos/button.js'
-import { input } from '../elementos/objetos/input.js'
-import { link } from '../elementos/objetos/link.js'
-
+import { login, loginGoogle } from './data.js';
+import { button } from '../elementos/objetos/button.js';
+import { input } from '../elementos/objetos/input.js';
+import { link } from '../elementos/objetos/link.js';
 
 export default () => {
     const container = document.createElement('div');
@@ -14,15 +13,14 @@ export default () => {
     </figure>
     <div class="login">
     <h1> &lt;Umâmi&gt; </h1>
-    <h2>Welcome</h2>
+    <h2>Bem vindo!</h2>
     <form id="login-email" class="login-email">
       ${input({ type: "email", id: "email", placeholder: "E-mail", class: "input" })}
-      ${input({ type: "password", id: "password", placeholder: "password", class: "input" })}     
+      ${input({ type: "password", id: "password", placeholder: "Senha", class: "input" })}     
       ${button({ name: "Entrar" })}
       <div id="error"></div>
     </form>
     <p>Entrar com Google</p>
-    
     ${input({ type: "image", src: "./pages/elementos/icones/icon-google-24.png", id: "gmailBtn", class: "gmail" })}
     <div id="firebase-auth-container"></div>
     <p id="load"></p>
@@ -30,20 +28,18 @@ export default () => {
     ${link({ href: "#register", name: "Cadastre-se" })}</p>
     </div>`;
 
-
     container.querySelector("#login-email").addEventListener("submit", (event) => {
         event.preventDefault();
         const email = container.querySelector('#email').value;
         const password = container.querySelector('#password').value;
-        const error = container.querySelector('#error').value
-        login(email, password)
-
-    })
+        const error = container.querySelector('#error').value;
+        login(email, password);
+    });
 
     container.querySelector("#gmailBtn").addEventListener('click', (event) => {
         event.preventDefault();
-        loginGoogle()
-    })
+        loginGoogle();
+    });
 
     return container;
 }
