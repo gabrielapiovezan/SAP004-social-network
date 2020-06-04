@@ -6,23 +6,29 @@ import { link } from '../elementos/objetos/link.js'
 
 export default () => {
     const container = document.createElement('div');
+    container.classList.add("container");
 
     container.innerHTML = `
-    <h1> &lt;Nome Projeto&gt; </h1>
+    <figure>
+    <img src="/pages/elementos/imagens/imgLogin.jpg" class="imgLogin">
+    </figure>
+    <div class="login">
+    <h1> &lt;Umâmi&gt; </h1>
     <h2>Welcome</h2>
-    <form id="login-email">
-      ${input({type:"email",id:"email", placeholder:"E-mail"})}
-      ${input({type:"password",id:"password", placeholder:"password"})}     
-      ${button({name:"Entrar"})}
+    <form id="login-email" class="login-email">
+      ${input({ type: "email", id: "email", placeholder: "E-mail", class: "input" })}
+      ${input({ type: "password", id: "password", placeholder: "password", class: "input" })}     
+      ${button({ name: "Entrar" })}
       <div id="error"></div>
     </form>
     <p>Entrar com Google</p>
     
-    ${input({type:"image",src:"./pages/elementos/icones/icon-google-24.png", id:"gmailBtn"})}
+    ${input({ type: "image", src: "./pages/elementos/icones/icon-google-24.png", id: "gmailBtn", class: "gmail" })}
     <div id="firebase-auth-container"></div>
     <p id="load"></p>
     <p>Não tem uma conta? 
-    ${link({href:"#register",name:"Cadastre-se"})}</p>`;
+    ${link({ href: "#register", name: "Cadastre-se" })}</p>
+    </div>`;
 
 
     container.querySelector("#login-email").addEventListener("submit", (event) => {
