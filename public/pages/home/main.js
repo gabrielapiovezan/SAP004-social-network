@@ -1,15 +1,18 @@
 // Aqui serão criados os eventos de Manipulação de DOM e templates
 import { greeting, logout } from './data.js';
 import { button } from '../elementos/objetos/button.js';
-import { input } from '../elementos/objetos/input.js';
+// import { textarea } from '../elementos/objetos/textarea.js';
 import { link } from '../elementos/objetos/link.js';
+import { textarea } from '../elementos/objetos/textarea.js';
+
+// ${textarea({ id: "name", type: "text", placeholder: "Diga Oi!" })} <textarea rows="52" cols="52" id="name" type="text"></textarea>
 
 export default () => {
     const container = document.createElement('div');
     container.innerHTML = `
-    <form>
-    ${input({ id: "name", type: "text", placeholder: "Diga Oi!" })}
-    ${button({ id: "greeting-btn", name: "Dizer Oi" })}
+    <form class="box">
+    ${textarea({ id: "name", type: "text", rows: "5", cols: "50", placeholder: "Diga Oi!" })}    
+    ${button({ id: "greeting-btn", class: "greeting-btn", name: "Dizer Oi" })}
     </form>
     <div id='greeting-message'></div>
     <div id="firebase-auth-container"></div>
@@ -21,6 +24,7 @@ export default () => {
 
     greetingBtn.addEventListener('click', (event) => {
         event.preventDefault();
+
         greetingMessage.innerHTML = greeting(name.value);
     });
 
