@@ -9,7 +9,7 @@ export default () => {
 
   container.innerHTML = `
     <figure>
-      <img src="/pages/elementos/imagens/imgLogin.jpg" class="imgLogin">
+      <img src="/pages/elementos/imagens/IMG2.png" class="imgLogin">
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>

@@ -1,5 +1,6 @@
 body{
     font-family: 'Roboto', sans-serif;
+    color:#3C2415;
     background-color: rgba(250, 247, 243, 0.959);
 }
 .button {
@@ -11,12 +12,12 @@ body{
     height: 50px;
     width: 83%;
     padding: 0 10px;
-    background-color: #FABA47;
+    background-color: #FFD932;
     font-weight: 700;
 }
 
 .button:hover{
-    background-color: rgb(223, 159, 41);
+    background-color: #3C2415;
 }
 
 .input {
@@ -25,7 +26,7 @@ body{
     height: 45px;
     margin: 5px 10px;
     padding-left: 10px;
-    border: solid 1.5px black;
+    border: solid 1.5px #3C2415;
     border-radius: 40px;
 }
 
@@ -46,10 +47,12 @@ body{
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
 }
- 
+ .link{
+     color: #3C2415;
+ }
 .link:hover {
     font-weight: 700;
-    color: rgb(223, 159, 41);
+    color: #FFD932;
 }
 
 /* style tela login */
@@ -57,6 +60,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 50px;
   }
 
 .container form{
@@ -69,8 +73,8 @@ body{
 }
 
 .imgLogin{
-    max-width: 300px; 
-    max-height: 300px;
+    max-width: 450px; 
+    max-height: 450px;
     margin: 0;
 }
 
@@ -87,17 +91,17 @@ h1{
     font-size: 50px;
     font-family: 'Lobster', cursive;
     letter-spacing: 2px;
-    color:  #FABA47;
+    color:  #FFD932;
     margin: 0;
-    /* margin-bottom: 20px; */
 }
-/* font-family: 'Lato', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Roboto', sans-serif; */
+.box{
+    display: flex;
+    flex-direction: column;
+    border:solid 2px black;
+}
 
-@media (min-width:600px){
+
+@media (min-width:800px){
 
 .container{
     display: flex;
@@ -121,7 +125,6 @@ font-family: 'Roboto', sans-serif; */
 .imgLogin{
     max-width: 500px; 
     max-height: 500px;
-    margin: 0;
     padding: 0 100px;
 }
  
