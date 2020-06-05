@@ -1,5 +1,6 @@
 body{
     font-family: 'Roboto', sans-serif;
+    background-color: rgba(250, 247, 243, 0.959);
 }
 .button {
     font-size: 25px;
@@ -58,7 +59,7 @@ body{
     align-items: center;
   }
 
-  .container form{
+.container form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +89,7 @@ h1{
     letter-spacing: 2px;
     color:  #FABA47;
     margin: 0;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 /* font-family: 'Lato', sans-serif;
 font-family: 'Montserrat', sans-serif;
@@ -96,10 +97,35 @@ font-family: 'Open Sans', sans-serif;
 font-family: 'Oswald', sans-serif;
 font-family: 'Roboto', sans-serif; */
 
-@media (min-width:600px ){
-body{
-    background-color: blue;
+@media (min-width:600px){
+
+.container{
+    display: flex;
+    flex-direction: row;  
 }
+.container-register{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    width: 100%;
+}
+
+.input{
+   width: 50%;   
+}
+
+.button{
+    width: 52%;
+}
+.imgLogin{
+    max-width: 500px; 
+    max-height: 500px;
+    margin: 0;
+    padding: 0 100px;
+}
+ 
+
 }  
 
 

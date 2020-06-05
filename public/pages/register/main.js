@@ -8,16 +8,21 @@ export default () => {
   container.classList.add("container");
 
   container.innerHTML = `
-    <h1> &lt; Umâmi &gt; </h1>
-    <h2>Bem vindo!</h2>
-    <form id="register">
-      ${input({ type: "text", id: "name", placeholder: "Nome" })}
-      ${input({ type: "email", id: "email", placeholder: "E-mail" })}
-      ${input({ type: "password", id: "password", placeholder: "Senha" })}     
-      ${button({ name: "Registrar" })}
-      <div id="error"></div>
-    </form>
-    ${link({ href: "#", name: "Voltar" })}`;
+    <figure>
+      <img src="/pages/elementos/imagens/imgLogin.jpg" class="imgLogin">
+    </figure>
+    <div class="login">
+      <h1> &lt; Umâmi &gt; </h1>
+      <h2>Bem vindo!</h2>
+      <form id="register">
+        ${input({ type: "text", id: "name", placeholder: "Nome" })}
+        ${input({ type: "email", id: "email", placeholder: "E-mail" })}
+        ${input({ type: "password", id: "password", placeholder: "Senha" })}     
+        ${button({ name: "Registrar" })}
+        <div id="error"></div>
+      </form>
+      ${link({ href: "#", name: "Voltar" })}
+    </div>`;
 
   container.querySelector("#register").addEventListener("submit", (event) => {
     event.preventDefault();
