@@ -3,6 +3,9 @@ body {
     color: #3C2415;
     font-family: 'Roboto', sans-serif;
 }
+.image{
+    width: 32px;
+}
 
 .container {
     display: flex;
@@ -94,16 +97,31 @@ body {
 }
 
 .box {
+    margin-top: 15px;
+    border-radius: 7px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     border: solid 2px #3C2415;
-    width: 40%;
+    width: 80%;
 }
-
-.textarea {
+.textarea{
+    padding: 10px;
+    border-radius: 7px;
+    width:90%;
+    height: 70px;
     resize: none;
 }
 
+.greeting-btn{
+    border-radius: 30px;
+    font-size: 16px;
+   width: 120px;
+   height: 30px;
+}
+.box:nth-child(3){
+    background-color: #FFD932;
+}
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
@@ -130,4 +148,5 @@ body {
         max-height: 500px;
         padding: 0 100px;
     }
+
 }
