@@ -3,7 +3,7 @@ import { input } from '../elementos/objetos/input.js';
 import { register } from './data.js';
 import { link } from '../elementos/objetos/link.js';
 
-{/* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */}
+/* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
 export default () => {
   const container = document.createElement('div');
