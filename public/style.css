@@ -4,6 +4,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.image {
+    width: 32px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -67,7 +71,7 @@ body {
     background-color: #3C2415;
 }
 
-.icon {
+.icon-google {
     background: none;
     padding: 0;
     border: transparent;
@@ -77,7 +81,7 @@ body {
     padding: 5px;
 }
 
-.icon:hover {
+.icon-google:hover {
     background-color: #DBD7D7;
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
@@ -94,21 +98,50 @@ body {
 }
 
 .box {
+    margin-top: 15px;
+    border-radius: 7px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     border: solid 2px #3C2415;
-    width: 40%;
+    width: 80%;
 }
 
 .textarea {
+    padding: 10px;
+    border-radius: 7px;
+    width: 90%;
+    height: 70px;
     resize: none;
+}
+
+.greeting-btn {
+    border-radius: 30px;
+    font-size: 16px;
+    width: 120px;
+    height: 30px;
+}
+
+.icon {
+    border: solid 0.5px #3C2415;
+    margin: 10px;
+    padding: 1px;
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.space-buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
     }
-
     /* .container-register {
         display: flex;
         align-items: center;
@@ -116,15 +149,12 @@ body {
         flex-wrap: wrap;
         width: 100%;
     } */
-
     .input {
         width: 50%;
     }
-
     .button {
         width: 52%;
     }
-
     .imgLogin {
         max-width: 500px;
         max-height: 500px;

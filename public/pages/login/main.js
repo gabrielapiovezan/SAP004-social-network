@@ -22,7 +22,7 @@ export default () => {
         <div id="error"></div>
         </form>
         <p>Entrar com Google</p>
-        ${input({ type: "image", src: "./pages/elementos/icones/icon-google-32.png", id: "gmailBtn", class: "icon" })}
+        ${input({ type: "image", src: "./pages/elementos/icones/icon-google-32.png", id: "gmailBtn", class: "icon-google" })}
         <div id="firebase-auth-container"></div>
         <p id="load"></p>
         <p>Não tem uma conta? 
