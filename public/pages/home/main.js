@@ -26,6 +26,7 @@ export default () => {
     </form>
     <div id='greeting-message'></div>
     <div id="firebase-auth-container"></div>
+    <div id='message'></div>
     ${link({ href: "#", id: "buttonOut", name: "Logout" })}`;
 
   const name = container.querySelector('#name');
@@ -45,7 +46,12 @@ export default () => {
     location.reload();
   });
 
-  user()
+  // const message = container.querySelector('#message');
+
+  // window.addEventListener("load", () => {
+  //   message.innerHTML = user();
+  // })
+  user();
 
   return container;
 };

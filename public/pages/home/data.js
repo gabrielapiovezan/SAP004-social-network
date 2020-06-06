@@ -7,6 +7,7 @@ export const logout = () => {
 
 export const user = () => {
   firebase.auth().onAuthStateChanged(function (user) {
+    // Se troca essa variável por const ou let para de funcionar.
     var user = firebase.auth().currentUser;
     if (user) {
       let name = user.displayName;
