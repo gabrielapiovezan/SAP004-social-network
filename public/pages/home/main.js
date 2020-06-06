@@ -1,19 +1,8 @@
-// Aqui serão criados os eventos de Manipulação de DOM e templates
-import {
-  greeting,
-  logout,
-  user
-} from './data.js';
-import {
-  button
-} from '../elementos/objetos/button.js';
+import {greeting, logout, user} from './data.js';
+import {button} from '../elementos/objetos/button.js';
 // import { textarea } from '../elementos/objetos/textarea.js';
-import {
-  link
-} from '../elementos/objetos/link.js';
-import {
-  textarea
-} from '../elementos/objetos/textarea.js';
+import {link} from '../elementos/objetos/link.js';
+import {textarea} from '../elementos/objetos/textarea.js';
 
 // ${textarea({ id: "name", type: "text", placeholder: "Diga Oi!" })} <textarea rows="52" cols="52" id="name" type="text"></textarea>
 
@@ -35,7 +24,6 @@ export default () => {
 
   greetingBtn.addEventListener('click', (event) => {
     event.preventDefault();
-
     greetingMessage.innerHTML = greeting(name.value);
   });
 
