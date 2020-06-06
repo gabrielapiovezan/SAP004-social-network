@@ -1,21 +1,44 @@
-body{
+body {
+    background-color: #FAF7F3;
+    color: #3C2415;
     font-family: 'Roboto', sans-serif;
 }
-.button {
-    font-size: 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 40px;    
-    color: white;
-    height: 50px;
-    width: 83%;
-    padding: 0 10px;
-    background-color: #FABA47;
-    font-weight: 700;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.button:hover{
-    background-color: rgb(223, 159, 41);
+.imgLogin {
+    max-width: 475px;
+    max-height: 475px;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.login h1 {
+    font-size: 50px;
+    font-family: 'Lobster', cursive;
+    letter-spacing: 2px;
+    color: #FFD932;
+    margin: 0;
+}
+
+.container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
 .input {
@@ -24,80 +47,87 @@ body{
     height: 45px;
     margin: 5px 10px;
     padding-left: 10px;
-    border: solid 1.5px black;
+    border: solid 1.5px #3C2415;
     border-radius: 40px;
+}
+
+.button {
+    font-size: 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 40px;
+    color: #FFF;
+    height: 50px;
+    width: 83%;
+    background-color: #FFD932;
+    font-weight: 700;
+}
+
+.button:hover {
+    background-color: #3C2415;
 }
 
 .icon {
     background: none;
-    color: inherit;
     padding: 0;
     border: transparent;
     cursor: pointer;
-    max-width: 32px; 
-    max-height: 32px; 
+    max-width: 32px;
+    max-height: 32px;
     padding: 5px;
 }
 
-.icon:hover{
-    background-color: rgba(219, 215, 215, 0.74);
+.icon:hover {
+    background-color: #DBD7D7;
     -moz-transform: scale(1.1);
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
- 
+
+.link {
+    color: #3C2415;
+}
+
 .link:hover {
     font-weight: 700;
-    color: rgb(223, 159, 41);
+    color: #FFD932;
 }
 
-/* style tela login */
-.container{
+.box {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-
-  .container form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;  
-    width: 100%;
+    border: solid 2px #3C2415;
+    width: 40%;
 }
 
-.imgLogin{
-    max-width: 300px; 
-    max-height: 300px;
-    margin: 0;
+.textarea {
+    resize: none;
 }
 
-.login{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap:wrap ;
-    border-radius: 10px;
-    width: 70%; 
-}
+@media only screen and (min-width:770px) {
+    .container {
+        flex-direction: row;
+    }
 
-h1{
-    font-size: 50px;
-    font-family: 'Lobster', cursive;
-    letter-spacing: 2px;
-    color:  #FABA47;
-    margin: 0;
-    margin-bottom: 20px;
-}
-/* font-family: 'Lato', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Open Sans', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Roboto', sans-serif; */
+    /* .container-register {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    } */
 
-@media (min-width:600px ){
-body{
-    background-color: blue;
+    .input {
+        width: 50%;
+    }
+
+    .button {
+        width: 52%;
+    }
+
+    .imgLogin {
+        max-width: 500px;
+        max-height: 500px;
+        padding: 0 100px;
+    }
 }
-}  
