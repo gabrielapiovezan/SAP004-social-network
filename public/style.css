@@ -122,21 +122,11 @@ body {
     height: 30px;
 }
 
-.form {
-    display: inline-block;
-}
-
 .icon {
-    display: block;
-    position: relative;
-    left: 0px;
-    top: 0px;
     border: solid 0.5px #3C2415;
-    margin: 10px;
-    padding: 1px;
     border-radius: 8px;
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
 
 .icon-1 {
@@ -144,12 +134,10 @@ body {
 }
 
 .icon-2 {
+    display: none;
     border: none;
     z-index: 1;
     display: none;
-    position: relative;
-    left: 0px;
-    top: -35px;
 }
 
 .space-buttons {
