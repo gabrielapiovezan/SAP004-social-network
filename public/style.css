@@ -15,8 +15,10 @@ body {
 }
 
 .imgLogin {
-    max-width: 475px;
-    max-height: 475px;
+    width: 100%;
+    min-width: 250px;
+    /* max-width: 475px;
+    max-height: 475px; */
 }
 
 .login {
@@ -29,7 +31,9 @@ body {
 }
 
 .login h1 {
-    font-size: 50px;
+    font-size: 32px;
+    text-align: center;
+    width: 50%;
     font-family: 'Lobster', cursive;
     letter-spacing: 2px;
     color: #FFD932;

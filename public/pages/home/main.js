@@ -31,6 +31,7 @@ export default () => {
     container.appendChild(icon('luva'))
     container.appendChild(icon('talher'))
     container.appendChild(icon('tomate'))
+    container.appendChild(icon('caneca'))
 
     const name = container.querySelector('#name');
     const greetingBtn = container.querySelector('#greeting-btn');
