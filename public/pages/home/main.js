@@ -5,7 +5,6 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 
-
 // ${textarea({ id: "name", type: "text", placeholder: "Diga Oi!" })} <textarea rows="52" cols="52" id="name" type="text"></textarea>
 //    ${icon('churrasqueira')}
 export default () => {

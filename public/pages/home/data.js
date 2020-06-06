@@ -11,6 +11,7 @@ export const user = () => {
         var user = firebase.auth().currentUser;
         if (user) {
             let name = user.displayName;
+            // let photo = user.photoURL;
             console.log(`Oi ${name}! Que bom ver você aqui!`);
         } else {
             console.log("não possui usuário logado!");
