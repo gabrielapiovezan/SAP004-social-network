@@ -24,13 +24,13 @@ export default () => {
     ${link({ href: "#", id: "buttonOut", name: "Logout" })}`;
 
     container.appendChild(icon('cereja'))
-    container.appendChild(icon('churrasqueira'))
-    container.appendChild(icon('cafeteira'))
-    container.appendChild(icon('comida'))
-    container.appendChild(icon('luva'))
-    container.appendChild(icon('talher'))
-    container.appendChild(icon('tomate'))
-    container.appendChild(icon('caneca'))
+        // container.appendChild(icon('churrasqueira'))
+        // container.appendChild(icon('cafeteira'))
+        // container.appendChild(icon('comida'))
+        // container.appendChild(icon('luva'))
+        // container.appendChild(icon('talher'))
+        // container.appendChild(icon('tomate'))
+        // container.appendChild(icon('caneca'))
 
     const name = container.querySelector('#name');
     const greetingBtn = container.querySelector('#greeting-btn');

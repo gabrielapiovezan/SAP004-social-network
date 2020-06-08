@@ -3,3 +3,10 @@ export const button = (info) => {
     <button type="submit" class="button ${info.class}" id="${info.id}">${info.name}</button>`;
     return button;
 };
+
+export default (info) => {
+    const element = `<button type="submit" class="button ${info.class}" id="${info.id}">${info.name}</button>`;
+    const id = `#${info.id}`
+    return { element, id }
+
+};
