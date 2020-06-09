@@ -15,7 +15,9 @@ export const user = () => {
             console.log(`Oi ${name}! Que bom ver você aqui!`);
         } else {
             console.log("não possui usuário logado!");
+            //   let name = "anonimo"
         }
+        // return name;
     });
 }
 

@@ -136,10 +136,8 @@ body {
 }
 
 .icon-2 {
-    display: none;
     border: none;
     z-index: 1;
-    display: none;
 }
 
 .space-buttons {
@@ -147,6 +145,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.disappear {
+    display: none;
 }
 
 @media only screen and (min-width:770px) {
