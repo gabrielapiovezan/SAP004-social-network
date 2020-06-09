@@ -17,7 +17,7 @@ export default () => {
     ${button({ id: "greeting-btn", class: "greeting-btn", name: "Compartilhar" })}
     </div>
     </form>
-    
+
     <div id='greeting-message'></div>
     <div id="firebase-auth-container"></div>
     <div id='message'></div>
