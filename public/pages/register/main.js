@@ -36,3 +36,19 @@ export default () => {
   });
   return container;
 }
+
+
+// export default () => {
+//   const container = createElement("div");
+//   container.classList.add("container");
+
+//   const register = button({ name: "Registrar" })
+//   const voltar = link({ href: "#", name: "Voltar" })
+//   const name = input({ type: "text", id: "name", placeholder: "Nome" })
+//   const email = input({ type: "email", id: "email", placeholder: "E-mail" })
+//   const password = input({ type: "password", id: "password", placeholder: "Senha" })
+
+
+//   const form = document.createElement('form')
+//   form.cls
+// }

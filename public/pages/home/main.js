@@ -16,9 +16,14 @@ export default () => {
     const textBox = textarea({ id: "name", type: "text", size: "500", placeholder: "Diga Oi!" })
     const logout = link({ href: "#", id: "buttonOut", name: "Logout" })
 
-    const spaceButtons = document.createElement('div');
-    spaceButtons.classList.add("space-buttons")
-    spaceButtons.innerHTML = cherry.element + greetingBtn.element
+    container.appendChild(icon('cereja'))
+    // container.appendChild(icon('churrasqueira'))
+    // container.appendChild(icon('cafeteira'))
+    // container.appendChild(icon('comida'))
+    // container.appendChild(icon('luva'))
+    // container.appendChild(icon('talher'))
+    // container.appendChild(icon('tomate'))
+    // container.appendChild(icon('caneca'))
 
 
     const form = document.createElement('form')
@@ -28,7 +33,7 @@ export default () => {
     container.appendChild(form)
 
     const greetingMessage = document.createElement('div')
-        // greetingMessage.classList.add("greeting-message");
+    // greetingMessage.classList.add("greeting-message");
     container.appendChild(greetingMessage)
 
     const back = document.createElement('div')
