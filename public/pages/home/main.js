@@ -74,9 +74,9 @@ export default () => {
     function addPosts(post) {
         const postsTemplete = `
         <li id="li${post.id}" class="post box">
-            <div class="user-post">Publicado por: ${post.data().name}</div>
+            <div class="user-post">Publicado por: ${post.data().name} ${icon({name:'talher', id:post.id+"close"})}</div>
             ${post.data().text} 
-            <div class="icon-post">${post.data().likes}${icon({name:'luva', id:post.id})}</div>
+            <div class="icon-post">${post.data().likes}${icon({name:'cereja', id:post.id})}</div>
         </li>
         `
         container.querySelector("#posts").innerHTML += postsTemplete
@@ -103,7 +103,7 @@ export default () => {
             }
             likes += valid
             container.querySelector("#posts").innerHTML = ""
-            updateCollection(likeUser, likes, post.id, addPosts, like, likeClass)
+            updateCollection(likeUser, likes, post.id)
         })
 
     }
@@ -114,8 +114,8 @@ export default () => {
         container.querySelector("#nameUser").innerHTML = data
     }
     //  user();
-    loadPost(addPosts, like, likeClass);
     dataUser(profile);
+    loadPost(addPosts, like, likeClass);
 
 
 

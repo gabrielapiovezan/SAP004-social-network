@@ -8,11 +8,12 @@ body {
     width: 32px;
 }
 
-.back-yellow {
+
+/* .back-yellow {
     background-color: #FFD932;
     color: #FFF;
     font-weight: 700;
-}
+} */
 
 .container {
     display: flex;
@@ -113,7 +114,7 @@ body {
     padding: 15px;
     display: flex;
     flex-direction: column;
-    border: solid 1px #3C2415;
+    border: solid 1px rgba(60, 36, 21, 0.295);
     width: 80%;
 }
 
@@ -174,9 +175,13 @@ body {
 }
 
 .user-post {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
     background-color: #FFD932;
     font-size: 16px;
+    font-weight: 700;
+    /* color: #3C2415; */
 }
 
 .icon-post {

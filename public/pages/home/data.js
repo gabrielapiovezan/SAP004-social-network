@@ -40,7 +40,7 @@ export const updateCollection = (likeUser, likes, post, addPosts, like, likeClas
         liked: likeUser,
         likes: likes
     }).then(() => {
-        loadPost(addPosts, like, likeClass);
+        location.reload()
     })
 }
 
