@@ -35,13 +35,12 @@ export const loadPost = (addPosts, like, likeClass) => {
         });
     })
 }
-export const updateCollection = (likeUser, likes, post, addPosts, like, likeClass) => {
+export const updateCollection = (likeUser, likes, post) => {
     firebase.firestore().collection("posts").doc(`${post}`).update({
         liked: likeUser,
         likes: likes
-    }).then(() => {
-        location.reload()
     })
+
 }
 
 

@@ -5,7 +5,9 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 
+
 export default () => {
+
     const container = document.createElement('div');
 
     container.classList.add("container");
@@ -33,7 +35,7 @@ export default () => {
 
 
     const greetingBtn = container.querySelector('#greeting-btn');
-    const greetingMessage = container.querySelector('#greeting-message');
+    //const greetingMessage = container.querySelector('#greeting-message');
 
 
 
@@ -76,7 +78,7 @@ export default () => {
         <li id="li${post.id}" class="post box">
             <div class="user-post">Publicado por: ${post.data().name} ${icon({name:'talher', id:post.id+"close"})}</div>
             ${post.data().text} 
-            <div class="icon-post">${post.data().likes}${icon({name:'cereja', id:post.id})}</div>
+            <div id="likeid${post.id}" class="icon-post">${post.data().likes}${icon({name:'cereja', id:post.id})}</div>
         </li>
         `
         container.querySelector("#posts").innerHTML += postsTemplete
@@ -84,7 +86,7 @@ export default () => {
 
 
     function like(post) {
-        container.querySelector(`#li${post.id}`).addEventListener("click", (event) => {
+        container.querySelector(`#likeid${post.id}`).addEventListener("click", (event) => {
             event.preventDefault();
             let likes = post.data().likes
             let likeUser = post.data().liked
@@ -104,6 +106,9 @@ export default () => {
             likes += valid
             container.querySelector("#posts").innerHTML = ""
             updateCollection(likeUser, likes, post.id)
+
+            loadPost(addPosts, like, likeClass);
+
         })
 
     }
@@ -114,10 +119,8 @@ export default () => {
         container.querySelector("#nameUser").innerHTML = data
     }
     //  user();
+
     dataUser(profile);
-    loadPost(addPosts, like, likeClass);
-
-
-
+    loadPost(addPosts, like, likeClass)
     return container;
 };
