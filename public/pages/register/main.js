@@ -2,6 +2,7 @@ import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
 import { register } from './data.js';
 import { link } from '../elementos/objetos/link.js';
+import { image } from '../elementos/objetos/image.js';
 
 /* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
@@ -11,7 +12,7 @@ export default () => {
 
   container.innerHTML = `
     <figure>
-      <img src="/pages/elementos/imagens/IMG2.png" class="imgLogin">
+    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>

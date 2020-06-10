@@ -2,6 +2,7 @@ import { login, loginGoogle } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
 import { link } from '../elementos/objetos/link.js';
+import { image } from '../elementos/objetos/image.js';
 
 export default () => {
     const container = document.createElement('div');
@@ -9,7 +10,7 @@ export default () => {
 
     container.innerHTML = `
     <figure>
-        <img src="/pages/elementos/imagens/IMG2.png" class="imgLogin">
+    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
   
     <div class="login">
