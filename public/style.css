@@ -108,7 +108,7 @@ body {
 .box {
     margin-top: 15px;
     border-radius: 7px;
-    padding: 15px 0;
+justify-content: center;
     display: flex;
     flex-direction: column;
     border: solid 1px #3C2415;
@@ -117,7 +117,7 @@ body {
 
 .textarea {
     padding: 10px;
-    margin: 5px;
+    margin: 15px;
     border-radius: 7px;
     width: 90%;
     height: 70px;
