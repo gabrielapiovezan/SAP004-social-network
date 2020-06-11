@@ -126,7 +126,7 @@ body {
     resize: none;
 }
 
-.greeting-btn {
+.post-btn {
     border-radius: 30px;
     font-size: 16px;
     width: 120px;
@@ -168,6 +168,11 @@ body {
     flex-direction: column;
 }
 
+.text {
+    height: 50px;
+    padding: 5px;
+}
+
 .post {
     width: 100%;
     padding: 0;
@@ -186,6 +191,8 @@ body {
 
 .icon-post {
     display: flex;
+    padding: 5px;
+    align-items: center;
 }
 
 @media only screen and (min-width:770px) {

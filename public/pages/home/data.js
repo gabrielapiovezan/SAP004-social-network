@@ -1,6 +1,6 @@
 export const logout = () => {
     firebase.auth().signOut();
-    location.reload();
+    window.location.hash = "";
 };
 
 // export const user = () => {
@@ -19,8 +19,6 @@ export const logout = () => {
 //     });
 // }
 
-
-
 export const loadPost = (addPosts, like, likeClass, deletePost) => {
     const postsCollection = firebase.firestore().collection("posts")
     postsCollection.get().then(snap => {
@@ -38,17 +36,24 @@ export const loadPost = (addPosts, like, likeClass, deletePost) => {
         });
     })
 }
+
 export const updateCollection = (likeUser, likes, post) => {
     firebase.firestore().collection("posts").doc(`${post}`).update({
         liked: likeUser,
         likes: likes
     })
-
 }
-
 
 export const dataUser = (profile) => {
     firebase.auth().onAuthStateChanged(function(user) {
         profile(firebase.auth().currentUser.displayName)
     })
+}
+
+export const postDelete = (post) => {
+    firebase.firestore().collection("posts").doc(post).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
 }
