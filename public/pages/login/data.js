@@ -7,9 +7,8 @@ export const login = (email, password, printErrorLogin) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            printErrorLogin(errorMessage)
+            printErrorLogin(errorMessage);
                 //window.alert(errorMessage);
-                // ...
         });
 }
 
@@ -23,6 +22,5 @@ export const loginGoogle = () => {
         const token = result.credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-    })
-
-}
+    });
+};

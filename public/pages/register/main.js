@@ -3,7 +3,6 @@ import { input } from '../elementos/objetos/input.js';
 import { register } from './data.js';
 import { link } from '../elementos/objetos/link.js';
 import { image } from '../elementos/objetos/image.js';
-
 /* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
 export default () => {
@@ -22,7 +21,7 @@ export default () => {
         ${input({ type: "email", id: "email", placeholder: "E-mail" })}
         ${input({ type: "password", id: "password", placeholder: "Senha" })}  
         ${button({ name: "Registrar" })}
-        <div id="firebase-auth-container"></div>
+        <div id="error" class="error"></div>
       </form>
       ${link({ href: "#", name: "Voltar" })}
     </div>`;
@@ -32,12 +31,12 @@ export default () => {
         const name = container.querySelector('#name').value;
         const email = container.querySelector('#email').value;
         const password = container.querySelector('#password').value;
-
         register(email, password, name, printErrorLogin);
     });
 
     const printErrorLogin = (answer) => {
-        container.querySelector("#firebase-auth-container").innerHTML = answer
-    }
+        container.querySelector("#error").innerHTML = answer;
+    };
+    
     return container;
 }

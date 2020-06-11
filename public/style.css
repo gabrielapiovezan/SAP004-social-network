@@ -35,7 +35,7 @@ body {
 }
 
 .login h1 {
-    font-size: 32px;
+    font-size: 33px;
     text-align: center;
     width: 50%;
     font-family: 'Lobster', cursive;
@@ -79,6 +79,13 @@ body {
     background-color: #3C2415;
 }
 
+.error {
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    width: 70%;
+}
+
 .icon-google {
     background: none;
     padding: 0;
@@ -98,6 +105,7 @@ body {
 
 .link {
     color: #3C2415;
+    margin-bottom: 30px;
 }
 
 .link:hover {
@@ -108,7 +116,7 @@ body {
 .box {
     margin-top: 15px;
     border-radius: 7px;
-justify-content: center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
     border: solid 1px #3C2415;
