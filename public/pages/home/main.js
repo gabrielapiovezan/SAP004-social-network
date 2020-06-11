@@ -1,4 +1,4 @@
-import { logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
+import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 // import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
@@ -32,19 +32,21 @@ export default () => {
     container.querySelector('#post-btn').addEventListener('click', (event) => {
         event.preventDefault();
         const postText = container.querySelector('#post-text').value;
+
         const post = {
             name: firebase.auth().currentUser.displayName,
             text: postText,
             user_id: firebase.auth().currentUser.uid,
             likes: 0,
             liked: [],
-            comments: []
+            comments: [],
+            time: firebase.firestore.FieldValue.serverTimestamp()
         }
-        const postsCollection = firebase.firestore().collection("posts")
-        postsCollection.add(post).then(res => {
-            container.querySelector("#post-text").value = ""
-            loadPost()
-        })
+        container.querySelector("#post-text").value = ""
+        container.querySelector("#posts").innerHTML = ""
+        createPost(post)
+        loadPost(addPosts, like, likeClass, deletePost)
+
     });
 
     container.querySelector('#logout-btn').addEventListener('click', (event) => {
@@ -67,9 +69,11 @@ export default () => {
     function addPosts(post) {
         const postsTemplete = `
         <li id="li${post.id}" class="post box">
-            <div class="user-post" id="user-post${post.id}">Publicado por: ${post.data().name} ${icon({name:'talher', id:`'close${post.id}'`})}</div>
+            <div class="user-post">Publicado por: ${post.data().name} 
+            <span id="close${post.id}">${icon({name:'talher'})}</span></div>
             <div class="text">${post.data().text}</div> 
-            <div id="likeid${post.id}" class="icon-post">${post.data().likes} ${icon({name:'cereja', id:post.id})}</div>
+            <div class="icon-post">${post.data().likes} 
+            <span id="like${post.id}">${icon({name:'cereja', id:post.id})}</span></div>
         </li>
         `
         container.querySelector("#posts").innerHTML += postsTemplete
@@ -77,24 +81,24 @@ export default () => {
 
 
     function deletePost(post) {
-        container.querySelector(`#user-post${post.id}`).addEventListener("click", (event) => {
+        container.querySelector(`#close${post.id}`).addEventListener("click", (event) => {
             event.preventDefault();
             let postUser = post.data().user_id;
 
             if (postUser === firebase.auth().currentUser.uid) {
                 postDelete(post.id);
                 container.querySelector("#posts").innerHTML = "";
-            loadPost(addPosts, like, likeClass, deletePost);
+                loadPost(addPosts, like, likeClass, deletePost);
             } else {
                 alert("Você não é o autor do post!");
-            }; 
+            };
         });
     };
 
 
 
     function like(post) {
-        container.querySelector(`#likeid${post.id}`).addEventListener("click", (event) => {
+        container.querySelector(`#like${post.id}`).addEventListener("click", (event) => {
             event.preventDefault();
             let likes = post.data().likes
             let likeUser = post.data().liked
@@ -124,7 +128,7 @@ export default () => {
     }
 
 
-    //  user();
+    user();
     dataUser(profile);
     loadPost(addPosts, like, likeClass, deletePost)
     return container;

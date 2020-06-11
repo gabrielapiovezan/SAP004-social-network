@@ -1,4 +1,4 @@
-export const login = (email, password) => {
+export const login = (email, password, printErrorLogin) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(user) {
             window.location.hash = "home";
@@ -7,8 +7,9 @@ export const login = (email, password) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            window.alert(errorMessage);
-            // ...
+            printErrorLogin(errorMessage)
+                //window.alert(errorMessage);
+                // ...
         });
 }
 
