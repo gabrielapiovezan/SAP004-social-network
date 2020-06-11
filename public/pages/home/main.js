@@ -1,4 +1,4 @@
-import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
+import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 // import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
@@ -54,7 +54,7 @@ export default () => {
     container.querySelector("#post-text").value = "";
     container.querySelector("#posts").innerHTML = "";
     createPost(post);
-    loadPost(addPosts, like, likeClass, deletePost);
+    loadPost(addPosts, like, likeClass, deletePost, editPost);
   });
 
   container.querySelector('#logout-btn').addEventListener('click', (event) => {
@@ -77,12 +77,13 @@ export default () => {
   function addPosts(post) {
     const postsTemplete = `
         <li id="li${post.id}" class="post box">
-            <div class="user-post">Publicado por: ${post.data().name} 
-            <span id="close${post.id}">${icon({ name: 'talher' })}</span></div>
-            <div class="text">${post.data().text}</div> 
-            <hr>
-            <div class="icon-post">${post.data().likes} 
-            <span id="like${post.id}">${icon({ name: 'cereja', id: post.id })}</span></div>
+          <div class="user-post">Publicado por: ${post.data().name} 
+            <span id="edit${post.id}">Editar</span>
+            <span id="save${post.id}" class="disappear">Salvar</span>
+            <span id="close${post.id}">${icon({ name: 'talher' })}</span></div>           
+          <div class="text" id="text${post.id}">${post.data().text}</div>          
+          <div class="icon-post">${post.data().likes} 
+          <span id="like${post.id}">${icon({ name: 'cereja', id: post.id })}</span></div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
@@ -96,7 +97,7 @@ export default () => {
       if (postUser === firebase.auth().currentUser.uid) {
         postDelete(post.id);
         container.querySelector("#posts").innerHTML = "";
-        loadPost(addPosts, like, likeClass, deletePost);
+        loadPost(addPosts, like, likeClass, deletePost, editPost);
       } else {
         alert("Você não é o autor do post!");
       };
@@ -124,7 +125,7 @@ export default () => {
       likes += valid;
       container.querySelector("#posts").innerHTML = "";
       updateCollection(likeUser, likes, post.id);
-      loadPost(addPosts, like, likeClass, deletePost);
+      loadPost(addPosts, like, likeClass, deletePost, editPost);
     });
   };
 
@@ -132,9 +133,42 @@ export default () => {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data}!`;
   };
 
+  function editPost(post) {
+    const edit = container.querySelector(`#edit${post.id}`)
+    const save = container.querySelector(`#save${post.id}`)
+    edit.addEventListener("click", (event) => {
+      event.preventDefault();
+      const textPost = document.querySelector(`#text${post.id}`);
+
+      textPost.classList.add("disappear");
+
+      const newPost = document.createElement("input");
+      newPost.value = post.data().text;
+
+      textPost.after(newPost);
+
+      edit.classList.add("disappear")
+      save.classList.remove("disappear")
+
+      save.addEventListener("click", async () => {
+        await updatePost(post.id, newPost.value);
+        save.classList.add("disappear")
+        edit.classList.remove("disappear")
+
+        textPost.innerHTML = newPost.value;
+        textPost.classList.remove("disappear")
+
+        newPost.remove()
+        loadPost(addPosts, like, likeClass, deletePost, editPost)
+      })
+
+    });
+
+  };
+
   user();
   dataUser(profile);
-  loadPost(addPosts, like, likeClass, deletePost);
+  loadPost(addPosts, like, likeClass, deletePost, editPost);
 
   return container;
 };
