@@ -67,9 +67,11 @@ export default () => {
     function addPosts(post) {
         const postsTemplete = `
         <li id="li${post.id}" class="post box">
-            <div class="user-post" id="user-post${post.id}">Publicado por: ${post.data().name} ${icon({name:'talher', id:`'close${post.id}'`})}</div>
+            <div class="user-post">Publicado por: ${post.data().name} 
+            <span id="close${post.id}">${icon({name:'talher'})}</span></div>
             <div class="text">${post.data().text}</div> 
-            <div id="likeid${post.id}" class="icon-post">${post.data().likes} ${icon({name:'cereja', id:post.id})}</div>
+            <div class="icon-post">${post.data().likes} 
+            <span id="like${post.id}">${icon({name:'cereja', id:post.id})}</span></div>
         </li>
         `
         container.querySelector("#posts").innerHTML += postsTemplete
@@ -77,7 +79,7 @@ export default () => {
 
 
     function deletePost(post) {
-        container.querySelector(`#user-post${post.id}`).addEventListener("click", (event) => {
+        container.querySelector(`#close${post.id}`).addEventListener("click", (event) => {
             event.preventDefault();
             let postUser = post.data().user_id;
 
@@ -94,7 +96,7 @@ export default () => {
 
 
     function like(post) {
-        container.querySelector(`#likeid${post.id}`).addEventListener("click", (event) => {
+        container.querySelector(`#like${post.id}`).addEventListener("click", (event) => {
             event.preventDefault();
             let likes = post.data().likes
             let likeUser = post.data().liked
