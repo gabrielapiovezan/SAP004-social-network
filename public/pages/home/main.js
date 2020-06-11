@@ -3,6 +3,7 @@ import { button } from '../elementos/objetos/button.js';
 // import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
+import { image } from '../elementos/objetos/image.js';
 
 
 export default () => {
@@ -10,8 +11,14 @@ export default () => {
     container.classList.add("container");
 
     container.innerHTML = `
-    <div id="nameUser"></div>
-    ${button({ id: "logout-btn", class: "post-btn", name: "Sair" })}
+    <header>
+        <figure>
+            ${image({ src:"/pages/elementos/imagens/logo.png", class: "img-header" })}
+        </figure>
+        <h1> &lt; Umâmi &gt; </h1> 
+        ${button({ id: "logout-btn", class: "out-btn", name: "Sair" })}
+    </header>
+    <div id="nameUser" class="name-user"></div>
     <form class="box">
     ${textarea({ id: "post-text", type: "text", size:"500", placeholder: "Compartilhe sua publicação aqui!" })}
     <div class="space-buttons">
@@ -71,6 +78,7 @@ export default () => {
             <div class="user-post">Publicado por: ${post.data().name} 
             <span id="close${post.id}">${icon({name:'talher'})}</span></div>
             <div class="text">${post.data().text}</div> 
+            <hr>
             <div class="icon-post">${post.data().likes} 
             <span id="like${post.id}">${icon({name:'cereja', id:post.id})}</span></div>
         </li>
@@ -125,6 +133,6 @@ export default () => {
     user();
     dataUser(profile);
     loadPost(addPosts, like, likeClass, deletePost);
-    
+
     return container;
 };
