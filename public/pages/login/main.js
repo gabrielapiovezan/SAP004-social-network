@@ -12,20 +12,17 @@ export default () => {
     <figure>
     ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
-  
     <div class="login">
         <h1> &lt; Umâmi &gt; </h1>
         <h2>Bem vindo!</h2>
         <form id="login-email">
-        ${input({ type: "email", id: "email", placeholder: " E-mail", class: "input" })}
-        ${input({ type: "password", id: "password", placeholder: " Senha", class: "input" })}     
-        ${button({ name: "Entrar" })}
-        <div id="error"></div>
+            ${input({ type: "email", id: "email", placeholder: " E-mail", class: "input" })}
+            ${input({ type: "password", id: "password", placeholder: " Senha", class: "input" })}     
+            ${button({ name: "Entrar" })}
         </form>
-        <div id="firebase-auth-container"></div>
+        <div id="error" class="error"></div>
         <p>Entrar com Google</p>
         ${input({ type: "image", src: "./pages/elementos/icones/icon-google-32.png", id: "gmailBtn", class: "icon-google" })}
-        <p id="load"></p>
         <p>Não tem uma conta? 
         ${link({ href: "#register", name: "Cadastre-se" })}</p>
     </div>`;
@@ -34,12 +31,12 @@ export default () => {
         event.preventDefault();
         const email = container.querySelector('#email').value;
         const password = container.querySelector('#password').value;
-        const error = container.querySelector('#error').value;
         login(email, password, printErrorLogin);
     });
+
     const printErrorLogin = (answer) => {
-        container.querySelector("#firebase-auth-container").innerHTML = answer
-    }
+        container.querySelector("#error").innerHTML = answer;
+    };
 
     container.querySelector("#gmailBtn").addEventListener('click', (event) => {
         event.preventDefault();

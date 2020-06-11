@@ -13,12 +13,11 @@ export const user = () => {
             console.log(`Oi ${name}! Que bom ver você aqui!`);
         } else {
             console.log("não possui usuário logado!");
-            logout()
+            logout();
                 //   let name = "anonimo"
-        }
-
+        };
     });
-}
+};
 
 export const loadPost = (addPosts, like, likeClass, deletePost) => {
     const postsCollection = firebase.firestore().collection("posts");
@@ -27,33 +26,32 @@ export const loadPost = (addPosts, like, likeClass, deletePost) => {
         .get()
         .then(snap => {
             snap.forEach(post => {
-                addPosts(post)
+                addPosts(post);
             });
             snap.forEach(post => {
-                likeClass(post)
+                likeClass(post);
             });
             snap.forEach(post => {
-                like(post)
+                like(post);
             });
             snap.forEach(post => {
-                deletePost(post)
+                deletePost(post);
             });
-        })
-
-}
+        });
+};
 
 export const updateCollection = (likeUser, likes, post) => {
     firebase.firestore().collection("posts").doc(`${post}`).update({
         liked: likeUser,
         likes: likes
-    })
-}
+    });
+};
 
 export const dataUser = (profile) => {
     firebase.auth().onAuthStateChanged(function(user) {
-        profile(firebase.auth().currentUser.displayName)
-    })
-}
+        profile(firebase.auth().currentUser.displayName);
+    });
+};
 
 export const postDelete = (post) => {
     firebase.firestore().collection("posts").doc(post).delete().then(function() {
@@ -64,5 +62,5 @@ export const postDelete = (post) => {
 }
 
 export const createPost = (post) => {
-    firebase.firestore().collection("posts").add(post)
-}
+    firebase.firestore().collection("posts").add(post);
+};
