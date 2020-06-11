@@ -129,7 +129,7 @@ export default () => {
 
 
     user();
-    // dataUser(profile);
-    // loadPost(addPosts, like, likeClass, deletePost)
+    dataUser(profile);
+    loadPost(addPosts, like, likeClass, deletePost)
     return container;
 };
