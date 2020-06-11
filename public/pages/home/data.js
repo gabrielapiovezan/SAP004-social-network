@@ -3,38 +3,43 @@ export const logout = () => {
     window.location.hash = "";
 };
 
-// export const user = () => {
-//     firebase.auth().onAuthStateChanged(function(user) {
-//         // Se troca essa variável por const ou let para de funcionar.
-//         var user = firebase.auth().currentUser;
-//         if (user) {
-//             let name = user.displayName;
-//             // let photo = user.photoURL;
-//             console.log(`Oi ${name}! Que bom ver você aqui!`);
-//         } else {
-//             console.log("não possui usuário logado!");
-//             //   let name = "anonimo"
-//         }
-//         // return name;
-//     });
-// }
+export const user = () => {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Se troca essa variável por const ou let para de funcionar.
+        var user = firebase.auth().currentUser;
+        if (user) {
+            let name = user.displayName;
+            // let photo = user.photoURL;
+            console.log(`Oi ${name}! Que bom ver você aqui!`);
+        } else {
+            console.log("não possui usuário logado!");
+            logout()
+                //   let name = "anonimo"
+        }
+
+    });
+}
 
 export const loadPost = (addPosts, like, likeClass, deletePost) => {
-    const postsCollection = firebase.firestore().collection("posts")
-    postsCollection.get().then(snap => {
-        snap.forEach(post => {
-            addPosts(post)
-        });
-        snap.forEach(post => {
-            likeClass(post)
-        });
-        snap.forEach(post => {
-            like(post)
-        });
-        snap.forEach(post => {
-            deletePost(post)
-        });
-    })
+    const postsCollection = firebase.firestore().collection("posts");
+    postsCollection
+        .orderBy("time", "desc")
+        .get()
+        .then(snap => {
+            snap.forEach(post => {
+                addPosts(post)
+            });
+            snap.forEach(post => {
+                likeClass(post)
+            });
+            snap.forEach(post => {
+                like(post)
+            });
+            snap.forEach(post => {
+                deletePost(post)
+            });
+        })
+
 }
 
 export const updateCollection = (likeUser, likes, post) => {
@@ -56,4 +61,8 @@ export const postDelete = (post) => {
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
+}
+
+export const createPost = (post) => {
+    firebase.firestore().collection("posts").add(post)
 }

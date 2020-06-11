@@ -1,4 +1,4 @@
-import { logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
+import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 // import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
@@ -32,19 +32,21 @@ export default () => {
     container.querySelector('#post-btn').addEventListener('click', (event) => {
         event.preventDefault();
         const postText = container.querySelector('#post-text').value;
+
         const post = {
             name: firebase.auth().currentUser.displayName,
             text: postText,
             user_id: firebase.auth().currentUser.uid,
             likes: 0,
             liked: [],
-            comments: []
+            comments: [],
+            time: firebase.firestore.FieldValue.serverTimestamp()
         }
-        const postsCollection = firebase.firestore().collection("posts")
-        postsCollection.add(post).then(res => {
-            container.querySelector("#post-text").value = ""
-            loadPost()
-        })
+        container.querySelector("#post-text").value = ""
+        container.querySelector("#posts").innerHTML = ""
+        createPost(post)
+        loadPost(addPosts, like, likeClass, deletePost)
+
     });
 
     container.querySelector('#logout-btn').addEventListener('click', (event) => {
@@ -86,10 +88,10 @@ export default () => {
             if (postUser === firebase.auth().currentUser.uid) {
                 postDelete(post.id);
                 container.querySelector("#posts").innerHTML = "";
-            loadPost(addPosts, like, likeClass, deletePost);
+                loadPost(addPosts, like, likeClass, deletePost);
             } else {
                 alert("Você não é o autor do post!");
-            }; 
+            };
         });
     };
 
@@ -126,7 +128,7 @@ export default () => {
     }
 
 
-    //  user();
+    user();
     dataUser(profile);
     loadPost(addPosts, like, likeClass, deletePost)
     return container;
