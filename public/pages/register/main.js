@@ -6,12 +6,12 @@ import { image } from '../elementos/objetos/image.js';
 /* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
 export default () => {
-    const container = document.createElement('div');
-    container.classList.add("container");
+  const container = document.createElement('div');
+  container.classList.add("container");
 
-    container.innerHTML = `
+  container.innerHTML = `
     <figure>
-    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
+    ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
@@ -26,17 +26,17 @@ export default () => {
       ${link({ href: "#", name: "Voltar" })}
     </div>`;
 
-    container.querySelector("#register").addEventListener("submit", (event) => {
-        event.preventDefault();
-        const name = container.querySelector('#name').value;
-        const email = container.querySelector('#email').value;
-        const password = container.querySelector('#password').value;
-        register(email, password, name, printErrorLogin);
-    });
+  container.querySelector("#register").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = container.querySelector('#name').value;
+    const email = container.querySelector('#email').value;
+    const password = container.querySelector('#password').value;
+    register(email, password, name, printErrorLogin);
+  });
 
-    const printErrorLogin = (answer) => {
-        container.querySelector("#error").innerHTML = answer;
-    };
-    
-    return container;
+  const printErrorLogin = (answer) => {
+    container.querySelector("#error").innerHTML = answer;
+  };
+
+  return container;
 }

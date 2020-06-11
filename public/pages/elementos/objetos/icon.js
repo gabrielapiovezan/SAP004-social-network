@@ -12,5 +12,5 @@ export default (info) => {
     //     const idIcon2 = `#${info}-2`
 
     return icon
-        //  return iconContainer;
+    //  return iconContainer;
 };
