@@ -2,12 +2,21 @@ body {
     background-color: #FAF7F3;
     color: #3C2415;
     font-family: 'Roboto', sans-serif;
+    /* margin: 0;
+    padding: 0; */
 }
 
-.image {
+/* .image {
     width: 32px;
-}
+}  */
 
+/* .back-yellow {
+    background-color: #FFD932;
+    color: #FFF;
+    font-weight: 700;
+} */
+
+.container-home,
 .container {
     display: flex;
     flex-direction: column;
@@ -17,8 +26,6 @@ body {
 .imgLogin {
     width: 100%;
     min-width: 250px;
-    /* max-width: 475px;
-    max-height: 475px; */
 }
 
 .login {
@@ -30,8 +37,9 @@ body {
     padding-top: 50px;
 }
 
+header h1,
 .login h1 {
-    font-size: 32px;
+    font-size: 33px;
     text-align: center;
     width: 50%;
     font-family: 'Lobster', cursive;
@@ -75,6 +83,13 @@ body {
     background-color: #3C2415;
 }
 
+.error {
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    width: 70%;
+}
+
 .icon-google {
     background: none;
     padding: 0;
@@ -94,6 +109,7 @@ body {
 
 .link {
     color: #3C2415;
+    margin-bottom: 30px;
 }
 
 .link:hover {
@@ -101,34 +117,101 @@ body {
     color: #FFD932;
 }
 
-.box {
-    margin-top: 15px;
-    border-radius: 7px;
-    padding: 15px;
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:#3C2415;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 45px;
+    height: 70px;
+}
+
+header h1 {
+    font-weight: normal;
+}
+
+.img-header {
+    width: 50px;
+}
+
+.out-btn { 
+    border-radius: 30px;
+    font-size: 14px;
+    width: 70px;
+    height: 25px;
+    margin-right: 40px;
+    color: #3C2415;
+}
+
+.out-btn:hover {
+    background-color: rgb(223, 191, 51);
+}
+
+.timeline {
     display: flex;
     flex-direction: column;
-    border: solid 2px #3C2415;
-    width: 80%;
+    align-items: center;
+}
+
+.name-user {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+.box {
+    margin: 10px 0 30px;
+    border-radius: 7px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #3C2415;
+    width: 90%;
+    align-content: center;
 }
 
 .textarea {
     padding: 10px;
+    margin: 15px;
     border-radius: 7px;
+    border: solid 1px #3C2415;
     width: 90%;
     height: 70px;
     resize: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    align-self: center;
 }
 
-.greeting-btn {
+.textarea:hover {
+ background-color: #FAF7F3;
+}
+
+.space-buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.post-btn {
     border-radius: 30px;
     font-size: 16px;
     width: 120px;
     height: 30px;
+    margin-left: 3%;
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
+    width: 23px;
+    height: 23px;
+    padding-left: 4px;
+}
+.icon:hover {
+    width: 25px;
+    height: 25px;
 }
 
 .icon-1 {
@@ -136,39 +219,109 @@ body {
 }
 
 .icon-2 {
-    display: none;
     border: none;
     z-index: 1;
+}
+
+.disappear {
     display: none;
 }
 
-.space-buttons {
+.post-box {
+    list-style-type: none;
+    width: 90%;
+    padding: 0;
+    margin: 0;
+}
+
+.user-post {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: #FFD932;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 7px 7px 0 0;
+    color: #3C2415;
+    align-items: center;
+}
+
+.post {
     width: 100%;
+    padding: 0;
+    background-color: #FFF;
+}
+
+.text {
+    height: auto;
+    min-height: 50px;
+    padding: 10px;
+    color: #4e4e4e;
+}
+
+.icon-post {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    font-size: 17px;
+    color: #4e4e4e;
+    font-weight: 600;
+    padding: 4px 10px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 0 0 7px 7px;
+}
+
+hr {
+    width: 98%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    align-self: center;
+    color:#DBD7D7;
+    background-color: #DBD7D7;
+    height: 1px;
 }
 
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
     }
-    /* .container-register {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-    } */
+ 
     .input {
         width: 50%;
     }
+
     .button {
         width: 52%;
     }
+
     .imgLogin {
         max-width: 500px;
         max-height: 500px;
         padding: 0 100px;
     }
+
+    .out-btn { 
+        width: 70px;
+    }    
+
+    .name-user {
+    margin-left: 500px;
+    }
+
+    .post-btn {
+        width: 120px;
+    }
+
+    .box {
+        width: 45%;
+        align-self: flex-end;
+        margin-right: 70px;
+    }
+
+    .post-box {
+        display: flex;
+    flex-direction: column;
+    width: 100%;
+    }
+
 }

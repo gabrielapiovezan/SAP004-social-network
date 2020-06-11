@@ -2,7 +2,7 @@ import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
 import { register } from './data.js';
 import { link } from '../elementos/objetos/link.js';
-
+import { image } from '../elementos/objetos/image.js';
 /* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
 
   container.innerHTML = `
     <figure>
-      <img src="/pages/elementos/imagens/IMG2.png" class="imgLogin">
+    ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
@@ -21,7 +21,7 @@ export default () => {
         ${input({ type: "email", id: "email", placeholder: "E-mail" })}
         ${input({ type: "password", id: "password", placeholder: "Senha" })}  
         ${button({ name: "Registrar" })}
-        <div id="error"></div>
+        <div id="error" class="error"></div>
       </form>
       ${link({ href: "#", name: "Voltar" })}
     </div>`;
@@ -31,24 +31,12 @@ export default () => {
     const name = container.querySelector('#name').value;
     const email = container.querySelector('#email').value;
     const password = container.querySelector('#password').value;
-
-    register(email, password, name);
+    register(email, password, name, printErrorLogin);
   });
+
+  const printErrorLogin = (answer) => {
+    container.querySelector("#error").innerHTML = answer;
+  };
+
   return container;
 }
-
-
-// export default () => {
-//   const container = createElement("div");
-//   container.classList.add("container");
-
-//   const register = button({ name: "Registrar" })
-//   const voltar = link({ href: "#", name: "Voltar" })
-//   const name = input({ type: "text", id: "name", placeholder: "Nome" })
-//   const email = input({ type: "email", id: "email", placeholder: "E-mail" })
-//   const password = input({ type: "password", id: "password", placeholder: "Senha" })
-
-
-//   const form = document.createElement('form')
-//   form.cls
-// }
