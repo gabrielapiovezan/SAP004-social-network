@@ -22,9 +22,9 @@ export default () => {
         ${button({ name: "Entrar" })}
         <div id="error"></div>
         </form>
+        <div id="firebase-auth-container"></div>
         <p>Entrar com Google</p>
         ${input({ type: "image", src: "./pages/elementos/icones/icon-google-32.png", id: "gmailBtn", class: "icon-google" })}
-        <div id="firebase-auth-container"></div>
         <p id="load"></p>
         <p>Não tem uma conta? 
         ${link({ href: "#register", name: "Cadastre-se" })}</p>
@@ -35,9 +35,11 @@ export default () => {
         const email = container.querySelector('#email').value;
         const password = container.querySelector('#password').value;
         const error = container.querySelector('#error').value;
-        login(email, password);
+        login(email, password, printErrorLogin);
     });
-
+    const printErrorLogin = (answer) => {
+        container.querySelector("#firebase-auth-container").innerHTML = answer
+    }
     container.querySelector("#gmailBtn").addEventListener('click', (event) => {
         event.preventDefault();
         loginGoogle();
