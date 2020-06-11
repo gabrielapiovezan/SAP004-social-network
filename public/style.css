@@ -119,6 +119,7 @@ justify-content: center;
     padding: 10px;
     margin: 15px;
     border-radius: 7px;
+    border: solid 1px #3C2415;
     width: 90%;
     height: 70px;
     resize: none;
@@ -149,7 +150,7 @@ justify-content: center;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .disappear {
@@ -161,20 +162,21 @@ justify-content: center;
     width: 80%;
     padding: 0px;
     margin: 0px;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
 }
 
 .text {
     height: 50px;
-    padding: 5px;
+    padding: 10px;
+    color: #4e4e4e;
 }
 
 .post {
     width: 100%;
     padding: 0;
-    background-color: white;
+    background-color: #FFF;
 }
 
 .user-post {
@@ -183,13 +185,16 @@ justify-content: center;
     padding: 10px;
     background-color: #FFD932;
     font-size: 16px;
-    font-weight: 700;
-    /* color: #3C2415; */
+    font-weight: 600;
+    border-radius: 7px 7px 0 0;
+    color: #3C2415;
 }
+
+/* parei aqui - cor das letras, tamanho do n likes, data post, botão sair, nome em cima com sair */
 
 .icon-post {
     display: flex;
-    padding: 5px;
+    padding: 10px;
     align-items: center;
 }
 
