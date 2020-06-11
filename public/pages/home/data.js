@@ -20,21 +20,25 @@ export const logout = () => {
 // }
 
 export const loadPost = (addPosts, like, likeClass, deletePost) => {
-    const postsCollection = firebase.firestore().collection("posts")
-    postsCollection.get().then(snap => {
-        snap.forEach(post => {
-            addPosts(post)
-        });
-        snap.forEach(post => {
-            likeClass(post)
-        });
-        snap.forEach(post => {
-            like(post)
-        });
-        snap.forEach(post => {
-            deletePost(post)
-        });
-    })
+    const postsCollection = firebase.firestore().collection("posts");
+    postsCollection
+        .orderBy("time", "desc")
+        .get()
+        .then(snap => {
+            snap.forEach(post => {
+                addPosts(post)
+            });
+            snap.forEach(post => {
+                likeClass(post)
+            });
+            snap.forEach(post => {
+                like(post)
+            });
+            snap.forEach(post => {
+                deletePost(post)
+            });
+        })
+
 }
 
 export const updateCollection = (likeUser, likes, post) => {
@@ -56,4 +60,8 @@ export const postDelete = (post) => {
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
+}
+
+export const createPost = (post) => {
+    firebase.firestore().collection("posts").add(post)
 }
