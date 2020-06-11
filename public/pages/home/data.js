@@ -3,21 +3,22 @@ export const logout = () => {
     window.location.hash = "";
 };
 
-// export const user = () => {
-//     firebase.auth().onAuthStateChanged(function(user) {
-//         // Se troca essa variável por const ou let para de funcionar.
-//         var user = firebase.auth().currentUser;
-//         if (user) {
-//             let name = user.displayName;
-//             // let photo = user.photoURL;
-//             console.log(`Oi ${name}! Que bom ver você aqui!`);
-//         } else {
-//             console.log("não possui usuário logado!");
-//             //   let name = "anonimo"
-//         }
-//         // return name;
-//     });
-// }
+export const user = () => {
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Se troca essa variável por const ou let para de funcionar.
+        var user = firebase.auth().currentUser;
+        if (user) {
+            let name = user.displayName;
+            // let photo = user.photoURL;
+            console.log(`Oi ${name}! Que bom ver você aqui!`);
+        } else {
+            console.log("não possui usuário logado!");
+            logout()
+                //   let name = "anonimo"
+        }
+
+    });
+}
 
 export const loadPost = (addPosts, like, likeClass, deletePost) => {
     const postsCollection = firebase.firestore().collection("posts");

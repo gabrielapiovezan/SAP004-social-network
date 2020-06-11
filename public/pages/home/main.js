@@ -1,4 +1,4 @@
-import { createPost, logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
+import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 // import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
@@ -128,8 +128,8 @@ export default () => {
     }
 
 
-    //  user();
-    dataUser(profile);
-    loadPost(addPosts, like, likeClass, deletePost)
+    user();
+    // dataUser(profile);
+    // loadPost(addPosts, like, likeClass, deletePost)
     return container;
 };
