@@ -8,7 +8,7 @@ import { image } from '../elementos/objetos/image.js';
 
 export default () => {
     const container = document.createElement('div');
-    container.classList.add("container");
+    container.classList.add("container-home");
 
     container.innerHTML = `
     <header>
@@ -18,14 +18,16 @@ export default () => {
         <h1> &lt; Umâmi &gt; </h1> 
         ${button({ id: "logout-btn", class: "out-btn", name: "Sair" })}
     </header>
-    <div id="nameUser" class="name-user"></div>
-    <form class="box">
-    ${textarea({ id: "post-text", type: "text", size:"500", placeholder: "Compartilhe sua publicação aqui!" })}
-    <div class="space-buttons">
-    ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
-    </div>
-    </form>
-    <ul id="posts" class="post-box"></ul>
+    <section class="timeline">
+        <h3 id="nameUser" class="name-user"></h3>
+        <form class="box">
+        ${textarea({ id: "post-text", type: "text", size:"500", placeholder: "Compartilhe sua publicação aqui!" })}
+        <div class="space-buttons">
+        ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+        </div>
+        </form>
+        <ul id="posts" class="post-box"></ul>
+    </section>
     `;
 
     // container.appendChild(icon('churrasqueira'))

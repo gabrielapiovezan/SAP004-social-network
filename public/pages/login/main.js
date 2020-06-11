@@ -10,7 +10,7 @@ export default () => {
 
     container.innerHTML = `
     <figure>
-    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "img-login" })}
+    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
     </figure>
     <div class="login">
         <h1> &lt; Umâmi &gt; </h1>
