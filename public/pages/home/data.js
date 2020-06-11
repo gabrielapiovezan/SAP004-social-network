@@ -21,7 +21,7 @@ export const logout = () => {
 
 
 
-export const loadPost = (addPosts, like, likeClass) => {
+export const loadPost = (addPosts, like, likeClass, deletePost) => {
     const postsCollection = firebase.firestore().collection("posts")
     postsCollection.get().then(snap => {
         snap.forEach(post => {
@@ -32,6 +32,9 @@ export const loadPost = (addPosts, like, likeClass) => {
         });
         snap.forEach(post => {
             like(post)
+        });
+        snap.forEach(post => {
+            deletePost(post)
         });
     })
 }

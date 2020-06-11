@@ -76,12 +76,24 @@ export default () => {
     function addPosts(post) {
         const postsTemplete = `
         <li id="li${post.id}" class="post box">
-            <div class="user-post">Publicado por: ${post.data().name} ${icon({name:'talher', id:post.id+"close"})}</div>
+            <div class="user-post">Publicado por: ${post.data().name} ${icon({name:'talher', id:`close${post.id}`})}</div>
             ${post.data().text} 
             <div id="likeid${post.id}" class="icon-post">${post.data().likes}${icon({name:'cereja', id:post.id})}</div>
         </li>
         `
         container.querySelector("#posts").innerHTML += postsTemplete
+    }
+
+
+    function deletePost(post) {
+        container.querySelector(`#close${post.id}`).addEventListener("click", (event) => {
+            event.preventDefault();
+            firebase.firestore().collection("posts").doc("DC").delete().then(function() {
+                console.log("Document successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing document: ", error);
+            });
+        })
     }
 
 
@@ -107,7 +119,7 @@ export default () => {
             container.querySelector("#posts").innerHTML = ""
             updateCollection(likeUser, likes, post.id)
 
-            loadPost(addPosts, like, likeClass);
+            loadPost(addPosts, like, likeClass, deletePost);
 
         })
 
@@ -121,6 +133,6 @@ export default () => {
     //  user();
 
     dataUser(profile);
-    loadPost(addPosts, like, likeClass)
+    loadPost(addPosts, like, likeClass, deletePost)
     return container;
 };
