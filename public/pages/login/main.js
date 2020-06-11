@@ -40,6 +40,7 @@ export default () => {
     const printErrorLogin = (answer) => {
         container.querySelector("#firebase-auth-container").innerHTML = answer
     }
+
     container.querySelector("#gmailBtn").addEventListener('click', (event) => {
         event.preventDefault();
         loginGoogle();
