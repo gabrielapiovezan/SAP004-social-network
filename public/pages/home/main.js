@@ -1,16 +1,17 @@
 import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
+import iconColor from '../elementos/objetos/icon-color.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
 
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add("container-home");
+    const container = document.createElement('div');
+    container.classList.add("container-home");
 
-  container.innerHTML = `
+    container.innerHTML = `
     <header>
       <nav role="navigation">
         <div id="menuToggle">
@@ -53,69 +54,70 @@ export default () => {
     </footer>
     `;
 
-  // container.appendChild(icon('churrasqueira'))
-  // container.appendChild(icon('cafeteira'))
-  // container.appendChild(icon('comida'))
-  // container.appendChild(icon('luva'))
-  // container.appendChild(icon('talher'))
-  // container.appendChild(icon('tomate'))
-  // container.appendChild(icon('caneca'))
+    // container.appendChild(icon('churrasqueira'))
+    // container.appendChild(icon('cafeteira'))
+    // container.appendChild(icon('comida'))
+    // container.appendChild(icon('luva'))
+    // container.appendChild(icon('talher'))
+    // container.appendChild(icon('tomate'))
+    // container.appendChild(icon('caneca'))
 
-  container.querySelector('#post-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const postText = container.querySelector('#post-text').value;
+    container.querySelector('#post-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        const postText = container.querySelector('#post-text').value;
 
-    const post = {
-      name: firebase.auth().currentUser.displayName,
-      text: postText,
-      user_id: firebase.auth().currentUser.uid,
-      likes: 0,
-      liked: [],
-      comments: [],
-      time: firebase.firestore.FieldValue.serverTimestamp()
-    }
-    container.querySelector("#post-text").value = "";
-    container.querySelector("#posts").innerHTML = "";
-    createPost(post);
-    loadPost(addPosts, like, likeClass, deletePost, editPost);
-  });
-
-  container.querySelector('#logout-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    logout();
-  })
-
-  function likeClass(post) {
-    post.data().liked.forEach(a => {
-      if (a === firebase.auth().currentUser.uid) {
-        container.querySelector(`#like1${post.id}`).classList.add("disappear");
-        container.querySelector(`#like2${post.id}`).classList.remove("disappear");
-      } else {
-        container.querySelector(`#like2${post.id}`).classList.add("disappear");
-        container.querySelector(`#like1${post.id}`).classList.remove("disappear");
-      };
+        const post = {
+            name: firebase.auth().currentUser.displayName,
+            text: postText,
+            user_id: firebase.auth().currentUser.uid,
+            likes: 0,
+            liked: [],
+            comments: [],
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }
+        container.querySelector("#post-text").value = "";
+        container.querySelector("#posts").innerHTML = "";
+        createPost(post);
+        loadPost(addPosts, like, likeClass, deletePost, editPost);
     });
-  };
 
-  function addPosts(post) {
-    const postsTemplete = `
+    container.querySelector('#logout-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        logout();
+    })
+
+
+    function likeClass(post) {
+        post.data().liked.forEach(a => {
+            if (a === firebase.auth().currentUser.uid) {
+                container.querySelector(`#like1${post.id}`).classList.add("disappear");
+                container.querySelector(`#like2${post.id}`).classList.remove("disappear");
+            } else {
+                container.querySelector(`#like2${post.id}`).classList.add("disappear");
+                container.querySelector(`#like1${post.id}`).classList.remove("disappear");
+            };
+        });
+    };
+
+    function addPosts(post) {
+        const postsTemplete = `
         <li id="li${post.id}" class="post box">
           <div class="user-post">Publicado por: ${post.data().name} 
             <div class="btn-post">
               ${button({ id:`edit${post.id}`, class:"edit-btn", name:"Editar" })}
               ${button({ id:`save${post.id}`, class:"edit-btn disappear", name:"Salvar" })}
-              <span id="close${post.id}">${icon({ name:'talher' })}</span></div>
+              ${icon({ name:'talher', id:post.id })}</div>
             </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${icon({ name:'cereja', id:post.id })}</span></div> 
+          <span id="like${post.id}">${iconColor({ name:'cereja', id:post.id })}</span></div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
   };
 
   function deletePost(post) {
-    container.querySelector(`#close${post.id}`).addEventListener("click", (event) => {
+    container.querySelector(`#icon${post.id}`).addEventListener("click", (event) => {
       event.preventDefault();
       let postUser = post.data().user_id;
 

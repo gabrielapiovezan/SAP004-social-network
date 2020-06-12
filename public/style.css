@@ -113,7 +113,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color:#3C2415;
+    background-color: #3C2415;
     width: 100%;
     margin: 0;
     margin-bottom: 45px;
@@ -137,92 +137,93 @@ header h1 {
 }
 
 #menuToggle a {
-  text-decoration: none;
-  color: #3C2415;
-  transition: color 0.3s ease;
+    text-decoration: none;
+    color: #3C2415;
+    transition: color 0.3s ease;
 }
 
 #menuToggle a:hover {
-  color: #3C2415;
+    color: #3C2415;
 }
 
 #menuToggle input {
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
-  -webkit-touch-callout: none;
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    /* hide this */
+    z-index: 2;
+    /* and place it over the hamburger */
+    -webkit-touch-callout: none;
 }
 
 #menuToggle span {
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: #FFD932;
-  border-radius: 3px;
-  z-index: 1;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #FFD932;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
 }
 
 #menuToggle span:first-child {
-  transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
 }
 
 #menuToggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
 }
 
-#menuToggle input:checked ~ span {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #3C2415;
+#menuToggle input:checked~span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #3C2415;
 }
 
-#menuToggle input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+#menuToggle input:checked~span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-#menuToggle input:checked ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
+#menuToggle input:checked~span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
 }
 
 #menu {
-  position: absolute;
-  width: 25px;
-  margin: -100px 0 0 -50px;
-  padding: 125px 40px 5px;
-  background: #FFD932;
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    position: absolute;
+    width: 25px;
+    margin: -100px 0 0 -50px;
+    padding: 125px 40px 5px;
+    background: #FFD932;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 }
 
 #menu li {
-  padding: 5px 0;
-  font-size: 20px;
+    padding: 5px 0;
+    font-size: 20px;
 }
 
-#menuToggle input:checked ~ ul {
-  transform: none;
+#menuToggle input:checked~ul {
+    transform: none;
 }
 
 .img-header {
     width: 50px;
     padding: 0 15px;
 }
+
 
 /* .out-btn { 
     border-radius: 30px;
@@ -245,10 +246,10 @@ header h1 {
     justify-content: center;
 }
 
-.profile{
- display: flex;
- justify-content: center;
- align-items: center;
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 figure {
@@ -293,7 +294,7 @@ figure {
 }
 
 .textarea:hover {
- background-color: #FAF7F3;
+    background-color: #FAF7F3;
 }
 
 .post-btn {
@@ -398,7 +399,7 @@ hr {
     padding: 0;
     margin: 0;
     align-self: center;
-    color:#DBD7D7;
+    color: #DBD7D7;
     background-color: #DBD7D7;
     height: 1px;
 }
@@ -431,38 +432,31 @@ hr {
     .container {
         flex-direction: row;
     }
- 
     .img-login {
         max-width: 500px;
         max-height: 500px;
         padding: 0 100px;
     }
-
     .input {
         width: 50%;
     }
-
     .button {
         width: 52%;
     }
- 
     .img-header {
         width: 60px;
     }
-
     header h1 {
         font-weight: normal;
         margin-left: 0;
     }
-
     .timeline {
         flex-direction: row;
         width: 100%;
         justify-content: center;
     }
-
     .profile {
-        margin: 10px 50px 0 0 ;
+        margin: 10px 50px 0 0;
         align-self: baseline;
         border: solid 1px #3C2415;
         border-radius: 7px;
@@ -472,38 +466,31 @@ hr {
         width: 23%;
         box-shadow: 0 0 3px 0px #4e4e4e;
     }
-
     .name-user {
         padding: 0;
         padding-left: 15px;
     }
-
     .posts {
         width: 40%;
     }
-
     .post-btn {
         width: 120px;
     }
-
     .post-box {
         width: 0;
         margin: 0;
         padding: 0;
     }
-
     .textarea {
         box-shadow: 0px 0px 2px #999999;
     }
-
     .box {
         width: 100%;
         align-self: flex-end;
     }
-
     .post-box {
         display: flex;
         flex-direction: column;
         width: 100%;
-    } 
+    }
 }
