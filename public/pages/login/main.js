@@ -10,7 +10,7 @@ export default () => {
 
     container.innerHTML = `
     <figure>
-    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
+    ${image({ src:"/pages/elementos/imagens/IMG2.png", class: "img-login", alt: "logo-umâmi" })}
     </figure>
     <div class="login">
         <h1> &lt; Umâmi &gt; </h1>
@@ -24,7 +24,7 @@ export default () => {
         <p>Entrar com Google</p>
         ${input({ type: "image", src: "./pages/elementos/icones/icon-google-32.png", id: "gmailBtn", class: "icon-google" })}
         <p>Não tem uma conta? 
-        ${link({ href: "#register", name: "Cadastre-se" })}</p>
+        ${link({ href: "#register", name: "Cadastre-se", title:"cadastre-se", target:"_self" })}</p>
     </div>`;
 
     container.querySelector("#login-email").addEventListener("submit", (event) => {

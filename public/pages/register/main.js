@@ -11,7 +11,7 @@ export default () => {
 
   container.innerHTML = `
     <figure>
-    ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "imgLogin" })}
+    ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "img-login", alt: "logo-umâmi" })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
@@ -23,7 +23,7 @@ export default () => {
         ${button({ name: "Registrar" })}
         <div id="error" class="error"></div>
       </form>
-      ${link({ href: "#", name: "Voltar" })}
+      ${link({ href: "#", name: "Voltar", title:"voltar", target:"_self" })}
     </div>`;
 
   container.querySelector("#register").addEventListener("submit", (event) => {
