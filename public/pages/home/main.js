@@ -1,6 +1,7 @@
 import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
+import iconColor from '../elementos/objetos/icon-color.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
@@ -85,6 +86,7 @@ export default () => {
     logout();
   })
 
+
   function likeClass(post) {
     post.data().liked.forEach(a => {
       if (a === firebase.auth().currentUser.uid) {
@@ -104,18 +106,18 @@ export default () => {
             <div class="btn-post">
               ${button({ id: `edit${post.id}`, class: "edit-btn disappear", name: "Editar" })}
               ${button({ id: `save${post.id}`, class: "edit-btn disappear", name: "Salvar" })}
-              <span id="close${post.id}">${icon({ name: 'talher' })}</span></div>
+              ${icon({ name: 'talher', id: post.id })}</div>
             </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${icon({ name: 'cereja', id: post.id })}</span></div> 
+          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span></div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
   };
 
   function deletePost(post) {
-    container.querySelector(`#close${post.id}`).addEventListener("click", (event) => {
+    container.querySelector(`#icon${post.id}`).addEventListener("click", (event) => {
       event.preventDefault();
       let postUser = post.data().user_id;
 
@@ -172,29 +174,31 @@ export default () => {
         event.preventDefault();
         if (!editing) {
           editing = true;
-          const textPost = document.querySelector(`#text${post.id}`);
+          // const textPost = container.querySelector(`#text${post.id}`);
 
-          textPost.classList.add("disappear");
+          container.querySelector(`#text${post.id}`).classList.add("disappear");
 
           const newPost = document.createElement("div");
-          const textEdit = textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
+          newPost.id = "edit-post"
+          const textEdit = textarea({ id: "edit-post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
           newPost.innerHTML = textEdit;
 
-          textPost.after(newPost);
+          container.querySelector(`#text${post.id}`).after(newPost);
 
           edit.classList.add("disappear")
           save.classList.remove("disappear")
 
           save.addEventListener("click", async () => {
-            await updatePost(post.id, newPost.firstElementChild.value);
-            save.classList.add("disappear")
-            edit.classList.remove("disappear")
+            const valor = newPost.firstElementChild.value;
+            container.querySelector(`#save${post.id}`).classList.add("disappear")
+            container.querySelector(`#edit${post.id}`).classList.remove("disappear")
 
-            textPost.innerHTML = newPost.firstElementChild.value;
-            textPost.classList.remove("disappear")
+            container.querySelector(`#text${post.id}`).innerHTML = newPost.firstElementChild.value;
+            container.querySelector(`#text${post.id}`).classList.remove("disappear")
+            container.querySelector("#edit-post").remove()
 
-            newPost.remove()
-            loadPost(addPosts, like, likeClass, deletePost, editPost)
+            await updatePost(post.id, valor);
+            //loadPost(addPosts, like, likeClass, deletePost, editPost)
             editing = false;
           })
         } else alert("Você já está editando!");
