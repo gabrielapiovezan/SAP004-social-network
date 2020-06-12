@@ -74,3 +74,12 @@ export const updatePost = (id, post) => {
     text: post,
   })
 }
+
+
+export const filePost = (file, name) => {
+  const ref = firebase.storage().ref();
+  ref.child(name)
+  ref.put(file).then(function (snapshot) {
+    console.log(snapshot)
+  })
+}

@@ -19,8 +19,8 @@ export default () => {
           <span></span>
           <span></span>
           <ul id="menu">
-          <li>${link({ href:"#profile", name:"Perfil", title:"perfil", target:"_self" })}</li>
-          <li>${link({ id:"logout-btn", name:"Sair", title:"deslogar", target:"_self" })}</li>
+          <li>${link({ href: "#profile", name: "Perfil", title: "perfil", target: "_self" })}</li>
+          <li>${link({ id: "logout-btn", name: "Sair", title: "deslogar", target: "_self" })}</li>
           </ul>
         </div>
       </nav>
@@ -46,9 +46,9 @@ export default () => {
     </section>
     <footer class="footer">
       <h5>Desenvolvido por: 
-        ${link({ href:"https://github.com/camilagerarde", name:"Camila Cunha", class:"link-footer", title:"Camila Cunha", target:"_blank"})},
-        ${link({ href:"https://github.com/gabrielapiovezan/", name:"Gabriela Piovezan", class:"link-footer", title:"Gabriela Piovezan", target:"_blank"})}
-        e ${link({ href:"https://github.com/MarianaMBarros", name:"Mariana Barros", class:"link-footer", title:"Mariana Barros", target:"_blank"})}
+        ${link({ href: "https://github.com/camilagerarde", name: "Camila Cunha", class: "link-footer", title: "Camila Cunha", target: "_blank" })},
+        ${link({ href: "https://github.com/gabrielapiovezan/", name: "Gabriela Piovezan", class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+        e ${link({ href: "https://github.com/MarianaMBarros", name: "Mariana Barros", class: "link-footer", title: "Mariana Barros", target: "_blank" })}
       </h5>
     </footer>
     `;
@@ -102,13 +102,13 @@ export default () => {
         <li id="li${post.id}" class="post box">
           <div class="user-post">Publicado por: ${post.data().name} 
             <div class="btn-post">
-              ${button({ id:`edit${post.id}`, class:"edit-btn", name:"Editar" })}
-              ${button({ id:`save${post.id}`, class:"edit-btn disappear", name:"Salvar" })}
-              <span id="close${post.id}">${icon({ name:'talher' })}</span></div>
+              ${button({ id: `edit${post.id}`, class: "edit-btn disappear", name: "Editar" })}
+              ${button({ id: `save${post.id}`, class: "edit-btn disappear", name: "Salvar" })}
+              <span id="close${post.id}">${icon({ name: 'talher' })}</span></div>
             </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${icon({ name:'cereja', id:post.id })}</span></div> 
+          <span id="like${post.id}">${icon({ name: 'cereja', id: post.id })}</span></div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
@@ -158,37 +158,48 @@ export default () => {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data}!`;
   };
 
+  let editing = false
+
   function editPost(post) {
     const edit = container.querySelector(`#edit${post.id}`)
     const save = container.querySelector(`#save${post.id}`)
-    edit.addEventListener("click", (event) => {
-      event.preventDefault();
-      const textPost = document.querySelector(`#text${post.id}`);
 
-      textPost.classList.add("disappear");
+    let postEdit = post.data().user_id;
+    if (postEdit === firebase.auth().currentUser.uid) {
+      edit.classList.remove("disappear")
 
-      const newPost = document.createElement("input");
-      newPost.value = post.data().text;
+      edit.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (!editing) {
+          editing = true;
+          const textPost = document.querySelector(`#text${post.id}`);
 
-      textPost.after(newPost);
+          textPost.classList.add("disappear");
 
-      edit.classList.add("disappear")
-      save.classList.remove("disappear")
+          const newPost = document.createElement("div");
+          const textEdit = textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
+          newPost.innerHTML = textEdit;
 
-      save.addEventListener("click", async () => {
-        await updatePost(post.id, newPost.value);
-        save.classList.add("disappear")
-        edit.classList.remove("disappear")
+          textPost.after(newPost);
 
-        textPost.innerHTML = newPost.value;
-        textPost.classList.remove("disappear")
+          edit.classList.add("disappear")
+          save.classList.remove("disappear")
 
-        newPost.remove()
-        loadPost(addPosts, like, likeClass, deletePost, editPost)
-      })
+          save.addEventListener("click", async () => {
+            await updatePost(post.id, newPost.firstElementChild.value);
+            save.classList.add("disappear")
+            edit.classList.remove("disappear")
 
-    });
+            textPost.innerHTML = newPost.firstElementChild.value;
+            textPost.classList.remove("disappear")
 
+            newPost.remove()
+            loadPost(addPosts, like, likeClass, deletePost, editPost)
+            editing = false;
+          })
+        } else alert("Você já está editando!");
+      });
+    }
   };
 
   user();
