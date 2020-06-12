@@ -40,17 +40,38 @@ export default () => {
       <div class="posts">
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-          ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+          <span>
+            ${iconColor({ name: 'cadeado' })}
+            ${icon({ name: 'img' })}
+            ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+          </span>
         </form>
         <ul id="posts" class="post-box"></ul>
       </div>
     </section>
     <footer class="footer">
-      <h5>Desenvolvido por: 
-        ${link({ href: "https://github.com/camilagerarde", name: "Camila Cunha", class: "link-footer", title: "Camila Cunha", target: "_blank" })},
-        ${link({ href: "https://github.com/gabrielapiovezan/", name: "Gabriela Piovezan", class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
-        e ${link({ href: "https://github.com/MarianaMBarros", name: "Mariana Barros", class: "link-footer", title: "Mariana Barros", target: "_blank" })}
-      </h5>
+      <h5>Desenvolvido por:
+        <div>
+          ${link({ href: "", name: "Camila Cunha", class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+            <span> 
+            ${link({ href: "https://github.com/camilagerarde", name: icon({ name: 'github' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}  
+            ${link({ href: "https://www.linkedin.com/in/camila-gerarde/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+            </span>
+          </div>
+        <div>
+          ${link({ href: "", name: "Gabriela Piovezan", class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+          <span>
+            ${link({ href: "https://github.com/gabrielapiovezan/", name: icon({ name: 'github' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+            ${link({ href: "https://www.linkedin.com/in/gabrielapiovezan/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}</div>
+          </span>
+        <div>
+          ${link({ href: "https://marianambarros.github.io/portifolio/src/", name: "Mariana Barros", class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+         <span>
+            ${link({ href: "https://github.com/MarianaMBarros", name: icon({ name: 'github' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+            ${link({ href: "https://www.linkedin.com/in/marianambarros/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+          </span>
+        </div>  
+        </h5>    
     </footer>
     `;
 
@@ -101,16 +122,19 @@ export default () => {
 
   function addPosts(post) {
     const postsTemplete = `
-        <li id="li${post.id}" class="post box">
-          <div class="user-post">Publicado por: ${post.data().name} 
+        <li id="li${post.id}" class="post box">        
+          <div class="user-post">
+          ${iconColor({ name: 'cadeado', id: post.id })}
+          Publicado por: ${post.data().name} 
             <div class="btn-post">
-              ${button({ id: `edit${post.id}`, class: "edit-btn disappear", name: "Editar" })}
-              ${button({ id: `save${post.id}`, class: "edit-btn disappear", name: "Salvar" })}
+              ${icon({ id: `edit${post.id}`, class: "edit-btn disappear", name: "edit" })}
+              ${icon({ id: `save${post.id}`, class: "edit-btn disappear", name: "checked" })}
               ${icon({ name: 'talher', id: post.id })}</div>
             </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span></div> 
+          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span>          
+          ${iconColor({ name: 'comentario', id: post.id })}</div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
