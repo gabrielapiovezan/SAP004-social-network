@@ -2,30 +2,22 @@ body {
     background-color: #FAF7F3;
     color: #3C2415;
     font-family: 'Roboto', sans-serif;
-    /* margin: 0;
-    padding: 0; */
+    margin: 0;
+    padding: 0;
 }
-
-/* .image {
-    width: 32px;
-}  */
-
-/* .back-yellow {
-    background-color: #FFD932;
-    color: #FFF;
-    font-weight: 700;
-} */
 
 .container-home,
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-.imgLogin {
+.img-login {
     width: 100%;
     min-width: 250px;
+    margin-top: 50px;
 }
 
 .login {
@@ -126,17 +118,113 @@ header {
     margin: 0;
     margin-bottom: 45px;
     height: 70px;
+    box-shadow: 0px 3px 4px 0px #4e4e4e;
 }
 
 header h1 {
     font-weight: normal;
+    margin-left: 15%;
+}
+
+#menuToggle {
+    display: block;
+    position: relative;
+    top: 3px;
+    left: 15px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle a {
+  text-decoration: none;
+  color: #3C2415;
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover {
+  color: #3C2415;
+}
+
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #FFD932;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #3C2415;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu {
+  position: absolute;
+  width: 25px;
+  margin: -100px 0 0 -50px;
+  padding: 125px 40px 5px;
+  background: #FFD932;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li {
+  padding: 5px 0;
+  font-size: 20px;
+}
+
+#menuToggle input:checked ~ ul {
+  transform: none;
 }
 
 .img-header {
     width: 50px;
+    padding: 0 15px;
 }
 
-.out-btn { 
+/* .out-btn { 
     border-radius: 30px;
     font-size: 14px;
     width: 70px;
@@ -147,18 +235,37 @@ header h1 {
 
 .out-btn:hover {
     background-color: rgb(223, 191, 51);
-}
+} */
 
+.posts,
 .timeline {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.profile{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+figure {
+    padding: 0;
+    margin: 0;
+}
+
+.img-profile {
+    width: 75px;
+    /* border-radius: 75px;
+    border: #3C2415 solid 0.5px; */
 }
 
 .name-user {
     font-weight: 600;
     font-size: 20px;
-    padding-bottom: 5px;
+    padding: 40px 0 0 10px;
 }
 
 .box {
@@ -189,19 +296,14 @@ header h1 {
  background-color: #FAF7F3;
 }
 
-.space-buttons {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
-
 .post-btn {
     border-radius: 30px;
     font-size: 16px;
     width: 120px;
     height: 30px;
-    margin-left: 3%;
+    padding: 0;
+    margin: 0 3% 20px 0;
+    align-self: flex-end;
 }
 
 .icon {
@@ -209,6 +311,7 @@ header h1 {
     height: 23px;
     padding-left: 4px;
 }
+
 .icon:hover {
     width: 25px;
     height: 25px;
@@ -246,6 +349,25 @@ header h1 {
     align-items: center;
 }
 
+.btn-post {
+    display: flex;
+    align-items: center;
+}
+
+.edit-btn {
+    background-color: #FFD932;
+    color: #3C2415;
+    border: #3C2415 1px solid;
+    height: 25px;
+    width: auto;
+    font-size: 15px;
+}
+
+.edit-btn:hover {
+    background-color: #3C2415;
+    color: #FFF;
+}
+
 .post {
     width: 100%;
     padding: 0;
@@ -281,11 +403,41 @@ hr {
     height: 1px;
 }
 
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DBD7D7;
+    margin: 0;
+    margin-top: 20px;
+    height: 40px;
+    text-decoration: none;
+    width: 100%;
+    box-shadow: 0px -2px 3px 0px #afafaf;
+    text-align: center;
+}
+
+.link-footer {
+    text-decoration: none;
+    color: #3C2415;
+}
+
+.link-footer:hover {
+    color: #3C2415;
+    text-decoration: underline;
+}
+
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
     }
  
+    .img-login {
+        max-width: 500px;
+        max-height: 500px;
+        padding: 0 100px;
+    }
+
     .input {
         width: 50%;
     }
@@ -293,35 +445,65 @@ hr {
     .button {
         width: 52%;
     }
-
-    .imgLogin {
-        max-width: 500px;
-        max-height: 500px;
-        padding: 0 100px;
+ 
+    .img-header {
+        width: 60px;
     }
 
-    .out-btn { 
-        width: 70px;
-    }    
+    header h1 {
+        font-weight: normal;
+        margin-left: 0;
+    }
+
+    .timeline {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .profile {
+        margin: 10px 50px 0 0 ;
+        align-self: baseline;
+        border: solid 1px #3C2415;
+        border-radius: 7px;
+        padding: 15px;
+        background-color: #FFD932;
+        align-items: flex-end;
+        width: 23%;
+        box-shadow: 0 0 3px 0px #4e4e4e;
+    }
 
     .name-user {
-    margin-left: 500px;
+        padding: 0;
+        padding-left: 15px;
+    }
+
+    .posts {
+        width: 40%;
     }
 
     .post-btn {
         width: 120px;
     }
 
+    .post-box {
+        width: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .textarea {
+        box-shadow: 0px 0px 2px #999999;
+    }
+
     .box {
-        width: 45%;
+        width: 100%;
         align-self: flex-end;
-        margin-right: 70px;
     }
 
     .post-box {
         display: flex;
-    flex-direction: column;
-    width: 100%;
-    }
-
+        flex-direction: column;
+        width: 100%;
+    } 
 }

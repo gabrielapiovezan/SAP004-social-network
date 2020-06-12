@@ -1,6 +1,6 @@
 import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
-// import { link } from '../elementos/objetos/link.js';
+import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
@@ -12,22 +12,45 @@ export default () => {
 
   container.innerHTML = `
     <header>
-        <figure>
-            ${image({ src: "/pages/elementos/imagens/logo.png", class: "img-header" })}
-        </figure>
-        <h1> &lt; Umâmi &gt; </h1> 
-        ${button({ id: "logout-btn", class: "out-btn", name: "Sair" })}
+      <nav role="navigation">
+        <div id="menuToggle">
+          <input type="checkbox"/>
+          <span></span>
+          <span></span>
+          <span></span>
+          <ul id="menu">
+          <li>${link({ href:"#profile", name:"Perfil", title:"perfil", target:"_self" })}</li>
+          <li>${link({ id:"logout-btn", name:"Sair", title:"deslogar", target:"_self" })}</li>
+          </ul>
+        </div>
+      </nav>
+      <h1> &lt; Umâmi &gt; </h1> 
+      <figure>
+        ${image({ src: "/pages/elementos/imagens/logo.png", class: "img-header", alt: "logo-umâmi" })}
+      </figure>
     </header>
     <section class="timeline">
+      <div class="profile">
+        <figure>
+          ${image({ src: "/pages/elementos/imagens/chefe.png", class: "img-profile", alt: "foto-perfil" })}
+        </figure>
         <h3 id="nameUser" class="name-user"></h3>
+      </div>
+      <div class="posts">
         <form class="box">
-        ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-        <div class="space-buttons">
-        ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
-        </div>
+          ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
+          ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
         </form>
         <ul id="posts" class="post-box"></ul>
+      </div>
     </section>
+    <footer class="footer">
+      <h5>Desenvolvido por: 
+        ${link({ href:"https://github.com/camilagerarde", name:"Camila Cunha", class:"link-footer", title:"Camila Cunha", target:"_blank"})},
+        ${link({ href:"https://github.com/gabrielapiovezan/", name:"Gabriela Piovezan", class:"link-footer", title:"Gabriela Piovezan", target:"_blank"})}
+        e ${link({ href:"https://github.com/MarianaMBarros", name:"Mariana Barros", class:"link-footer", title:"Mariana Barros", target:"_blank"})}
+      </h5>
+    </footer>
     `;
 
   // container.appendChild(icon('churrasqueira'))
@@ -78,12 +101,14 @@ export default () => {
     const postsTemplete = `
         <li id="li${post.id}" class="post box">
           <div class="user-post">Publicado por: ${post.data().name} 
-            <span id="edit${post.id}">Editar</span>
-            <span id="save${post.id}" class="disappear">Salvar</span>
-            <span id="close${post.id}">${icon({ name: 'talher' })}</span></div>           
+            <div class="btn-post">
+              ${button({ id:`edit${post.id}`, class:"edit-btn", name:"Editar" })}
+              ${button({ id:`save${post.id}`, class:"edit-btn disappear", name:"Salvar" })}
+              <span id="close${post.id}">${icon({ name:'talher' })}</span></div>
+            </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${icon({ name: 'cereja', id: post.id })}</span></div> 
+          <span id="like${post.id}">${icon({ name:'cereja', id:post.id })}</span></div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
