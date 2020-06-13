@@ -278,6 +278,7 @@ figure {
     border: solid 1px #3C2415;
     width: 90%;
     align-content: center;
+    background-color: #FAF7F3;
 }
 
 .textarea {
@@ -431,6 +432,15 @@ hr {
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
+    }
+    .image-back {
+        width: 500px;
+        transform: rotateY(180deg);
+        display: block;
+        z-index: -1;
+        position: absolute;
+        left: 20px;
+        top: 100px;
     }
     .img-login {
         max-width: 500px;

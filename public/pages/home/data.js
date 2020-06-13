@@ -47,7 +47,7 @@ export const user = () => {
 export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
     //export const readPosts = (callback) => {
     firebase.firestore().collection("posts")
-        // .orderBy("time", "desc")
+        .orderBy("time", "desc")
         .onSnapshot(snap => {
             snap.forEach(post => {
                 addPosts(post);

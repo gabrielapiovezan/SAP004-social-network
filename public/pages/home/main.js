@@ -37,6 +37,7 @@ export default () => {
         </figure>
         <h3 id="nameUser" class="name-user"></h3>
       </div>
+      ${image({src:"/pages/elementos/imagens/fundo.png", class:"disappear image-back"})}
       <div class="posts">
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
