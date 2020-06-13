@@ -146,7 +146,6 @@ export default () => {
     const postsTemplete = `
         <li id="li${post.id}" class="post box">        
           <div class="user-post">
-          ${iconColor({ name: 'cadeado', id: post.id })}
           Publicado por: ${post.data().name} 
             <div class="btn-post">
               ${icon({ id: `edit-${post.id}`, class: "edit-btn disappear", name: "edit" })}
@@ -173,7 +172,7 @@ export default () => {
 
         postDelete(post.id);
         container.querySelector("#posts").innerHTML = "";
-        loadPost(addPosts, like, likeClass, deletePost, editPost);
+        // loadPost(addPosts, like, likeClass, deletePost, editPost);
 
       });
     }
@@ -200,7 +199,7 @@ export default () => {
       likes += valid;
       container.querySelector("#posts").innerHTML = "";
       updateCollection(likeUser, likes, post.id);
-      loadPost(addPosts, like, likeClass, deletePost, editPost);
+      // loadPost(addPosts, like, likeClass, deletePost, editPost);
     });
   };
 
