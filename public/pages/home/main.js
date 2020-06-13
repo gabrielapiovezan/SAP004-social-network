@@ -1,10 +1,11 @@
-import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost } from './data.js';
+import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost, filePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
 import iconColor from '../elementos/objetos/icon-dynamic.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
+import { input } from '../elementos/objetos/input.js';
 
 
 export default () => {
@@ -44,6 +45,7 @@ export default () => {
           <span>
             <span id="loker">${iconColor({ name: 'cadeado', id:"block"})}</span>
             ${icon({ name: 'img' })}
+
             ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
           </span>
         </form>
@@ -77,80 +79,106 @@ export default () => {
     `;
 
 
-    container.querySelector('#post-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        const postText = container.querySelector('#post-text').value;
+  // container.appendChild(icon('churrasqueira'))
+  // container.appendChild(icon('cafeteira'))
+  // container.appendChild(icon('comida'))
+  // container.appendChild(icon('luva'))
+  // container.appendChild(icon('talher'))
+  // container.appendChild(icon('tomate'))
+  // container.appendChild(icon('caneca'))
 
-        const post = {
-            name: firebase.auth().currentUser.displayName,
-            text: postText,
-            user_id: firebase.auth().currentUser.uid,
-            likes: 0,
-            liked: [],
-            comments: [],
-            time: firebase.firestore.FieldValue.serverTimestamp()
-        }
-        container.querySelector("#post-text").value = "";
-        container.querySelector("#posts").innerHTML = "";
-        createPost(post);
-        // loadPost(addPosts, like, likeClass, deletePost, editPost);
-    });
+  container.querySelector('#post-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    const fileInpxut = container.querySelector("#file");
+    filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase)
+    // const postText = container.querySelector('#post-text').value;
+    // const post = {
+    //   url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
+    //   name: firebase.auth().currentUser.displayName,
+    //   text: postText,
+    //   user_id: firebase.auth().currentUser.uid,
+    //   likes: 0,
+    //   liked: [],
+    //   comments: [],
+    //   time: firebase.firestore.FieldValue.serverTimestamp()
+    // }
+    // container.querySelector("#post-text").value = "";
+    // container.querySelector("#posts").innerHTML = "";
+    // createPost(post);
+    // loadPost(addPosts, like, likeClass, deletePost, editPost);
+  });
 
-    container.querySelector('#logout-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        logout();
-    })
+  container.querySelector('#logout-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    logout();
+  })
 
+  function saveFirebase(urlFile) {
+    const postText = container.querySelector('#post-text').value;
+    const post = {
+      url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
+      name: firebase.auth().currentUser.displayName,
+      text: postText,
+      user_id: firebase.auth().currentUser.uid,
+      likes: 0,
+      liked: [],
+      comments: [],
+      time: firebase.firestore.FieldValue.serverTimestamp()
+    }
+    container.querySelector("#post-text").value = "";
+    container.querySelector("#posts").innerHTML = "";
+    createPost(post);
+    //loadPost(addPosts, like, likeClass, deletePost, editPost);
+  }
 
-    function likeClass(id, valid) {
+     };
 
-        //  post.data().liked.forEach(a => {
-        if (valid === 1) {
-            container.querySelector(`#icon-dynamic-1-${id}`).classList.add("disappear");
-            container.querySelector(`#icon-dynamic-2-${id}`).classList.remove("disappear")
-        } else {
-            container.querySelector(`#icon-dynamic-2-${id}`).classList.add("disappear");
-            container.querySelector(`#icon-dynamic-1-${id}`).classList.remove("disappear");
-        }
+  function renderImg(url_file) {
+    return url_file ? `<img src="${url_file}" style="width:120px;"/>` : ''
+  }
+  function addPosts(post) {
+    const postsTemplete = `
 
-    };
-    //          ${iconColor({ name: 'cadeado', id: post.id })}
-    function addPosts(post) {
-        const postsTemplete = `
         <li id="li${post.id}" class="post box">        
           <div class="user-post">
           Publicado por: ${post.data().name} 
             <div class="btn-post">
-              ${icon({ id: `edit${post.id}`, class: "edit-btn disappear", name: "edit" })}
-              ${icon({ id: `save${post.id}`, class: "edit-btn disappear", name: "checked" })}
-              ${icon({ name: 'talher', id: post.id })}</div>
+              ${icon({ id: `edit-${post.id}`, class: "edit-btn disappear", name: "edit" })}
+              ${icon({ id: `save-${post.id}`, class: "edit-btn disappear", name: "checked" })}
+              ${icon({ name: 'talher', id: post.id, class: "disappear" })}</div>
             </div>  
-          <div class="text" id="text${post.id}">${post.data().text}</div>          
-          <div id="like-number-${post.id}" class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span>          
-          ${icon({ name: 'comentario', id: post.id })}</div> 
-        </li>
-        `;
+
+          <div class="text" id="text${post.id}">${post.data().text}</div>    
+         ${renderImg(post.data().url_file)}
+        <div class="icon-post" > ${ post.data().likes}
+          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span>
+          ${ iconColor({ name: 'comentario', id: post.id })}</div> 
+        </li >
+      `;
+
     container.querySelector("#posts").innerHTML += postsTemplete;
   };
 
   function deletePost(post) {
-    container.querySelector(`#icon${post.id}`).addEventListener("click", (event) => {
-      event.preventDefault();
-      let postUser = post.data().user_id;
+    let postUser = post.data().user_id;
 
-      if (postUser === firebase.auth().currentUser.uid) {
+    if (postUser === firebase.auth().currentUser.uid) {
+      container.querySelector(`#icon${post.id} `).classList.remove("disappear")
+      container.querySelector(`#icon${post.id} `).addEventListener("click", (event) => {
+        event.preventDefault();
+
         postDelete(post.id);
         container.querySelector("#posts").innerHTML = "";
-      //  loadPost(addPosts, like, likeClass, deletePost, editPost);
-      } else {
-        alert("Você não é o autor do post!");
-      };
-    });
+
+        // loadPost(addPosts, like, likeClass, deletePost, editPost);
+
+      });
+    }
+
   };
 
   function like(post) {
-    container.querySelector(`#like${post.id}`).addEventListener("click", (event) => {
+    container.querySelector(`#like${post.id} `).addEventListener("click", (event) => {
       event.preventDefault();
       let likes = post.data().likes;
       let likeUser = post.data().liked;
@@ -169,16 +197,18 @@ export default () => {
 
       likes += valid;
       container.querySelector("#posts").innerHTML = "";
+
       updateCollection(likeUser, likes, post.id); 
       likeClass(post.id, valid)      
 
    //   container.querySelector(`#like-number-${post.id}`).innerHTML = "";
   // loadPost(addPosts, like, likeClass, deletePost, editPost);
+
     });
   };
 
   function profile(data) {
-    container.querySelector("#nameUser").innerHTML = `Olá, ${data}!`;
+    container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
   };
 
 
@@ -192,8 +222,8 @@ export default () => {
 
   
   function editPost(post) {
-    const edit = container.querySelector(`#edit${post.id}`)
-    const save = container.querySelector(`#save${post.id}`)
+    const edit = container.querySelector(`#iconedit-${post.id} `)
+    const save = container.querySelector(`#iconsave-${post.id} `)
 
     let postEdit = post.data().user_id;
     if (postEdit === firebase.auth().currentUser.uid) {
@@ -203,31 +233,32 @@ export default () => {
         event.preventDefault();
         if (!editing) {
           editing = true;
-          // const textPost = container.querySelector(`#text${post.id}`);
 
-          container.querySelector(`#text${post.id}`).classList.add("disappear");
+          container.querySelector(`#text${post.id} `).classList.add("disappear");
 
           const newPost = document.createElement("div");
           newPost.id = "edit-post"
           const textEdit = textarea({ id: "edit-post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
           newPost.innerHTML = textEdit;
 
-          container.querySelector(`#text${post.id}`).after(newPost);
+          container.querySelector(`#text${post.id} `).after(newPost);
 
           edit.classList.add("disappear")
           save.classList.remove("disappear")
+          container.querySelector(`#icon${post.id}`).classList.add("disappear")
+
 
           save.addEventListener("click", async () => {
             const valor = newPost.firstElementChild.value;
-            container.querySelector(`#save${post.id}`).classList.add("disappear")
-            container.querySelector(`#edit${post.id}`).classList.remove("disappear")
+            container.querySelector(`#iconsave-${post.id} `).classList.add("disappear")
+            container.querySelector(`#iconedit-${post.id} `).classList.remove("disappear")
+            container.querySelector(`#icon${post.id} `).classList.remove("disappear")
 
-            container.querySelector(`#text${post.id}`).innerHTML = newPost.firstElementChild.value;
-            container.querySelector(`#text${post.id}`).classList.remove("disappear")
+            container.querySelector(`#text${post.id} `).innerHTML = newPost.firstElementChild.value;
+            container.querySelector(`#text${post.id} `).classList.remove("disappear")
             container.querySelector("#edit-post").remove()
 
             await updatePost(post.id, valor);
-            //loadPost(addPosts, like, likeClass, deletePost, editPost)
             editing = false;
           })
         } else alert("Você já está editando!");
