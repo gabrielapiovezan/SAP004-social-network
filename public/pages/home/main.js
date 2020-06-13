@@ -1,7 +1,7 @@
 import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost, filePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
-import iconColor from '../elementos/objetos/icon-dynamic.js';
+import iconDynamic from '../elementos/objetos/icon-dynamic.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
@@ -44,7 +44,7 @@ export default () => {
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
           <span>
-            <span id="loker">${iconColor({ name: 'cadeado', id:"block"})}</span>
+            <span id="loker">${iconDynamic({ name: 'cadeado', id:"block"})}</span>
             ${icon({ name: 'img' })}
             ${input({ type: "file", id: "file" })}
             ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
@@ -142,8 +142,8 @@ export default () => {
           <div class="text" id="text${post.id}">${post.data().text}</div>    
          ${renderImg(post.data().url_file)}
         <div class="icon-post" > ${ post.data().likes}
-          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span>
-          ${ iconColor({ name: 'comentario', id: post.id })}</div> 
+          <span id="like${post.id}">${iconDynamic({ name: 'cereja', id: post.id })}</span>
+          ${ iconDynamic({ name: 'comentario', id: post.id })}</div> 
         </li >
       `;
 
