@@ -46,41 +46,41 @@ export const user = () => {
 
 export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
 
-  //export const readPosts = (callback) => {
-  firebase.firestore().collection("posts")
-    .orderBy("time", "desc")
-    .onSnapshot(snap => {
-      snap.forEach(post => {
-        addPosts(post);
-      });
-      snap.forEach(post => {
-        likeClass(post);
-      });
-      snap.forEach(post => {
-        like(post);
-      });
-      snap.forEach(post => {
-        deletePost(post);
-      });
-      snap.forEach(post => {
-        updatePost(post);
-      });
+    //export const readPosts = (callback) => {
+    firebase.firestore().collection("posts")
+        .orderBy("time", "desc")
+        .onSnapshot(snap => {
+            snap.forEach(post => {
+                addPosts(post);
+            });
+            snap.forEach(post => {
+                iconVerific(post, likeClass);
+            });
+            snap.forEach(post => {
+                like(post);
+            });
+            snap.forEach(post => {
+                deletePost(post);
+            });
+            snap.forEach(post => {
+                updatePost(post);
+            });
 
-    })
+        })
 
 }
 
 
-    }
-    //  .onSnapshot(function(querySnapshot) {
-    //    var posts = [];
-    //   querySnapshot.forEach(function(doc) {
-    //               posts.push(doc.data());
-    //           });
-    //           callback(posts)
-    //       });
-    //   }
-    // }
+
+//  .onSnapshot(function(querySnapshot) {
+//    var posts = [];
+//   querySnapshot.forEach(function(doc) {
+//               posts.push(doc.data());
+//           });
+//           callback(posts)
+//       });
+//   }
+// }
 
 
 
@@ -118,12 +118,12 @@ export const updatePost = (id, post) => {
 
 
 export const filePost = (file, name, callback) => {
-  const ref = firebase.storage().ref();
-  const filePostar = ref.child(name)
-  filePostar.put(file).then(function (snapshot) {
-    console.log(snapshot)
-    callback(filePostar.fullPath)
-  })
+    const ref = firebase.storage().ref();
+    const filePostar = ref.child(name)
+    filePostar.put(file).then(function(snapshot) {
+        console.log(snapshot)
+        callback(filePostar.fullPath)
+    })
 
 }
 

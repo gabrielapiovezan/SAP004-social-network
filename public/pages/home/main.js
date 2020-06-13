@@ -8,6 +8,7 @@ import { image } from '../elementos/objetos/image.js';
 import { input } from '../elementos/objetos/input.js';
 
 
+
 export default () => {
     const container = document.createElement('div');
     container.classList.add("container-home");
@@ -45,7 +46,7 @@ export default () => {
           <span>
             <span id="loker">${iconColor({ name: 'cadeado', id:"block"})}</span>
             ${icon({ name: 'img' })}
-
+            ${input({ type: "file", id: "file" })}
             ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
           </span>
         </form>
@@ -79,65 +80,55 @@ export default () => {
     `;
 
 
-  // container.appendChild(icon('churrasqueira'))
-  // container.appendChild(icon('cafeteira'))
-  // container.appendChild(icon('comida'))
-  // container.appendChild(icon('luva'))
-  // container.appendChild(icon('talher'))
-  // container.appendChild(icon('tomate'))
-  // container.appendChild(icon('caneca'))
+    container.querySelector('#post-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        const fileInpxut = container.querySelector("#file");
+        filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase)
 
-  container.querySelector('#post-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const fileInpxut = container.querySelector("#file");
-    filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase)
-    // const postText = container.querySelector('#post-text').value;
-    // const post = {
-    //   url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
-    //   name: firebase.auth().currentUser.displayName,
-    //   text: postText,
-    //   user_id: firebase.auth().currentUser.uid,
-    //   likes: 0,
-    //   liked: [],
-    //   comments: [],
-    //   time: firebase.firestore.FieldValue.serverTimestamp()
-    // }
-    // container.querySelector("#post-text").value = "";
-    // container.querySelector("#posts").innerHTML = "";
-    // createPost(post);
-    // loadPost(addPosts, like, likeClass, deletePost, editPost);
-  });
+        function saveFirebase(urlFile) {
+            const postText = container.querySelector('#post-text').value;
+            const post = {
+                url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
+                name: firebase.auth().currentUser.displayName,
+                text: postText,
+                user_id: firebase.auth().currentUser.uid,
+                likes: 0,
+                liked: [],
+                comments: [],
+                time: firebase.firestore.FieldValue.serverTimestamp()
+            }
+            container.querySelector("#post-text").value = "";
+            container.querySelector("#posts").innerHTML = "";
+            createPost(post);
+            //loadPost(addPosts, like, likeClass, deletePost, editPost);
+        }
 
-  container.querySelector('#logout-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    logout();
-  })
+    })
+    container.querySelector('#logout-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        logout();
+    })
 
-  function saveFirebase(urlFile) {
-    const postText = container.querySelector('#post-text').value;
-    const post = {
-      url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
-      name: firebase.auth().currentUser.displayName,
-      text: postText,
-      user_id: firebase.auth().currentUser.uid,
-      likes: 0,
-      liked: [],
-      comments: [],
-      time: firebase.firestore.FieldValue.serverTimestamp()
+
+    function likeClass(id, valid) {
+
+        //  post.data().liked.forEach(a => {
+        if (valid === 1) {
+            container.querySelector(`#icon-dynamic-1-${id}`).classList.add("disappear");
+            container.querySelector(`#icon-dynamic-2-${id}`).classList.remove("disappear")
+        } else {
+            container.querySelector(`#icon-dynamic-2-${id}`).classList.add("disappear");
+            container.querySelector(`#icon-dynamic-1-${id}`).classList.remove("disappear");
+        }
+
+    };
+
+    function renderImg(url_file) {
+        return url_file ? `<img src="${url_file}" style="width:120px;"/>` : ''
     }
-    container.querySelector("#post-text").value = "";
-    container.querySelector("#posts").innerHTML = "";
-    createPost(post);
-    //loadPost(addPosts, like, likeClass, deletePost, editPost);
-  }
 
-     };
-
-  function renderImg(url_file) {
-    return url_file ? `<img src="${url_file}" style="width:120px;"/>` : ''
-  }
-  function addPosts(post) {
-    const postsTemplete = `
+    function addPosts(post) {
+        const postsTemplete = `
 
         <li id="li${post.id}" class="post box">        
           <div class="user-post">
@@ -178,7 +169,7 @@ export default () => {
   };
 
   function like(post) {
-    container.querySelector(`#like${post.id} `).addEventListener("click", (event) => {
+    container.querySelector(`#like${post.id}`).addEventListener("click", (event) => {
       event.preventDefault();
       let likes = post.data().likes;
       let likeUser = post.data().liked;
@@ -197,28 +188,25 @@ export default () => {
 
       likes += valid;
       container.querySelector("#posts").innerHTML = "";
-
       updateCollection(likeUser, likes, post.id); 
       likeClass(post.id, valid)      
 
    //   container.querySelector(`#like-number-${post.id}`).innerHTML = "";
   // loadPost(addPosts, like, likeClass, deletePost, editPost);
-
     });
   };
 
   function profile(data) {
-    container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
+    container.querySelector("#nameUser").innerHTML = `Olá, ${data}!`;
   };
 
 
  container.querySelector("#loker").addEventListener('click',()=>{
-
   likeClass("block", 1)
  })
 
 
-  let editing = false
+   let editing = false
 
   
   function editPost(post) {
@@ -259,12 +247,27 @@ export default () => {
             container.querySelector("#edit-post").remove()
 
             await updatePost(post.id, valor);
+
             editing = false;
           })
         } else alert("Você já está editando!");
       });
     }
   };
+
+  function profile(data) {
+    container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
+  };
+
+
+
+ container.querySelector("#loker").addEventListener('click',()=>{
+
+  likeClass("block", 1)
+ })
+
+
+ 
 
   user();
   dataUser(profile);
