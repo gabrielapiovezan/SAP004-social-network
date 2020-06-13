@@ -64,6 +64,7 @@ export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
       snap.forEach(post => {
         updatePost(post);
       });
+
     })
 
 }
@@ -112,10 +113,11 @@ export const updatePost = (id, post) => {
 }
 
 
-export const filePost = (file, name) => {
+export const filePost = (file, name, callback) => {
   const ref = firebase.storage().ref();
-  ref.child(name)
-  ref.put(file).then(function (snapshot) {
+  const filePostar = ref.child(name)
+  filePostar.put(file).then(function (snapshot) {
     console.log(snapshot)
+    callback(filePostar.fullPath)
   })
 }
