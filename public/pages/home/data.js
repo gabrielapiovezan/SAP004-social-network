@@ -45,38 +45,37 @@ export const user = () => {
 // };
 
 export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
-    //export const readPosts = (callback) => {
-    firebase.firestore().collection("posts")
-        .orderBy("time", "desc")
-        .onSnapshot(snap => {
-            snap.forEach(post => {
-                addPosts(post);
-            });
-            snap.forEach(post => {
-                likeClass(post);
-            });
-            snap.forEach(post => {
-                like(post);
-            });
-            snap.forEach(post => {
-                deletePost(post);
-            });
-            snap.forEach(post => {
-                updatePost(post);
-            });
-        })
+        //export const readPosts = (callback) => {
+        firebase.firestore().collection("posts")
+            // .orderBy("time", "desc")
+            .onSnapshot(snap => {
+                snap.forEach(post => {
+                    addPosts(post);
+                });
+                snap.forEach(post => {
+                    like(post);
+                });
+                snap.forEach(post => {
+                    iconVerific(post, likeClass);
+                });
+                // snap.forEach(post => {
+                //     deletePost(post);
+                // });
+                // snap.forEach(post => {
+                //     updatePost(post);
+                // });
+            })
 
-}
-
-//  .onSnapshot(function(querySnapshot) {
-//    var posts = [];
-//   querySnapshot.forEach(function(doc) {
-//               posts.push(doc.data());
-//           });
-//           callback(posts)
-//       });
-//   }
-// }
+    }
+    //  .onSnapshot(function(querySnapshot) {
+    //    var posts = [];
+    //   querySnapshot.forEach(function(doc) {
+    //               posts.push(doc.data());
+    //           });
+    //           callback(posts)
+    //       });
+    //   }
+    // }
 
 
 
@@ -108,5 +107,21 @@ export const createPost = (post) => {
 export const updatePost = (id, post) => {
     return firebase.firestore().collection("posts").doc(id).update({
         text: post,
+    })
+}
+
+
+export const filePost = (file, name) => {
+    const ref = firebase.storage().ref();
+    ref.child(name)
+    ref.put(file).then(function(snapshot) {
+        console.log(snapshot)
+    })
+}
+
+function iconVerific(post, likeClass) {
+    post.data().liked.forEach(a => {
+        if (a === firebase.auth().currentUser.uid)
+            likeClass(post.id, 1)
     })
 }
