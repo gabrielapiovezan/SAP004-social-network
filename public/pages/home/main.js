@@ -1,7 +1,7 @@
 import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost, filePost } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
-import iconColor from '../elementos/objetos/icon-color.js';
+import iconColor from '../elementos/objetos/icon-dynamic.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
@@ -9,10 +9,10 @@ import { input } from '../elementos/objetos/input.js';
 
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add("container-home");
+    const container = document.createElement('div');
+    container.classList.add("container-home");
 
-  container.innerHTML = `
+    container.innerHTML = `
     <header>
       <nav role="navigation">
         <div id="menuToggle">
@@ -38,12 +38,14 @@ export default () => {
         </figure>
         <h3 id="nameUser" class="name-user"></h3>
       </div>
+      ${image({src:"/pages/elementos/imagens/fundo.png", class:"disappear image-back"})}
       <div class="posts">
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
           <span>
-            ${iconColor({ name: "cadeado" })}
-            ${input({ type: "file", id: "file" })}
+            <span id="loker">${iconColor({ name: 'cadeado', id:"block"})}</span>
+            ${icon({ name: 'img' })}
+
             ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
           </span>
         </form>
@@ -75,6 +77,7 @@ export default () => {
         </h5>    
     </footer>
     `;
+
 
   // container.appendChild(icon('churrasqueira'))
   // container.appendChild(icon('cafeteira'))
@@ -128,22 +131,14 @@ export default () => {
     //loadPost(addPosts, like, likeClass, deletePost, editPost);
   }
 
-  function likeClass(post) {
-    post.data().liked.forEach(a => {
-      if (a === firebase.auth().currentUser.uid) {
-        container.querySelector(`#like1${post.id}`).classList.add("disappear");
-        container.querySelector(`#like2${post.id}`).classList.remove("disappear");
-      } else {
-        container.querySelector(`#like2${post.id}`).classList.add("disappear");
-        container.querySelector(`#like1${post.id}`).classList.remove("disappear");
-      };
-    });
-  };
+     };
+
   function renderImg(url_file) {
     return url_file ? `<img src="${url_file}" style="width:120px;"/>` : ''
   }
   function addPosts(post) {
     const postsTemplete = `
+
         <li id="li${post.id}" class="post box">        
           <div class="user-post">
           Publicado por: ${post.data().name} 
@@ -152,6 +147,7 @@ export default () => {
               ${icon({ id: `save-${post.id}`, class: "edit-btn disappear", name: "checked" })}
               ${icon({ name: 'talher', id: post.id, class: "disappear" })}</div>
             </div>  
+
           <div class="text" id="text${post.id}">${post.data().text}</div>    
          ${renderImg(post.data().url_file)}
         <div class="icon-post" > ${ post.data().likes}
@@ -159,6 +155,7 @@ export default () => {
           ${ iconColor({ name: 'comentario', id: post.id })}</div> 
         </li >
       `;
+
     container.querySelector("#posts").innerHTML += postsTemplete;
   };
 
@@ -172,10 +169,12 @@ export default () => {
 
         postDelete(post.id);
         container.querySelector("#posts").innerHTML = "";
+
         // loadPost(addPosts, like, likeClass, deletePost, editPost);
 
       });
     }
+
   };
 
   function like(post) {
@@ -198,8 +197,13 @@ export default () => {
 
       likes += valid;
       container.querySelector("#posts").innerHTML = "";
-      updateCollection(likeUser, likes, post.id);
-      // loadPost(addPosts, like, likeClass, deletePost, editPost);
+
+      updateCollection(likeUser, likes, post.id); 
+      likeClass(post.id, valid)      
+
+   //   container.querySelector(`#like-number-${post.id}`).innerHTML = "";
+  // loadPost(addPosts, like, likeClass, deletePost, editPost);
+
     });
   };
 
@@ -207,8 +211,16 @@ export default () => {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
   };
 
+
+ container.querySelector("#loker").addEventListener('click',()=>{
+
+  likeClass("block", 1)
+ })
+
+
   let editing = false
 
+  
   function editPost(post) {
     const edit = container.querySelector(`#iconedit-${post.id} `)
     const save = container.querySelector(`#iconsave-${post.id} `)

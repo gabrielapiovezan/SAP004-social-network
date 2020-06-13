@@ -278,6 +278,7 @@ figure {
     border: solid 1px #3C2415;
     width: 90%;
     align-content: center;
+    background-color: #FAF7F3;
 }
 
 .textarea {
@@ -420,14 +421,13 @@ hr {
     text-transform: uppercase
 }
 
-.footer div{
+.footer div {
     display: flex;
     flex-direction: column;
     margin: 0;
     padding-top: 15px;
     width: auto;
 }
-
 
 .link-footer {
     font-size: 15px;
@@ -445,6 +445,15 @@ hr {
 @media only screen and (min-width:770px) {
     .container {
         flex-direction: row;
+    }
+    .image-back {
+        width: 400px;
+        transform: rotateY(180deg);
+        display: block;
+        z-index: -1;
+        position: fixed;
+        left: 30px;
+        top: 90px;
     }
     .img-login {
         max-width: 500px;
@@ -507,15 +516,13 @@ hr {
         flex-direction: column;
         width: 100%;
     }
-
-    .footer h5{
+    .footer h5 {
         display: inline-flex;
         justify-content: space-between;
         align-items: center;
         width: 70%;
     }
-
-    .footer div{
+    .footer div {
         padding-top: 10px;
     }
 }
