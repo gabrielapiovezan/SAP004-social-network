@@ -8,10 +8,10 @@ import { image } from '../elementos/objetos/image.js';
 
 
 export default () => {
-    const container = document.createElement('div');
-    container.classList.add("container-home");
+  const container = document.createElement('div');
+  container.classList.add("container-home");
 
-    container.innerHTML = `
+  container.innerHTML = `
     <header>
       <nav role="navigation">
         <div id="menuToggle">
@@ -20,8 +20,8 @@ export default () => {
           <span></span>
           <span></span>
           <ul id="menu">
-          <li>${link({ href:"#profile", name:"Perfil", title:"perfil", target:"_self" })}</li>
-          <li>${link({ id:"logout-btn", name:"Sair", title:"deslogar", target:"_self" })}</li>
+          <li>${link({ href: "#profile", name: "Perfil", title: "perfil", target: "_self" })}</li>
+          <li>${link({ id: "logout-btn", name: "Sair", title: "deslogar", target: "_self" })}</li>
           </ul>
         </div>
       </nav>
@@ -40,77 +40,101 @@ export default () => {
       <div class="posts">
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-          ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+          <span>
+            ${iconColor({ name: 'cadeado' })}
+            ${icon({ name: 'img' })}
+            ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+          </span>
         </form>
         <ul id="posts" class="post-box"></ul>
       </div>
     </section>
     <footer class="footer">
-      <h5>Desenvolvido por: 
-        ${link({ href:"https://github.com/camilagerarde", name:"Camila Cunha", class:"link-footer", title:"Camila Cunha", target:"_blank"})},
-        ${link({ href:"https://github.com/gabrielapiovezan/", name:"Gabriela Piovezan", class:"link-footer", title:"Gabriela Piovezan", target:"_blank"})}
-        e ${link({ href:"https://github.com/MarianaMBarros", name:"Mariana Barros", class:"link-footer", title:"Mariana Barros", target:"_blank"})}
-      </h5>
+      <h5>Desenvolvido por:
+        <div>
+          ${link({ href: "", name: "Camila Cunha", class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+            <span> 
+            ${link({ href: "https://github.com/camilagerarde", name: icon({ name: 'github' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}  
+            ${link({ href: "https://www.linkedin.com/in/camila-gerarde/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+            </span>
+          </div>
+        <div>
+          ${link({ href: "", name: "Gabriela Piovezan", class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+          <span>
+            ${link({ href: "https://github.com/gabrielapiovezan/", name: icon({ name: 'github' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+            ${link({ href: "https://www.linkedin.com/in/gabrielapiovezan/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}</div>
+          </span>
+        <div>
+          ${link({ href: "https://marianambarros.github.io/portifolio/src/", name: "Mariana Barros", class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+         <span>
+            ${link({ href: "https://github.com/MarianaMBarros", name: icon({ name: 'github' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+            ${link({ href: "https://www.linkedin.com/in/marianambarros/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+          </span>
+        </div>  
+        </h5>    
     </footer>
     `;
 
-    // container.appendChild(icon('churrasqueira'))
-    // container.appendChild(icon('cafeteira'))
-    // container.appendChild(icon('comida'))
-    // container.appendChild(icon('luva'))
-    // container.appendChild(icon('talher'))
-    // container.appendChild(icon('tomate'))
-    // container.appendChild(icon('caneca'))
+  // container.appendChild(icon('churrasqueira'))
+  // container.appendChild(icon('cafeteira'))
+  // container.appendChild(icon('comida'))
+  // container.appendChild(icon('luva'))
+  // container.appendChild(icon('talher'))
+  // container.appendChild(icon('tomate'))
+  // container.appendChild(icon('caneca'))
 
-    container.querySelector('#post-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        const postText = container.querySelector('#post-text').value;
+  container.querySelector('#post-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    const postText = container.querySelector('#post-text').value;
 
-        const post = {
-            name: firebase.auth().currentUser.displayName,
-            text: postText,
-            user_id: firebase.auth().currentUser.uid,
-            likes: 0,
-            liked: [],
-            comments: [],
-            time: firebase.firestore.FieldValue.serverTimestamp()
-        }
-        container.querySelector("#post-text").value = "";
-        container.querySelector("#posts").innerHTML = "";
-        createPost(post);
-        loadPost(addPosts, like, likeClass, deletePost, editPost);
+    const post = {
+      name: firebase.auth().currentUser.displayName,
+      text: postText,
+      user_id: firebase.auth().currentUser.uid,
+      likes: 0,
+      liked: [],
+      comments: [],
+      time: firebase.firestore.FieldValue.serverTimestamp()
+    }
+    container.querySelector("#post-text").value = "";
+    container.querySelector("#posts").innerHTML = "";
+    createPost(post);
+    loadPost(addPosts, like, likeClass, deletePost, editPost);
+  });
+
+  container.querySelector('#logout-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    logout();
+  })
+
+
+  function likeClass(post) {
+    post.data().liked.forEach(a => {
+      if (a === firebase.auth().currentUser.uid) {
+        container.querySelector(`#like1${post.id}`).classList.add("disappear");
+        container.querySelector(`#like2${post.id}`).classList.remove("disappear");
+      } else {
+        container.querySelector(`#like2${post.id}`).classList.add("disappear");
+        container.querySelector(`#like1${post.id}`).classList.remove("disappear");
+      };
     });
+  };
 
-    container.querySelector('#logout-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        logout();
-    })
-
-
-    function likeClass(post) {
-        post.data().liked.forEach(a => {
-            if (a === firebase.auth().currentUser.uid) {
-                container.querySelector(`#like1${post.id}`).classList.add("disappear");
-                container.querySelector(`#like2${post.id}`).classList.remove("disappear");
-            } else {
-                container.querySelector(`#like2${post.id}`).classList.add("disappear");
-                container.querySelector(`#like1${post.id}`).classList.remove("disappear");
-            };
-        });
-    };
-
-    function addPosts(post) {
-        const postsTemplete = `
-        <li id="li${post.id}" class="post box">
-          <div class="user-post">Publicado por: ${post.data().name} 
+  function addPosts(post) {
+    const postsTemplete = `
+        <li id="li${post.id}" class="post box">        
+          <div class="user-post">
+          ${iconColor({ name: 'cadeado', id: post.id })}
+          Publicado por: ${post.data().name} 
             <div class="btn-post">
-              ${button({ id:`edit${post.id}`, class:"edit-btn", name:"Editar" })}
-              ${button({ id:`save${post.id}`, class:"edit-btn disappear", name:"Salvar" })}
-              ${icon({ name:'talher', id:post.id })}</div>
+              ${icon({ id: `edit${post.id}`, class: "edit-btn disappear", name: "edit" })}
+              ${icon({ id: `save${post.id}`, class: "edit-btn disappear", name: "checked" })}
+              ${icon({ name: 'talher', id: post.id })}</div>
             </div>  
           <div class="text" id="text${post.id}">${post.data().text}</div>          
           <div class="icon-post">${post.data().likes} 
-          <span id="like${post.id}">${iconColor({ name:'cereja', id:post.id })}</span></div> 
+          <span id="like${post.id}">${iconColor({ name: 'cereja', id: post.id })}</span>          
+          ${iconColor({ name: 'comentario', id: post.id })}</div> 
         </li>
         `;
     container.querySelector("#posts").innerHTML += postsTemplete;
@@ -160,37 +184,50 @@ export default () => {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data}!`;
   };
 
+  let editing = false
+
   function editPost(post) {
     const edit = container.querySelector(`#edit${post.id}`)
     const save = container.querySelector(`#save${post.id}`)
-    edit.addEventListener("click", (event) => {
-      event.preventDefault();
-      const textPost = document.querySelector(`#text${post.id}`);
 
-      textPost.classList.add("disappear");
+    let postEdit = post.data().user_id;
+    if (postEdit === firebase.auth().currentUser.uid) {
+      edit.classList.remove("disappear")
 
-      const newPost = document.createElement("input");
-      newPost.value = post.data().text;
+      edit.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (!editing) {
+          editing = true;
+          // const textPost = container.querySelector(`#text${post.id}`);
 
-      textPost.after(newPost);
+          container.querySelector(`#text${post.id}`).classList.add("disappear");
 
-      edit.classList.add("disappear")
-      save.classList.remove("disappear")
+          const newPost = document.createElement("div");
+          newPost.id = "edit-post"
+          const textEdit = textarea({ id: "edit-post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
+          newPost.innerHTML = textEdit;
 
-      save.addEventListener("click", async () => {
-        await updatePost(post.id, newPost.value);
-        save.classList.add("disappear")
-        edit.classList.remove("disappear")
+          container.querySelector(`#text${post.id}`).after(newPost);
 
-        textPost.innerHTML = newPost.value;
-        textPost.classList.remove("disappear")
+          edit.classList.add("disappear")
+          save.classList.remove("disappear")
 
-        newPost.remove()
-        loadPost(addPosts, like, likeClass, deletePost, editPost)
-      })
+          save.addEventListener("click", async () => {
+            const valor = newPost.firstElementChild.value;
+            container.querySelector(`#save${post.id}`).classList.add("disappear")
+            container.querySelector(`#edit${post.id}`).classList.remove("disappear")
 
-    });
+            container.querySelector(`#text${post.id}`).innerHTML = newPost.firstElementChild.value;
+            container.querySelector(`#text${post.id}`).classList.remove("disappear")
+            container.querySelector("#edit-post").remove()
 
+            await updatePost(post.id, valor);
+            //loadPost(addPosts, like, likeClass, deletePost, editPost)
+            editing = false;
+          })
+        } else alert("Você já está editando!");
+      });
+    }
   };
 
   user();
