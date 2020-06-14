@@ -309,14 +309,18 @@ figure {
 }
 
 .icon {
+
     width: 27px;
     /* height: 23px; */
+
     padding-left: 4px;
 }
 
 .icon:hover {
+
     width: 29px;
     /* height: 25px; */
+
 }
 
 .disappear {
