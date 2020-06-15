@@ -309,23 +309,18 @@ figure {
 }
 
 .icon {
-    width: 34px;
-    height: 34px;
+
+    width: 27px;
+    /* height: 23px; */
+
     padding-left: 4px;
 }
 
 .icon:hover {
-    width: 36px;
-    height: 36px;
-}
 
-.icon-1 {
-    z-index: 2;
-}
+    width: 29px;
+    /* height: 25px; */
 
-.icon-2 {
-    border: none;
-    z-index: 1;
 }
 
 .disappear {
@@ -355,11 +350,11 @@ figure {
     display: flex;
     align-items: center;
 }
-.send-post{
+
+.send-post {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    
 }
 
 .post {
@@ -436,13 +431,12 @@ hr {
 
 input[type='file'] {
     display: none
-  }
-
-.img-post{   
-    align-self: center; 
-    width: 70%;
 }
 
+.img-post {
+    align-self: center;
+    width: 70%;
+}
 
 @media only screen and (min-width:770px) {
     .container {
