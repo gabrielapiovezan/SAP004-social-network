@@ -205,7 +205,6 @@ export default () => {
     } else {
       adress = adress.replace("2", "1")
       container.querySelector(`#icon-variable-${id}`).src = adress
-
     }
 
   };
