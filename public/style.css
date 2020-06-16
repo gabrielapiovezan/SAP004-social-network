@@ -1,7 +1,7 @@
 body {
-    background-color: #FAF7F3;
-    color: #3C2415;
-    font-family: 'Roboto', sans-serif;
+    background-color: #faf7f3;
+    color: #3c2415;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -34,9 +34,9 @@ header h1,
     font-size: 33px;
     text-align: center;
     width: 50%;
-    font-family: 'Lobster', cursive;
+    font-family: "Lobster", cursive;
     letter-spacing: 2px;
-    color: #FFD932;
+    color: #ffd932;
     margin: 0;
 }
 
@@ -55,7 +55,7 @@ header h1,
     height: 45px;
     margin: 5px 10px;
     padding-left: 10px;
-    border: solid 1.5px #3C2415;
+    border: solid 1.5px #3c2415;
     border-radius: 40px;
 }
 
@@ -64,15 +64,15 @@ header h1,
     margin: 10px;
     border: none;
     border-radius: 40px;
-    color: #FFF;
+    color: #fff;
     height: 50px;
     width: 83%;
-    background-color: #FFD932;
+    background-color: #ffd932;
     font-weight: 700;
 }
 
 .button:hover {
-    background-color: #3C2415;
+    background-color: #3c2415;
 }
 
 .error {
@@ -93,27 +93,27 @@ header h1,
 }
 
 .icon-google:hover {
-    background-color: #DBD7D7;
+    background-color: #dbd7d7;
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 
 .link {
-    color: #3C2415;
+    color: #3c2415;
     margin-bottom: 30px;
 }
 
 .link:hover {
     font-weight: 700;
-    color: #FFD932;
+    color: #ffd932;
 }
 
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #3C2415;
+    background-color: #3c2415;
     width: 100%;
     margin: 0;
     margin-bottom: 45px;
@@ -138,12 +138,12 @@ header h1 {
 
 #menuToggle a {
     text-decoration: none;
-    color: #3C2415;
+    color: #3c2415;
     transition: color 0.3s ease;
 }
 
 #menuToggle a:hover {
-    color: #3C2415;
+    color: #3c2415;
 }
 
 #menuToggle input {
@@ -167,11 +167,11 @@ header h1 {
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: #FFD932;
+    background: #ffd932;
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0px;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
 }
 
 #menuToggle span:first-child {
@@ -185,7 +185,7 @@ header h1 {
 #menuToggle input:checked~span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
-    background: #3C2415;
+    background: #3c2415;
 }
 
 #menuToggle input:checked~span:nth-last-child(3) {
@@ -202,12 +202,12 @@ header h1 {
     width: 25px;
     margin: -100px 0 0 -50px;
     padding: 125px 40px 5px;
-    background: #FFD932;
+    background: #ffd932;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
 #menu li {
@@ -275,27 +275,27 @@ figure {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    border: solid 1px #3C2415;
+    border: solid 1px #3c2415;
     width: 90%;
     align-content: center;
-    background-color: #FAF7F3;
+    background-color: #faf7f3;
 }
 
 .textarea {
     padding: 10px;
     margin: 15px;
     border-radius: 7px;
-    border: solid 1px #3C2415;
+    border: solid 1px #3c2415;
     width: 90%;
     height: 70px;
     resize: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 15px;
     align-self: center;
 }
 
 .textarea:hover {
-    background-color: #FAF7F3;
+    background-color: #faf7f3;
 }
 
 .post-btn {
@@ -309,18 +309,14 @@ figure {
 }
 
 .icon {
-
     width: 27px;
     /* height: 23px; */
-
     padding-left: 4px;
 }
 
 .icon:hover {
-
     width: 29px;
     /* height: 25px; */
-
 }
 
 .disappear {
@@ -340,7 +336,7 @@ figure {
     padding: 10px 10px;
     background-color: #FFD932;
     border-radius: 7px 7px 0 0;
-    color: #3C2415;
+    color: #3c2415;
     align-items: center;
 }
 
@@ -368,7 +364,7 @@ figure {
 .post {
     width: 100%;
     padding: 0;
-    background-color: #FFF;
+    background-color: #fff;
 }
 
 .text {
@@ -395,8 +391,8 @@ hr {
     padding: 0;
     margin: 0;
     align-self: center;
-    color: #DBD7D7;
-    background-color: #DBD7D7;
+    color: #dbd7d7;
+    background-color: #dbd7d7;
     height: 1px;
 }
 
@@ -405,7 +401,7 @@ hr {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #FFD932;
+    background-color: #ffd932;
     margin: 0;
     margin-top: 20px;
     height: auto;
@@ -413,7 +409,7 @@ hr {
     width: 100%;
     /* box-shadow: 0px -2px 3px 0px #afafaf; */
     text-align: center;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .footer div {
@@ -429,16 +425,16 @@ hr {
     font-weight: 700;
     text-decoration: none;
     margin: 0;
-    color: #3C2415;
+    color: #3c2415;
 }
 
 .link-footer:hover {
-    color: #3C2415;
+    color: #3c2415;
     text-decoration: underline;
 }
 
-input[type='file'] {
-    display: none
+input[type="file"] {
+    display: none;
 }
 
 .img-post {
@@ -446,7 +442,7 @@ input[type='file'] {
     width: 70%;
 }
 
-@media only screen and (min-width:770px) {
+@media only screen and (min-width: 770px) {
     .container {
         flex-direction: row;
     }
@@ -485,10 +481,10 @@ input[type='file'] {
     .profile {
         margin: 10px 50px 0 0;
         align-self: baseline;
-        border: solid 1px #3C2415;
+        border: solid 1px #3c2415;
         border-radius: 7px;
         padding: 15px;
-        background-color: #FFD932;
+        background-color: #ffd932;
         align-items: flex-end;
         width: 23%;
         box-shadow: 0 0 3px 0px #4e4e4e;
