@@ -15,7 +15,7 @@ export const user = () => {
             console.log("não possui usuário logado!");
             logout();
             //   let name = "anonimo"
-        };
+        }
     });
 };
 
@@ -44,33 +44,44 @@ export const user = () => {
 //     });
 // };
 
-export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
-
+export const loadPost = (
+    addPosts,
+    like,
+    likeClass,
+    deletePost,
+    updatePost,
+    commenter,
+    printComment,
+) => {
     //export const readPosts = (callback) => {
-    firebase.firestore().collection("posts")
+    firebase
+        .firestore()
+        .collection("posts")
         .orderBy("time", "desc")
-        .onSnapshot(snap => {
-            snap.forEach(post => {
+        .onSnapshot((snap) => {
+            snap.forEach((post) => {
                 addPosts(post);
             });
-            snap.forEach(post => {
+            snap.forEach((post) => {
                 iconVerific(post, likeClass);
             });
-            snap.forEach(post => {
+            snap.forEach((post) => {
                 like(post);
             });
-            snap.forEach(post => {
+            snap.forEach((post) => {
                 deletePost(post);
             });
-            snap.forEach(post => {
+            snap.forEach((post) => {
                 updatePost(post);
             });
-
-        })
-
-}
-
-
+            snap.forEach((post) => {
+                commenter(post);
+            });
+            snap.forEach((post) => {
+                printComment(post)
+            });
+        });
+};
 
 //  .onSnapshot(function(querySnapshot) {
 //    var posts = [];
@@ -82,12 +93,11 @@ export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
 //   }
 // }
 
-
-
-export const updateCollection = (likeUser, likes, post) => {
+export const updateCollection = (post, data) => {
     firebase.firestore().collection("posts").doc(`${post}`).update({
-        liked: likeUser,
-        likes: likes
+        liked: data.liked,
+        comments: data.comments,
+        text: data.text,
     });
 };
 
@@ -98,12 +108,18 @@ export const dataUser = (profile) => {
 };
 
 export const postDelete = (post) => {
-    firebase.firestore().collection("posts").doc(post).delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-    });
-}
+    firebase
+        .firestore()
+        .collection("posts")
+        .doc(post)
+        .delete()
+        .then(function() {
+            console.log("Document successfully deleted!");
+        })
+        .catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+};
 
 export const createPost = (post) => {
     firebase.firestore().collection("posts").add(post);
@@ -112,24 +128,20 @@ export const createPost = (post) => {
 export const updatePost = (id, post) => {
     return firebase.firestore().collection("posts").doc(id).update({
         text: post,
-    })
-}
-
-
+    });
+};
 
 export const filePost = (file, name, callback) => {
     const ref = firebase.storage().ref();
-    const filePostar = ref.child(name)
+    const filePostar = ref.child(name);
     filePostar.put(file).then(function(snapshot) {
-        console.log(snapshot)
-        callback(filePostar.fullPath)
-    })
-
-}
+        console.log(snapshot);
+        callback(filePostar.fullPath);
+    });
+};
 
 function iconVerific(post, likeClass) {
-    post.data().liked.forEach(a => {
-        if (a === firebase.auth().currentUser.uid)
-            likeClass(post.id, 1)
-    })
+    post.data().liked.forEach((a) => {
+        if (a === firebase.auth().currentUser.uid) likeClass(post.id, 1);
+    });
 }
