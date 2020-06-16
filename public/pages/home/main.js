@@ -17,10 +17,8 @@ import { image } from "../elementos/objetos/image.js";
 import { input } from "../elementos/objetos/input.js";
 
 export default () => {
-
   const container = document.createElement('div');
   container.classList.add("container-home");
-
 
   container.innerHTML = `
     <header>
@@ -72,17 +70,15 @@ export default () => {
       })}
       <div class="posts">
         <form class="box">
-
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-          ${image({ id: "icon-variable-loker", src: "./pages/elementos/icones/cadeado-1.png", class: "icon" })}
-            <img id="photo" class="img-post"/>
-            ${icon({ name: 'talher', id: 'remove-photo', class: "disappear" })}                    
-            <div class="send-post">
-              <input type="file" id= "file" accept= "image/*">
-              <label for="file"> ${image({ id: "img-upload", class: "icon", src: "./pages/elementos/icones/img-1.png" })}</label>                     
-
-              ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
-            </div>
+          ${image({ id: "icon-variable-loker", src: "./pages/elementos/icones/cadeado-1.png", class: "icon icon-left" })}
+          <img id="photo" class="img-post"/>
+          ${icon({ name: 'talher', id: 'remove-photo', class: "disappear icon-left" })}                    
+          <div class="send-post">
+            <input type="file" id= "file" accept= "image/*" class="icon-left">
+            <label for="file"> ${image({ id: "img-upload", class: "icon icon-left", src: "./pages/elementos/icones/img-1.png" })}</label>                    
+            ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
+          </div>
         </form>
         <ul id="posts" class="post-box"></ul>
       </div>
@@ -167,8 +163,6 @@ export default () => {
     </footer>
     `;
 
-
-
   container.querySelector('#post-btn').addEventListener('click', (event) => {
     event.preventDefault();
     const fileInpxut = container.querySelector("#file");
@@ -240,48 +234,37 @@ export default () => {
     container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
   })
 
-
-
-
-      
-  
-          // alt:"ícone-editar"
-          // alt:"ícone-salvar"
-          // alt:"ícone-excluir"
-
-
-
-
   function addPosts(post) {
     let date = new Date(post.data().time.seconds*1000); 
     let options = {dateStyle:('short'), timeStyle:('short')};
     let datePost = date.toLocaleDateString("pt-BR", options);
 
     const postsTemplate = `
-      <div li id = "li${post.id}" class="post box" >
+      <div li id = "li${post.id}" class="post" >
         <div class="user-post">
-        <div>
-          <h3>Publicado por: ${post.data().name}</h3>
-          <time>${datePost}</time>
-        </div>
-          <div class="btn-post">
-            ${icon({
-              id: `edit-${post.id}`,
-              class: "edit-btn disappear",
-              name: "edit",
-            })}
-              ${icon({
-                id: `save-${post.id}`,
-                class: "edit-btn disappear",
-                name: "checked",
-              })}
-              ${icon({ name: "talher", id: post.id, class: "disappear" })}
+          <div>
+            <h3>Publicado por: ${post.data().name}</h3>
+            <time>${datePost}</time>
           </div>
+        <div class="btn-post">
+          ${icon({
+            id: `edit-${post.id}`,
+            class: "edit-btn disappear",
+            name: "edit",
+          })}
+          ${icon({
+            id: `save-${post.id}`,
+            class: "edit-btn disappear",
+            name: "checked",
+          })}
+          ${icon({ name: "talher", id: post.id, class: "disappear" })}
         </div>
-          <div class="text" id="text${post.id}">${post.data().text}</div>    
+        </div>
+        <div class="text">
+          <textarea id="text${post.id}" rows="auto" disabled> ${post.data().text} </textarea>  
           ${renderImg(post.data().url_file)}
-
-          <div class="icon-post" > 
+        </div>
+        <div class="icon-post" > 
           ${post.data().liked.length}
           ${image({
             id: `icon-variable-${post.id}`,
@@ -289,23 +272,20 @@ export default () => {
             name: "cereja",
             src: "./pages/elementos/icones/cereja-1.png",
           })}
-          ${post.data().comments.length}${icon({
-      name: "comentario",
-      id: `commenter-${post.id}`,
-    })}
-
-          </div> 
-      
-      <div id="comments${post.id}" class="disappear">
-      ${textarea({
-        id: `comment-text${post.id}`,
-        type: "text",
-        size: "500",
-        placeholder: "Comentario",
-      })}
-     ${icon({ name: "caneca", id: `send-comment-${post.id}` })}
-      <div id="comments-list${post.id}"></div>
-      </div>
+          ${post.data().comments.length}
+          ${icon({ name: "comentario", id: `commenter-${post.id}`})}
+        </div> 
+        <div id="comments${post.id}" class="disappear">
+          ${textarea({
+          id: `comment-text${post.id}`,
+          type: "text",
+          size: "500",
+          placeholder: "Insira seu comentário!",
+          class: "textarea-comment"
+          })}
+          ${icon({ name: "caneca", id: `send-comment-${post.id}`, class:"icon-left" })}
+          <div id="comments-list${post.id}"></div>
+        </div>
       </div>`;
     container.querySelector("#posts").innerHTML += postsTemplate;
   };
@@ -453,6 +433,7 @@ export default () => {
               text: container.querySelector(`#comment-text${post.id}`).value,
               user_id: firebase.auth().currentUser.uid,
               user_name: firebase.auth().currentUser.displayName,
+              time: new Date().getTime()
             };
             data.comments.push(comment);
             updateCollection(post.id, data);
@@ -507,33 +488,46 @@ export default () => {
   }
 
   function printComment(post) {
+
     const boxComments = container.querySelector(`#comments-list${post.id}`);
     const data = post.data();
     boxComments.innerHTML = "";
     for (let i in data.comments) {
+      let date = new Date(data.comments[i].time); 
+      const options = {dateStyle:('short'), timeStyle:('short')};
+      let datePost = date.toLocaleDateString("pt-BR", options);
+
       boxComments.innerHTML += `
-      <div  class="box">
-       <b>${data.comments[i].user_name}:</b>
-      ${textarea({
-        value: `${data.comments[i].text}`,
-        id: `comment-${i}-${post.id}`,
-        size: 50,
-      })}
-     ${icon({
-       name: "talher",
-       id: `close-${i}-${post.id}`,
-       class: "disappear",
-     })}
-     ${icon({
-       name: "edit",
-       id: `edit-${i}-${post.id}`,
-       class: "disappear",
-     })}
-        ${icon({
-          name: "checked",
-          id: `checked-${i}-${post.id}`,
-          class: "disappear",
-        })}</div>`;
+      <div  class="comment">
+        <div class="comment-box">
+          <div>
+            <h3>${data.comments[i].user_name}:</h3>
+            <time>${datePost}</time>
+          </div>
+          <div>
+            ${icon({
+              name: "talher",
+              id: `close-${i}-${post.id}`,
+              class: "disappear",
+            })}
+            ${icon({
+              name: "edit",
+              id: `edit-${i}-${post.id}`,
+              class: "disappear",
+            })}
+            ${icon({
+              name: "checked",
+              id: `checked-${i}-${post.id}`,
+              class: "disappear",
+            })}
+          </div>
+        </div>
+        ${textarea({
+          value: `${data.comments[i].text}`,
+          id: `comment-${i}-${post.id}`,
+          size: 50,
+        })}
+      </div>`;
       container
         .querySelector(`#comment-${i}-${post.id}`)
         .setAttribute("disabled", true);

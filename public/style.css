@@ -155,9 +155,7 @@ header h1 {
     left: -5px;
     cursor: pointer;
     opacity: 0;
-    /* hide this */
     z-index: 2;
-    /* and place it over the hamburger */
     -webkit-touch-callout: none;
 }
 
@@ -224,20 +222,6 @@ header h1 {
     padding: 0 15px;
 }
 
-
-/* .out-btn { 
-    border-radius: 30px;
-    font-size: 14px;
-    width: 70px;
-    height: 25px;
-    margin-right: 40px;
-    color: #3C2415;
-}
-
-.out-btn:hover {
-    background-color: rgb(223, 191, 51);
-} */
-
 .posts,
 .timeline {
     display: flex;
@@ -259,8 +243,6 @@ figure {
 
 .img-profile {
     width: 75px;
-    /* border-radius: 75px;
-    border: #3C2415 solid 0.5px; */
 }
 
 .name-user {
@@ -269,6 +251,7 @@ figure {
     padding: 40px 0 0 10px;
 }
 
+.post,
 .box {
     margin: 10px 0 30px;
     border-radius: 7px;
@@ -279,6 +262,10 @@ figure {
     width: 90%;
     align-content: center;
     background-color: #faf7f3;
+}
+
+.icon-left {
+    margin-left: 15px;
 }
 
 .textarea {
@@ -298,6 +285,17 @@ figure {
     background-color: #faf7f3;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+
+.send-post {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 0 0;
+}
+
 .post-btn {
     border-radius: 30px;
     font-size: 16px;
@@ -310,22 +308,27 @@ figure {
 
 .icon {
     width: 27px;
-    /* height: 23px; */
-    padding-left: 4px;
+    padding: 0 6px 0 3px;
 }
 
 .icon:hover {
     width: 29px;
-    /* height: 25px; */
 }
 
 .disappear {
     display: none;
 }
 
+.post {
+    margin: 10px 0;
+}
+
 .post-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style-type: none;
-    width: 90%;
+    width: 100%;
     padding: 0;
     margin: 0;
 }
@@ -346,8 +349,15 @@ figure {
     font-size: 17px;
 }
 
+.comment h3,
 .user-post time {
-    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+}
+
+.comment time {
+    font-size: 13px;
 }
 
 .btn-post {
@@ -355,23 +365,34 @@ figure {
     align-items: center;
 }
 
-.send-post {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.post {
-    width: 100%;
-    padding: 0;
-    background-color: #fff;
-}
-
-.text {
+/* .text {
     height: auto;
     min-height: 50px;
     padding: 10px;
     color: #4e4e4e;
+} */
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px;
+    color: #4e4e4e;
+}
+
+.text textarea {
+    resize: none;
+    width: 100%;   
+    overflow-y: auto;
+    min-height: 100px;
+    border: none;
+}
+
+.img-post {
+    align-self: center;
+    width: 70%;
+    margin: 15px 0;
 }
 
 .icon-post {
@@ -380,7 +401,7 @@ figure {
     font-size: 17px;
     color: #4e4e4e;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 4px 15px;
     background-color: rgb(240, 240, 240);
     border-radius: 0 0 7px 7px;
 }
@@ -396,6 +417,30 @@ hr {
     height: 1px;
 }
 
+.textarea-comment {
+    margin-bottom: 0;
+}
+
+.comment {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ffd932;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.comment-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment textarea {
+    background-color: #fff;
+    margin: 10px;
+    width: 95%;
+}
+
 .footer {
     display: flex;
     justify-content: center;
@@ -407,7 +452,6 @@ hr {
     height: auto;
     text-decoration: none;
     width: 100%;
-    /* box-shadow: 0px -2px 3px 0px #afafaf; */
     text-align: center;
     text-transform: uppercase;
 }
@@ -431,15 +475,6 @@ hr {
 .link-footer:hover {
     color: #3c2415;
     text-decoration: underline;
-}
-
-input[type="file"] {
-    display: none;
-}
-
-.img-post {
-    align-self: center;
-    width: 70%;
 }
 
 @media only screen and (min-width: 770px) {
@@ -499,10 +534,8 @@ input[type="file"] {
     .post-btn {
         width: 120px;
     }
-    .post-box {
-        width: 0;
-        margin: 0;
-        padding: 0;
+    .post {
+        width: 100%;
     }
     .textarea {
         box-shadow: 0px 0px 2px #999999;
@@ -511,11 +544,7 @@ input[type="file"] {
         width: 100%;
         align-self: flex-end;
     }
-    .post-box {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+   
     .footer h5 {
         display: inline-flex;
         justify-content: space-between;
