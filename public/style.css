@@ -333,13 +333,21 @@ figure {
 .user-post {
     display: flex;
     justify-content: space-between;
-    padding: 5px 10px;
-    background-color: #ffd932;
-    font-size: 17px;
-    font-weight: 600;
+    padding: 10px 10px;
+    background-color: #FFD932;
     border-radius: 7px 7px 0 0;
     color: #3c2415;
     align-items: center;
+}
+
+.user-post h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+}
+
+.user-post time {
+    font-size: 14px;
 }
 
 .btn-post {
