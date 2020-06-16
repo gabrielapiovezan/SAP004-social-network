@@ -1,14 +1,23 @@
-import { user, createPost, logout, loadPost, dataUser, updateCollection, postDelete, updatePost, filePost } from './data.js';
-import { button } from '../elementos/objetos/button.js';
-import { link } from '../elementos/objetos/link.js';
-import icon from '../elementos/objetos/icon.js';
-import { textarea } from '../elementos/objetos/textarea.js';
-import { image } from '../elementos/objetos/image.js';
-import { input } from '../elementos/objetos/input.js';
-
+import {
+    user,
+    createPost,
+    logout,
+    loadPost,
+    dataUser,
+    updateCollection,
+    postDelete,
+    updatePost,
+    filePost,
+} from "./data.js";
+import { button } from "../elementos/objetos/button.js";
+import { link } from "../elementos/objetos/link.js";
+import icon from "../elementos/objetos/icon.js";
+import { textarea } from "../elementos/objetos/textarea.js";
+import { image } from "../elementos/objetos/image.js";
+import { input } from "../elementos/objetos/input.js";
 
 export default () => {
-    const container = document.createElement('div');
+    const container = document.createElement("div");
     container.classList.add("container-home");
 
     container.innerHTML = `
@@ -20,32 +29,66 @@ export default () => {
           <span></span>
           <span></span>
           <ul id="menu">
-          <li>${link({ href: "#profile", name: "Perfil", title: "perfil", target: "_self" })}</li>
-          <li>${link({ id: "logout-btn", name: "Sair", title: "deslogar", target: "_self" })}</li>
+          <li>${link({
+            href: "#profile",
+            name: "Perfil",
+            title: "perfil",
+            target: "_self",
+          })}</li>
+          <li>${link({
+            id: "logout-btn",
+            name: "Sair",
+            title: "deslogar",
+            target: "_self",
+          })}</li>
           </ul>
         </div>
       </nav>
       <h1> &lt; Umâmi &gt; </h1> 
       <figure>
-        ${image({ src: "/pages/elementos/imagens/logo.png", class: "img-header", alt: "logo-umâmi" })}
+        ${image({
+          src: "/pages/elementos/imagens/logo.png",
+          class: "img-header",
+          alt: "logo-umâmi",
+        })}
       </figure>
     </header>
     <section class="timeline">
       <div class="profile">
         <figure>
-          ${image({ src: "/pages/elementos/imagens/chefe.png", class: "img-profile", alt: "foto-perfil" })}
+          ${image({
+            src: "/pages/elementos/imagens/chefe.png",
+            class: "img-profile",
+            alt: "foto-perfil",
+          })}
         </figure>
         <h3 id="nameUser" class="name-user"></h3>
       </div>
-      ${image({ src: "/pages/elementos/imagens/fundo.png", class: "disappear image-back" })}
+      ${image({
+        src: "/pages/elementos/imagens/fundo.png",
+        class: "disappear image-back",
+      })}
       <div class="posts">
         <form class="box">
-          ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-          ${image({id:"icon-variable-loker",src:"./pages/elementos/icones/cadeado-1.png",class:"icon"})}
+          ${textarea({
+            id: "post-text",
+            type: "text",
+            size: "500",
+            placeholder: "Compartilhe sua publicação aqui!",
+          })}
+          ${image({
+            id: "icon-variable-loker",
+            src: "./pages/elementos/icones/cadeado-1.png",
+            class: "icon",
+          })}
             <img id="photo" class="img-post">           
             <div class="send-post">
               <input type="file" id= "file" accept= "image/*">
-              <label for="file"> ${image({id:"img-upload", class:"icon", src:"./pages/elementos/icones/img-1.png"})}</label>                     
+              <label for="file"> ${image({
+                id: "img-upload",
+                class: "icon",
+                src: "./pages/elementos/icones/img-1.png",
+              })}</label>                     
               ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
             </div>
         </form>
@@ -55,87 +98,141 @@ export default () => {
     <footer class="footer">
       <h5>Desenvolvido por:
         <div>
-          ${link({ href: "", name: "Camila Cunha", class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+          ${link({
+            href: "",
+            name: "Camila Cunha",
+            class: "link-footer",
+            title: "Camila Cunha",
+            target: "_blank",
+          })}
             <span> 
-            ${link({ href: "https://github.com/camilagerarde", name: icon({ name: 'github' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}  
-            ${link({ href: "https://www.linkedin.com/in/camila-gerarde/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Camila Cunha", target: "_blank" })}
+            ${link({
+              href: "https://github.com/camilagerarde",
+              name: icon({ name: "github" }),
+              class: "link-footer",
+              title: "Camila Cunha",
+              target: "_blank",
+            })}  
+            ${link({
+              href: "https://www.linkedin.com/in/camila-gerarde/",
+              name: icon({ name: "linkedin" }),
+              class: "link-footer",
+              title: "Camila Cunha",
+              target: "_blank",
+            })}
             </span>
           </div>
         <div>
-          ${link({ href: "", name: "Gabriela Piovezan", class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
+          ${link({
+            href: "",
+            name: "Gabriela Piovezan",
+            class: "link-footer",
+            title: "Gabriela Piovezan",
+            target: "_blank",
+          })}
           <span>
-            ${link({ href: "https://github.com/gabrielapiovezan/", name: icon({ name: 'github' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}
-            ${link({ href: "https://www.linkedin.com/in/gabrielapiovezan/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Gabriela Piovezan", target: "_blank" })}</div>
+            ${link({
+              href: "https://github.com/gabrielapiovezan/",
+              name: icon({ name: "github" }),
+              class: "link-footer",
+              title: "Gabriela Piovezan",
+              target: "_blank",
+            })}
+            ${link({
+              href: "https://www.linkedin.com/in/gabrielapiovezan/",
+              name: icon({ name: "linkedin" }),
+              class: "link-footer",
+              title: "Gabriela Piovezan",
+              target: "_blank",
+            })}</div>
           </span>
         <div>
-          ${link({ href: "https://marianambarros.github.io/portifolio/src/", name: "Mariana Barros", class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+          ${link({
+            href: "https://marianambarros.github.io/portifolio/src/",
+            name: "Mariana Barros",
+            class: "link-footer",
+            title: "Mariana Barros",
+            target: "_blank",
+          })}
          <span>
-            ${link({ href: "https://github.com/MarianaMBarros", name: icon({ name: 'github' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
-            ${link({ href: "https://www.linkedin.com/in/marianambarros/", name: icon({ name: 'linkedin' }), class: "link-footer", title: "Mariana Barros", target: "_blank" })}
+            ${link({
+              href: "https://github.com/MarianaMBarros",
+              name: icon({ name: "github" }),
+              class: "link-footer",
+              title: "Mariana Barros",
+              target: "_blank",
+            })}
+            ${link({
+              href: "https://www.linkedin.com/in/marianambarros/",
+              name: icon({ name: "linkedin" }),
+              class: "link-footer",
+              title: "Mariana Barros",
+              target: "_blank",
+            })}
           </span>
         </div>  
         </h5>    
     </footer>
     `;
 
-
-    container.querySelector('#post-btn').addEventListener('click', (event) => {
+    container.querySelector("#post-btn").addEventListener("click", (event) => {
         event.preventDefault();
         const fileInpxut = container.querySelector("#file");
-        filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase)
+        filePost(
+            fileInpxut.files[0],
+            `images${fileInpxut.files[0].name}`,
+            saveFirebase
+        );
 
         function saveFirebase(urlFile) {
-            const postText = container.querySelector('#post-text').value;
+            const postText = container.querySelector("#post-text").value;
             const post = {
                 url_file: `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`,
                 name: firebase.auth().currentUser.displayName,
                 text: postText,
                 user_id: firebase.auth().currentUser.uid,
-                likes: 0,
                 liked: [],
                 comments: [],
-                time: firebase.firestore.FieldValue.serverTimestamp()
-            }
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+            };
             container.querySelector("#post-text").value = "";
             container.querySelector("#posts").innerHTML = "";
             container.querySelector("#photo").src = "";
-            container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
+            container.querySelector("#img-upload").src =
+                "./pages/elementos/icones/img-1.png";
             createPost(post);
         }
-
-    })
-    container.querySelector('#logout-btn').addEventListener('click', (event) => {
+    });
+    container.querySelector("#logout-btn").addEventListener("click", (event) => {
         event.preventDefault();
         logout();
-    })
-
+    });
 
     function likeClass(id, valid) {
-        let adress = container.querySelector(`#icon-variable-${id}`).src
+        let adress = container.querySelector(`#icon-variable-${id}`).src;
         if (valid === 1) {
-            adress = adress.replace("1", "2")
-            container.querySelector(`#icon-variable-${id}`).src = adress
+            adress = adress.replace("1", "2");
+            container.querySelector(`#icon-variable-${id}`).src = adress;
         } else {
-            adress = adress.replace("2", "1")
-            container.querySelector(`#icon-variable-${id}`).src = adress
-
+            adress = adress.replace("2", "1");
+            container.querySelector(`#icon-variable-${id}`).src = adress;
         }
-
-    };
+    }
 
     function renderImg(url_file) {
-        return url_file ? `${image({src:url_file, class:"img-post"})}` : ''
+        return url_file ? `${image({ src: url_file, class: "img-post" })}` : "";
     }
 
     container.querySelector("#file").addEventListener("change", (event) => {
         event.preventDefault();
-        const output = container.querySelector('#photo');
+        const output = container.querySelector("#photo");
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
-        }
-        container.querySelector("#img-upload").src = "./pages/elementos/icones/img-2.png"
-    })
+            URL.revokeObjectURL(output.src); // free memory
+        };
+        container.querySelector("#img-upload").src =
+            "./pages/elementos/icones/img-2.png";
+    });
 
     function addPosts(post) {
         const postsTemplete = `
@@ -143,138 +240,301 @@ export default () => {
         <div class="user-post">
           Publicado por: ${post.data().name}
           <div class="btn-post">
-            ${icon({ id: `edit-${post.id}`, class: "edit-btn disappear", name: "edit" })}
-              ${icon({ id: `save-${post.id}`, class: "edit-btn disappear", name: "checked" })}
-              ${icon({ name: 'talher', id: post.id, class: "disappear" })}
+            ${icon({
+              id: `edit-${post.id}`,
+              class: "edit-btn disappear",
+              name: "edit",
+            })}
+              ${icon({
+                id: `save-${post.id}`,
+                class: "edit-btn disappear",
+                name: "checked",
+              })}
+              ${icon({ name: "talher", id: post.id, class: "disappear" })}
           </div>
         </div>
           <div class="text" id="text${post.id}">${post.data().text}</div>    
           ${renderImg(post.data().url_file)}
-          <div class="icon-post" > ${post.data().likes}
-          ${image({ id:`icon-variable-${post.id}`, class:"icon", name:"cereja", src:"./pages/elementos/icones/cereja-1.png"})}
-            ${icon({ name: 'comentario', id: post.id })}
+          <div class="icon-post" > 
+          ${post.data().liked.length}
+          ${image({
+            id: `icon-variable-${post.id}`,
+            class: "icon",
+            name: "cereja",
+            src: "./pages/elementos/icones/cereja-1.png",
+          })}
+          ${post.data().comments.length}${icon({
+      name: "comentario",
+      id: `commenter-${post.id}`,
+    })}
           </div> 
-      </div> `;
+      
+      <div id="comments${post.id}" class="disappear">
+      ${textarea({
+        id: `comment-text${post.id}`,
+        type: "text",
+        size: "500",
+        placeholder: "Comentario",
+      })}
+     ${icon({ name: "caneca", id: `send-comment-${post.id}` })}
+      <div id="comments-list${post.id}"></div>
+      </div>
+      </div>`;
 
     container.querySelector("#posts").innerHTML += postsTemplete;
-  };
+  }
 
   function deletePost(post) {
     let postUser = post.data().user_id;
 
     if (postUser === firebase.auth().currentUser.uid) {
-      container.querySelector(`#icon${post.id} `).classList.remove("disappear")
-      container.querySelector(`#icon${post.id} `).addEventListener("click", (event) => {
-        event.preventDefault();
+      container.querySelector(`#icon${post.id} `).classList.remove("disappear");
+      container
+        .querySelector(`#icon${post.id} `)
+        .addEventListener("click", (event) => {
+          event.preventDefault();
 
-        postDelete(post.id);
-        container.querySelector("#posts").innerHTML = "";
-
-      });
+          postDelete(post.id);
+          container.querySelector("#posts").innerHTML = "";
+        });
     }
-
-  };
+  }
 
   function like(post) {
-    container.querySelector(`#icon-variable-${post.id}`).addEventListener("click", (event) => {
-      event.preventDefault();
-      let likes = post.data().likes;
-      let likeUser = post.data().liked;
-      let valid = 1;
+    container
+      .querySelector(`#icon-variable-${post.id}`)
+      .addEventListener("click", (event) => {
+        event.preventDefault();
+        let data = post.data();
+        let valid = 1;
 
-      for (let i in likeUser) {
-        if (likeUser[i] === firebase.auth().currentUser.uid) {
-          likeUser.splice(i, 1);
-          valid = -1;
-        };
-      };
+        for (let i in data.liked) {
+          if (data.liked[i] === firebase.auth().currentUser.uid) {
+            data.liked.splice(i, 1);
+            valid = -1;
+          }
+        }
 
-      if (valid === 1) {
-        likeUser.push(firebase.auth().currentUser.uid);
-      };
+        if (valid === 1) {
+          data.liked.push(firebase.auth().currentUser.uid);
+        }
 
-      likes += valid;
-      container.querySelector("#posts").innerHTML = "";
-      updateCollection(likeUser, likes, post.id);
-    });
-  };
+        container.querySelector("#posts").innerHTML = "";
+        updateCollection(post.id, data);
+      });
+  }
 
   function profile(data) {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
-  };
+  }
 
+  container
+    .querySelector("#icon-variable-loker")
+    .addEventListener("click", () => {
+      likeClass("loker", 1);
+    });
 
-  container.querySelector("#icon-variable-loker").addEventListener('click', () => {
-    likeClass("loker", 1)
-  })
-
-
-  let editing = false
-
+  let editing = false;
 
   function editPost(post) {
-    const edit = container.querySelector(`#iconedit-${post.id} `)
-    const save = container.querySelector(`#iconsave-${post.id} `)
+    const edit = container.querySelector(`#iconedit-${post.id} `);
+    const save = container.querySelector(`#iconsave-${post.id} `);
 
     let postEdit = post.data().user_id;
     if (postEdit === firebase.auth().currentUser.uid) {
-      edit.classList.remove("disappear")
+      edit.classList.remove("disappear");
 
       edit.addEventListener("click", (event) => {
         event.preventDefault();
         if (!editing) {
           editing = true;
 
-          container.querySelector(`#text${post.id} `).classList.add("disappear");
+          container
+            .querySelector(`#text${post.id} `)
+            .classList.add("disappear");
 
           const newPost = document.createElement("div");
-          newPost.id = "edit-post"
-          const textEdit = textarea({ id: "edit-post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!", value: post.data().text });
+          newPost.id = "edit-post";
+          const textEdit = textarea({
+            id: "edit-post-text",
+            type: "text",
+            size: "500",
+            placeholder: "Compartilhe sua publicação aqui!",
+            value: post.data().text,
+          });
           newPost.innerHTML = textEdit;
 
           container.querySelector(`#text${post.id} `).after(newPost);
 
-          edit.classList.add("disappear")
-          save.classList.remove("disappear")
-          container.querySelector(`#icon${post.id} `).classList.add("disappear")
-
+          edit.classList.add("disappear");
+          save.classList.remove("disappear");
+          container
+            .querySelector(`#icon${post.id} `)
+            .classList.add("disappear");
 
           save.addEventListener("click", async () => {
             const valor = newPost.firstElementChild.value;
-            container.querySelector(`#iconsave-${post.id} `).classList.add("disappear")
-            container.querySelector(`#iconedit-${post.id} `).classList.remove("disappear")
-            container.querySelector(`#icon${post.id} `).classList.remove("disappear")
+            container
+              .querySelector(`#iconsave-${post.id} `)
+              .classList.add("disappear");
+            container
+              .querySelector(`#iconedit-${post.id} `)
+              .classList.remove("disappear");
+            container
+              .querySelector(`#icon${post.id} `)
+              .classList.remove("disappear");
 
-            container.querySelector(`#text${post.id} `).innerHTML = newPost.firstElementChild.value;
-            container.querySelector(`#text${post.id} `).classList.remove("disappear")
-            container.querySelector("#edit-post").remove()
+            container.querySelector(`#text${post.id} `).innerHTML =
+              newPost.firstElementChild.value;
+            container
+              .querySelector(`#text${post.id}`)
+              .classList.remove("disappear");
+            container.querySelector("#edit-post").remove();
 
             await updatePost(post.id, valor);
 
             editing = false;
-          })
+          });
         } else alert("Você já está editando!");
       });
     }
-  };
+  }
 
   function profile(data) {
     container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
-  };
+  }
 
+  container
+    .querySelector("#icon-variable-loker")
+    .addEventListener("click", () => {
+      likeClass("loker", 1);
+    });
 
+  function commenter(post) {
+    container
+      .querySelector(`#iconcommenter-${post.id}`)
+      .addEventListener("click", (event) => {
+        event.preventDefault();
+        const data = post.data();
+        container
+          .querySelector(`#comments${post.id}`)
+          .classList.toggle("disappear");
+        container
+          .querySelector(`#iconsend-comment-${post.id}`)
+          .addEventListener("click", () => {
+            const comment = {
+              text: container.querySelector(`#comment-text${post.id}`).value,
+              user_id: firebase.auth().currentUser.uid,
+              user_name: firebase.auth().currentUser.displayName,
+            };
+            data.comments.push(comment);
+            updateCollection(post.id, data);
+          });
+      });
+  }
+  function deleteComents(data, post) {
+    for (let i in data.comments) {
+      container
+        .querySelector(`#iconclose-${i}-${post.id}`)
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+          data.comments.splice(i, 1);
+          updateCollection(post.id, data);
+        });
+    }
+  }
+  function editComments(data, post) {
+    for (let i in data.comments) {
+      container
+        .querySelector(`#iconedit-${i}-${post.id}`)
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+          container
+            .querySelector(`#iconedit-${i}-${post.id}`)
+            .classList.add("disappear");
+          container
+            .querySelector(`#iconchecked-${i}-${post.id}`)
+            .classList.remove("disappear");
+          container
+            .querySelector(`#comment-${i}-${post.id}`)
+            .removeAttribute("disabled");
+          container
+            .querySelector(`#iconchecked-${i}-${post.id}`)
+            .addEventListener("click", () => {
+              container
+                .querySelector(`#comment-${i}-${post.id}`)
+                .setAttribute("disabled", true);
+              data.comments[i].text = container.querySelector(
+                `#comment-${i}-${post.id}`
+              ).value;
+              updateCollection(post.id, data);
+              container
+                .querySelector(`#iconchecked-${i}-${post.id}`)
+                .classList.add("disappear");
+              container
+                .querySelector(`#iconedit-${i}-${post.id}`)
+                .classList.remove("disappear");
+            });
+        });
+    }
+  }
 
-  container.querySelector("#icon-variable-loker").addEventListener('click', () => {
+  function printComment(post) {
+    const boxComments = container.querySelector(`#comments-list${post.id}`);
+    const data = post.data();
+    boxComments.innerHTML = "";
+    for (let i in data.comments) {
+      boxComments.innerHTML += `
+      <div  class="box">
+       <b>${data.comments[i].user_name}:</b>
+      ${textarea({
+        value: `${data.comments[i].text}`,
+        id: `comment-${i}-${post.id}`,
+        size: 50,
+      })}
+     ${icon({
+       name: "talher",
+       id: `close-${i}-${post.id}`,
+       class: "disappear",
+     })}
+     ${icon({
+       name: "edit",
+       id: `edit-${i}-${post.id}`,
+       class: "disappear",
+     })}
+        ${icon({
+          name: "checked",
+          id: `checked-${i}-${post.id}`,
+          class: "disappear",
+        })}</div>`;
+      container
+        .querySelector(`#comment-${i}-${post.id}`)
+        .setAttribute("disabled", true);
+      if (firebase.auth().currentUser.uid === data.comments[i].user_id) {
+        container
+          .querySelector(`#iconclose-${i}-${post.id}`)
+          .classList.remove("disappear");
 
-    likeClass("loker", 1)
-  })
-
-
-
+        container
+          .querySelector(`#iconedit-${i}-${post.id}`)
+          .classList.remove("disappear");
+      }
+    }
+    deleteComents(data, post);
+    editComments(data, post);
+  }
 
   user();
   dataUser(profile);
-  loadPost(addPosts, like, likeClass, deletePost, editPost);
+  loadPost(
+    addPosts,
+    like,
+    likeClass,
+    deletePost,
+    editPost,
+    commenter,
+    printComment
+  );
 
   return container;
 };
