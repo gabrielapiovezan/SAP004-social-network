@@ -149,11 +149,30 @@ export default () => {
     container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
   })
 
+
+
+
+      
+  
+          // alt:"ícone-editar"
+          // alt:"ícone-salvar"
+          // alt:"ícone-excluir"
+
+
+
+
   function addPosts(post) {
-    const postsTemplete = `
+    let date = new Date(post.data().time.seconds*1000); 
+    let options = {dateStyle:('short'), timeStyle:('short')};
+    let datePost = date.toLocaleDateString("pt-BR", options);
+
+    const postsTemplate = `
       <div li id = "li${post.id}" class="post box" >
         <div class="user-post">
-          Publicado por: ${post.data().name}
+        <div>
+          <h3>Publicado por: ${post.data().name}</h3>
+          <time>${datePost}</time>
+        </div>
           <div class="btn-post">
             ${icon({ id: `edit-${post.id}`, class: "edit-btn disappear", name: "edit" })}
               ${icon({ id: `save-${post.id}`, class: "edit-btn disappear", name: "checked" })}
@@ -168,7 +187,7 @@ export default () => {
           </div> 
       </div> `;
 
-    container.querySelector("#posts").innerHTML += postsTemplete;
+    container.querySelector("#posts").innerHTML += postsTemplate;
   };
 
   function deletePost(post) {
