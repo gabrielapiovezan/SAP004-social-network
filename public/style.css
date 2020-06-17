@@ -461,6 +461,17 @@ hr {
     width: auto;
 }
 
+.icon-footer {
+  height: 20px;
+  width: 20px;
+  padding: 5px, 0;
+}
+
+.icon-footer:hover {
+  height: 24px;
+  width: 24px;
+}
+
 .link-footer {
     font-size: 15px;
     font-weight: 700;
