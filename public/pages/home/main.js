@@ -17,17 +17,27 @@ import { image } from "../elementos/objetos/image.js";
 import { input } from "../elementos/objetos/input.js";
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add("container-home");
+    const container = document.createElement("div");
 
-  container.innerHTML = `
+    container.classList.add("container-home");
+
+    container.innerHTML = `
+        <div id="modal" class="modal disappear">
+        <div class="modal-content">
+          <span class="close close-modal">&times;</span>
+        <h2>Tem certeza que deseja deletar?</h2>
+        ${button({ name: "Sim", id: "delete-yes", class: "close-modal" })}
+                ${button({
+                  name: "Cancelar",
+                  id: "delete-no",
+                  class: "close-modal",
+                })}
+        </div>
+        </div>
     <header>
       <nav role="navigation">
         <div id="menuToggle">
           <input type="checkbox"/>
-          <span></span>
-          <span></span>
-          <span></span>
           <ul id="menu">
           <li>${link({
             href: "#profile",
@@ -70,13 +80,30 @@ export default () => {
       })}
       <div class="posts">
         <form class="box">
-          ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
-          ${image({ id: "icon-variable-loker", src: "./pages/elementos/icones/cadeado-1.png", class: "icon icon-left" })}
+          ${textarea({
+            id: "post-text",
+            type: "text",
+            size: "500",
+            placeholder: "Compartilhe sua publicação aqui!",
+          })}
+          ${image({
+            id: "icon-variable-loker",
+            src: "./pages/elementos/icones/cadeado-1.png",
+            class: "icon icon-left",
+          })}
           <img id="photo" class="img-post"/>
-          ${icon({ name: 'talher', id: 'remove-photo', class: "disappear icon-left" })}                    
+          ${icon({
+            name: "talher",
+            id: "remove-photo",
+            class: "disappear icon-left",
+          })}                    
           <div class="send-post">
             <input type="file" id= "file" accept= "image/*" class="icon-left">
-            <label for="file"> ${image({ id: "img-upload", class: "icon icon-left", src: "./pages/elementos/icones/img-1.png" })}</label>                    
+            <label for="file"> ${image({
+              id: "img-upload",
+              class: "icon icon-left",
+              src: "./pages/elementos/icones/img-1.png",
+            })}</label>                    
             ${button({ id: "post-btn", class: "post-btn", name: "Postar" })}
           </div>
         </form>
@@ -163,82 +190,91 @@ export default () => {
     </footer>
     `;
 
-  container.querySelector('#post-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const fileInpxut = container.querySelector("#file");
-    if (fileInpxut.files[0]) {
-      filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase)
-    } else { saveFirebase(null) }
+    container.querySelector("#post-btn").addEventListener("click", (event) => {
+        event.preventDefault();
+        const fileInpxut = container.querySelector("#file");
+        if (fileInpxut.files[0]) {
+            filePost(
+                fileInpxut.files[0],
+                `images${fileInpxut.files[0].name}`,
+                saveFirebase
+            );
+        } else {
+            saveFirebase(null);
+        }
 
+        function saveFirebase(urlFile) {
+            const postText = container.querySelector("#post-text").value;
+            const post = {
+                url_file: urlFile ?
+                    `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` :
+                    null,
+                name: firebase.auth().currentUser.displayName,
+                text: postText,
+                user_id: firebase.auth().currentUser.uid,
+                likes: 0,
+                liked: [],
+                comments: [],
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+            };
+            container.querySelector("#post-text").value = "";
+            container.querySelector("#posts").innerHTML = "";
+            container.querySelector("#photo").src = "";
+            container.querySelector("#img-upload").src =
+                "./pages/elementos/icones/img-1.png";
+            createPost(post);
+        }
+    });
+    container.querySelector("#logout-btn").addEventListener("click", (event) => {
+        event.preventDefault();
+        logout();
+    });
 
-    function saveFirebase(urlFile) {
-      const postText = container.querySelector('#post-text').value;
-      const post = {
-        url_file: urlFile ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` : null,
-        name: firebase.auth().currentUser.displayName,
-        text: postText,
-        user_id: firebase.auth().currentUser.uid,
-        likes: 0,
-        liked: [],
-        comments: [],
-        time: firebase.firestore.FieldValue.serverTimestamp()
-      }
-      container.querySelector("#post-text").value = "";
-      container.querySelector("#posts").innerHTML = "";
-      container.querySelector("#photo").src = "";
-      container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
-      createPost(post);
+    function likeClass(id, valid) {
+        let adress = container.querySelector(`#icon-variable-${id}`).src;
+        if (valid === 1) {
+            adress = adress.replace("1", "2");
+            container.querySelector(`#icon-variable-${id}`).src = adress;
+        } else {
+            adress = adress.replace("2", "1");
+            container.querySelector(`#icon-variable-${id}`).src = adress;
+        }
     }
 
-  })
-  container.querySelector('#logout-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    logout();
-  })
-
-
-  function likeClass(id, valid) {
-    let adress = container.querySelector(`#icon-variable-${id}`).src
-    if (valid === 1) {
-      adress = adress.replace("1", "2")
-      container.querySelector(`#icon-variable-${id}`).src = adress
-    } else {
-      adress = adress.replace("2", "1")
-      container.querySelector(`#icon-variable-${id}`).src = adress
+    function renderImg(url_file) {
+        return url_file ? `${image({ src: url_file, class: "img-post" })}` : "";
     }
 
-  };
+    container.querySelector("#file").addEventListener("change", (event) => {
+        event.preventDefault();
+        const output = container.querySelector("#photo");
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            container
+                .querySelector("#iconremove-photo")
+                .classList.remove("disappear");
+            URL.revokeObjectURL(output.src); // free memory
+        };
+        container.querySelector("#img-upload").src =
+            "./pages/elementos/icones/img-2.png";
+    });
 
-  function renderImg(url_file) {
-    return url_file ? `${image({ src: url_file, class: "img-post" })}` : ''
-  }
+    container
+        .querySelector("#iconremove-photo")
+        .addEventListener("click", (event) => {
+            event.preventDefault();
+            container.querySelector("#photo").src = "";
+            container.querySelector("#iconremove-photo").classList.add("disappear");
+            container.querySelector("#img-upload").src =
+                "./pages/elementos/icones/img-1.png";
+        });
 
-  container.querySelector("#file").addEventListener("change", (event) => {
-    event.preventDefault();
-    const output = container.querySelector('#photo');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function () {
-      container.querySelector("#iconremove-photo").classList.remove("disappear")
-      URL.revokeObjectURL(output.src) // free memory
+    function addPosts(post) {
+        let date = new Date(post.data().time.seconds * 1000);
+        let options = { dateStyle: "short", timeStyle: "short" };
+        let datePost = date.toLocaleDateString("pt-BR", options);
 
-    }
-    container.querySelector("#img-upload").src = "./pages/elementos/icones/img-2.png"
-  })
-
-
-  container.querySelector("#iconremove-photo").addEventListener("click", (event) => {
-    event.preventDefault();
-    container.querySelector("#photo").src = "";
-    container.querySelector("#iconremove-photo").classList.add("disappear")
-    container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
-  })
-
-  function addPosts(post) {
-    let date = new Date(post.data().time.seconds*1000); 
-    let options = {dateStyle:('short'), timeStyle:('short')};
-    let datePost = date.toLocaleDateString("pt-BR", options);
-
-    const postsTemplate = `
+        const postsTemplate = `
       <div li id = "li${post.id}" class="post" >
         <div class="user-post">
           <div>
@@ -260,7 +296,9 @@ export default () => {
         </div>
         </div>
         <div class="text">
-          <textarea id="text${post.id}" rows="auto" disabled> ${post.data().text} </textarea>  
+          <textarea id="text${post.id}" rows="auto" disabled> ${
+      post.data().text
+    } </textarea>  
           ${renderImg(post.data().url_file)}
         </div>
         <div class="icon-post" > 
@@ -272,23 +310,53 @@ export default () => {
             src: "./pages/elementos/icones/cereja-1.png",
           })}
           ${post.data().comments.length}
-          ${icon({ name: "comentario", id: `commenter-${post.id}`})}
+          ${icon({ name: "comentario", id: `commenter-${post.id}` })}
         </div> 
         <div id="comments${post.id}" class="disappear">
           ${textarea({
-          id: `comment-text${post.id}`,
-          type: "text",
-          size: "500",
-          placeholder: "Insira seu comentário!",
-          class: "textarea-comment"
+            id: `comment-text${post.id}`,
+            type: "text",
+            size: "500",
+            placeholder: "Insira seu comentário!",
+            class: "textarea-comment",
           })}
-          ${icon({ name: "caneca", id: `send-comment-${post.id}`, class:"icon-left" })}
+          ${icon({
+            name: "enviar",
+            id: `send-comment-${post.id}`,
+            class: "icon-left",
+          })}
           <div id="comments-list${post.id}"></div>
         </div>
       </div>`;
     container.querySelector("#posts").innerHTML += postsTemplate;
-  };
+  }
+  function callPostDelete(post) {
+    postDelete(post.id);
+    container.querySelector("#posts").innerHTML = "";
+  }
+  function callCommentDelet(post, i) {
+    const data = post.data();
+    data.comments.splice(i, 1);
+    updateCollection(post.id, data);
+  }
+  function modal(post, func, i) {
+    const modal = container.querySelector("#modal");
+    modal.classList.remove("disappear");
+    container.querySelector("#delete-yes").addEventListener("click", () => {
+      func(post, i);
+    });
+    window.addEventListener("dblclick", (event) => {
+      if (event.target == modal) {
+        modal.classList.add("disappear");
+      }
+    });
 
+    container.querySelectorAll(".close-modal").forEach((a) => {
+      a.addEventListener("click", () => {
+        modal.classList.add("disappear");
+      });
+    });
+  }
 
   function deletePost(post) {
     let postUser = post.data().user_id;
@@ -299,9 +367,7 @@ export default () => {
         .querySelector(`#icon${post.id} `)
         .addEventListener("click", (event) => {
           event.preventDefault();
-
-          postDelete(post.id);
-          container.querySelector("#posts").innerHTML = "";
+          modal(post, callPostDelete);
         });
     }
   }
@@ -432,7 +498,7 @@ export default () => {
               text: container.querySelector(`#comment-text${post.id}`).value,
               user_id: firebase.auth().currentUser.uid,
               user_name: firebase.auth().currentUser.displayName,
-              time: new Date().getTime()
+              time: new Date().getTime(),
             };
             data.comments.push(comment);
             updateCollection(post.id, data);
@@ -445,8 +511,7 @@ export default () => {
         .querySelector(`#iconclose-${i}-${post.id}`)
         .addEventListener("click", (event) => {
           event.preventDefault();
-          data.comments.splice(i, 1);
-          updateCollection(post.id, data);
+          modal(post, callCommentDelet, i);
         });
     }
   }
@@ -487,13 +552,12 @@ export default () => {
   }
 
   function printComment(post) {
-
     const boxComments = container.querySelector(`#comments-list${post.id}`);
     const data = post.data();
     boxComments.innerHTML = "";
     for (let i in data.comments) {
-      let date = new Date(data.comments[i].time); 
-      const options = {dateStyle:('short'), timeStyle:('short')};
+      let date = new Date(data.comments[i].time);
+      const options = { dateStyle: "short", timeStyle: "short" };
       let datePost = date.toLocaleDateString("pt-BR", options);
 
       boxComments.innerHTML += `
