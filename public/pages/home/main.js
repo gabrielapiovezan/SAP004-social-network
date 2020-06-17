@@ -500,23 +500,16 @@ export default () => {
     const data = post.data();
     boxComments.innerHTML = '';
     for (let i in data.comments) {
-      let date = new Date(data.comments[i].time);
-      const options = { dateStyle: 'short', timeStyle: 'short' };
-      let datePost = date.toLocaleDateString('pt-BR', options);
+      let time = new Date(data.comments[i].time);
 
       boxComments.innerHTML += `
       <div  class="comment">
         <div class="comment-box">
           <div>
             <h3>${data.comments[i].user_name}:</h3>
-            <time>${datePost}</time>
+            <time>${dateAndHour(time)}</time>
           </div>
           <div>
-            ${icon({
-              name: 'talher',
-              id: `close-${i}-${post.id}`,
-              class: 'disappear',
-            })}
             ${icon({
               name: 'edit',
               id: `edit-${i}-${post.id}`,
@@ -525,6 +518,11 @@ export default () => {
             ${icon({
               name: 'checked',
               id: `checked-${i}-${post.id}`,
+              class: 'disappear',
+            })}
+            ${icon({
+              name: 'talher',
+              id: `close-${i}-${post.id}`,
               class: 'disappear',
             })}
           </div>
