@@ -126,14 +126,14 @@ export default () => {
             <span> 
             ${link({
               href: 'https://github.com/camilagerarde',
-              name: icon({ name: 'github' }),
+              name: icon({ name: 'github', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Camila Cunha',
               target: '_blank',
             })}  
             ${link({
               href: 'https://www.linkedin.com/in/camila-gerarde/',
-              name: icon({ name: 'linkedin' }),
+              name: icon({ name: 'linkedin', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Camila Cunha',
               target: '_blank',
@@ -151,14 +151,14 @@ export default () => {
           <span>
             ${link({
               href: 'https://github.com/gabrielapiovezan/',
-              name: icon({ name: 'github' }),
+              name: icon({ name: 'github', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Gabriela Piovezan',
               target: '_blank',
             })}
             ${link({
               href: 'https://www.linkedin.com/in/gabrielapiovezan/',
-              name: icon({ name: 'linkedin' }),
+              name: icon({ name: 'linkedin', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Gabriela Piovezan',
               target: '_blank',
@@ -175,14 +175,14 @@ export default () => {
          <span>
             ${link({
               href: 'https://github.com/MarianaMBarros',
-              name: icon({ name: 'github' }),
+              name: icon({ name: 'github', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Mariana Barros',
               target: '_blank',
             })}
             ${link({
               href: 'https://www.linkedin.com/in/marianambarros/',
-              name: icon({ name: 'linkedin' }),
+              name: icon({ name: 'linkedin', class: 'icon-footer' }),
               class: 'link-footer',
               title: 'Mariana Barros',
               target: '_blank',
