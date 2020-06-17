@@ -388,7 +388,7 @@ export default () => {
 
   function profile(name, img) {
     container.querySelector('#img-profile').src = img || './pages/elementos/imagens/chefe.png';
-    container.querySelector('#nameUser').innerHTML = `Olá, ${name} !`;
+    container.querySelector('#nameUser').innerHTML = `Olá, ${name}!`;
   }
 
   container.querySelector('#icon-variable-loker').addEventListener('click', () => {
