@@ -1,13 +1,13 @@
 import {
-    user,
-    createPost,
-    logout,
-    loadPost,
-    dataUser,
-    updateCollection,
-    postDelete,
-    updatePost,
-    filePost,
+  user,
+  createPost,
+  logout,
+  loadPost,
+  dataUser,
+  updateCollection,
+  postDelete,
+  updatePost,
+  filePost,
 } from "./data.js";
 import { button } from "../elementos/objetos/button.js";
 import { link } from "../elementos/objetos/link.js";
@@ -30,44 +30,44 @@ export default () => {
           <span></span>
           <ul id="menu">
           <li>${link({
-            href: "#profile",
-            name: "Perfil",
-            title: "perfil",
-            target: "_self",
-          })}</li>
+    href: "#profile",
+    name: "Perfil",
+    title: "perfil",
+    target: "_self",
+  })}</li>
           <li>${link({
-            id: "logout-btn",
-            name: "Sair",
-            title: "deslogar",
-            target: "_self",
-          })}</li>
+    id: "logout-btn",
+    name: "Sair",
+    title: "deslogar",
+    target: "_self",
+  })}</li>
           </ul>
         </div>
       </nav>
       <h1> &lt; Umâmi &gt; </h1> 
       <figure>
         ${image({
-          src: "/pages/elementos/imagens/logo.png",
-          class: "img-header",
-          alt: "logo-umâmi",
-        })}
+    src: "/pages/elementos/imagens/logo.png",
+    class: "img-header",
+    alt: "logo-umâmi",
+  })}
       </figure>
     </header>
     <section class="timeline">
       <div class="profile">
         <figure>
           ${image({
-            src: "/pages/elementos/imagens/chefe.png",
-            class: "img-profile",
-            alt: "foto-perfil",
-          })}
+    id: "img-profile",
+    class: "img-profile",
+    alt: "foto-perfil",
+  })}
         </figure>
         <h3 id="nameUser" class="name-user"></h3>
       </div>
       ${image({
-        src: "/pages/elementos/imagens/fundo.png",
-        class: "disappear image-back",
-      })}
+    src: "/pages/elementos/imagens/fundo.png",
+    class: "disappear image-back",
+  })}
       <div class="posts">
         <form class="box">
           ${textarea({ id: "post-text", type: "text", size: "500", placeholder: "Compartilhe sua publicação aqui!" })}
@@ -87,81 +87,83 @@ export default () => {
       <h5>Desenvolvido por:
         <div>
           ${link({
-            href: "",
-            name: "Camila Cunha",
-            class: "link-footer",
-            title: "Camila Cunha",
-            target: "_blank",
-          })}
+    href: "",
+    name: "Camila Cunha",
+    class: "link-footer",
+    title: "Camila Cunha",
+    target: "_blank",
+  })}
             <span> 
             ${link({
-              href: "https://github.com/camilagerarde",
-              name: icon({ name: "github" }),
-              class: "link-footer",
-              title: "Camila Cunha",
-              target: "_blank",
-            })}  
+    href: "https://github.com/camilagerarde",
+    name: icon({ name: "github" }),
+    class: "link-footer",
+    title: "Camila Cunha",
+    target: "_blank",
+  })}  
             ${link({
-              href: "https://www.linkedin.com/in/camila-gerarde/",
-              name: icon({ name: "linkedin" }),
-              class: "link-footer",
-              title: "Camila Cunha",
-              target: "_blank",
-            })}
+    href: "https://www.linkedin.com/in/camila-gerarde/",
+    name: icon({ name: "linkedin" }),
+    class: "link-footer",
+    title: "Camila Cunha",
+    target: "_blank",
+  })}
             </span>
           </div>
         <div>
           ${link({
-            href: "",
-            name: "Gabriela Piovezan",
-            class: "link-footer",
-            title: "Gabriela Piovezan",
-            target: "_blank",
-          })}
+    href: "",
+    name: "Gabriela Piovezan",
+    class: "link-footer",
+    title: "Gabriela Piovezan",
+    target: "_blank",
+  })}
           <span>
             ${link({
-              href: "https://github.com/gabrielapiovezan/",
-              name: icon({ name: "github" }),
-              class: "link-footer",
-              title: "Gabriela Piovezan",
-              target: "_blank",
-            })}
+    href: "https://github.com/gabrielapiovezan/",
+    name: icon({ name: "github" }),
+    class: "link-footer",
+    title: "Gabriela Piovezan",
+    target: "_blank",
+  })}
             ${link({
-              href: "https://www.linkedin.com/in/gabrielapiovezan/",
-              name: icon({ name: "linkedin" }),
-              class: "link-footer",
-              title: "Gabriela Piovezan",
-              target: "_blank",
-            })}</div>
+    href: "https://www.linkedin.com/in/gabrielapiovezan/",
+    name: icon({ name: "linkedin" }),
+    class: "link-footer",
+    title: "Gabriela Piovezan",
+    target: "_blank",
+  })}</div>
           </span>
         <div>
           ${link({
-            href: "https://marianambarros.github.io/portifolio/src/",
-            name: "Mariana Barros",
-            class: "link-footer",
-            title: "Mariana Barros",
-            target: "_blank",
-          })}
+    href: "https://marianambarros.github.io/portifolio/src/",
+    name: "Mariana Barros",
+    class: "link-footer",
+    title: "Mariana Barros",
+    target: "_blank",
+  })}
          <span>
             ${link({
-              href: "https://github.com/MarianaMBarros",
-              name: icon({ name: "github" }),
-              class: "link-footer",
-              title: "Mariana Barros",
-              target: "_blank",
-            })}
+    href: "https://github.com/MarianaMBarros",
+    name: icon({ name: "github" }),
+    class: "link-footer",
+    title: "Mariana Barros",
+    target: "_blank",
+  })}
             ${link({
-              href: "https://www.linkedin.com/in/marianambarros/",
-              name: icon({ name: "linkedin" }),
-              class: "link-footer",
-              title: "Mariana Barros",
-              target: "_blank",
-            })}
+    href: "https://www.linkedin.com/in/marianambarros/",
+    name: icon({ name: "linkedin" }),
+    class: "link-footer",
+    title: "Mariana Barros",
+    target: "_blank",
+  })}
           </span>
         </div>  
         </h5>    
     </footer>
     `;
+
+
 
   container.querySelector('#post-btn').addEventListener('click', (event) => {
     event.preventDefault();
@@ -217,8 +219,8 @@ export default () => {
     event.preventDefault();
     const output = container.querySelector('#photo');
     output.src = URL.createObjectURL(event.target.files[0]);
+    container.querySelector("#iconremove-photo").classList.remove("disappear")
     output.onload = function () {
-      container.querySelector("#iconremove-photo").classList.remove("disappear")
       URL.revokeObjectURL(output.src) // free memory
 
     }
@@ -228,14 +230,15 @@ export default () => {
 
   container.querySelector("#iconremove-photo").addEventListener("click", (event) => {
     event.preventDefault();
+    container.querySelector("#file").value = "";
     container.querySelector("#photo").src = "";
     container.querySelector("#iconremove-photo").classList.add("disappear")
     container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
   })
 
   function addPosts(post) {
-    let date = new Date(post.data().time.seconds*1000); 
-    let options = {dateStyle:('short'), timeStyle:('short')};
+    let date = new Date(post.data().time.seconds * 1000);
+    let options = { dateStyle: ('short'), timeStyle: ('short') };
     let datePost = date.toLocaleDateString("pt-BR", options);
 
     const postsTemplate = `
@@ -247,15 +250,15 @@ export default () => {
           </div>
         <div class="btn-post">
           ${icon({
-            id: `edit-${post.id}`,
-            class: "edit-btn disappear",
-            name: "edit",
-          })}
+      id: `edit-${post.id}`,
+      class: "edit-btn disappear",
+      name: "edit",
+    })}
           ${icon({
-            id: `save-${post.id}`,
-            class: "edit-btn disappear",
-            name: "checked",
-          })}
+      id: `save-${post.id}`,
+      class: "edit-btn disappear",
+      name: "checked",
+    })}
           ${icon({ name: "talher", id: post.id, class: "disappear" })}
         </div>
         </div>
@@ -266,23 +269,23 @@ export default () => {
         <div class="icon-post" > 
           ${post.data().liked.length}
           ${image({
-            id: `icon-variable-${post.id}`,
-            class: "icon",
-            name: "cereja",
-            src: "./pages/elementos/icones/cereja-1.png",
-          })}
+      id: `icon-variable-${post.id}`,
+      class: "icon",
+      name: "cereja",
+      src: "./pages/elementos/icones/cereja-1.png",
+    })}
           ${post.data().comments.length}
-          ${icon({ name: "comentario", id: `commenter-${post.id}`})}
+          ${icon({ name: "comentario", id: `commenter-${post.id}` })}
         </div> 
         <div id="comments${post.id}" class="disappear">
           ${textarea({
-          id: `comment-text${post.id}`,
-          type: "text",
-          size: "500",
-          placeholder: "Insira seu comentário!",
-          class: "textarea-comment"
-          })}
-          ${icon({ name: "caneca", id: `send-comment-${post.id}`, class:"icon-left" })}
+      id: `comment-text${post.id}`,
+      type: "text",
+      size: "500",
+      placeholder: "Insira seu comentário!",
+      class: "textarea-comment"
+    })}
+          ${icon({ name: "caneca", id: `send-comment-${post.id}`, class: "icon-left" })}
           <div id="comments-list${post.id}"></div>
         </div>
       </div>`;
@@ -330,8 +333,9 @@ export default () => {
       });
   }
 
-  function profile(data) {
-    container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
+  function profile(name, img) {
+    container.querySelector("#img-profile").src = img || "./pages/elementos/imagens/chefe.png";
+    container.querySelector("#nameUser").innerHTML = `Olá, ${name} !`;
   }
 
   container
@@ -404,10 +408,6 @@ export default () => {
         } else alert("Você já está editando!");
       });
     }
-  }
-
-  function profile(data) {
-    container.querySelector("#nameUser").innerHTML = `Olá, ${data} !`;
   }
 
   container
@@ -492,8 +492,8 @@ export default () => {
     const data = post.data();
     boxComments.innerHTML = "";
     for (let i in data.comments) {
-      let date = new Date(data.comments[i].time); 
-      const options = {dateStyle:('short'), timeStyle:('short')};
+      let date = new Date(data.comments[i].time);
+      const options = { dateStyle: ('short'), timeStyle: ('short') };
       let datePost = date.toLocaleDateString("pt-BR", options);
 
       boxComments.innerHTML += `
@@ -505,27 +505,27 @@ export default () => {
           </div>
           <div>
             ${icon({
-              name: "talher",
-              id: `close-${i}-${post.id}`,
-              class: "disappear",
-            })}
+        name: "talher",
+        id: `close-${i}-${post.id}`,
+        class: "disappear",
+      })}
             ${icon({
-              name: "edit",
-              id: `edit-${i}-${post.id}`,
-              class: "disappear",
-            })}
+        name: "edit",
+        id: `edit-${i}-${post.id}`,
+        class: "disappear",
+      })}
             ${icon({
-              name: "checked",
-              id: `checked-${i}-${post.id}`,
-              class: "disappear",
-            })}
+        name: "checked",
+        id: `checked-${i}-${post.id}`,
+        class: "disappear",
+      })}
           </div>
         </div>
         ${textarea({
-          value: `${data.comments[i].text}`,
-          id: `comment-${i}-${post.id}`,
-          size: 50,
-        })}
+        value: `${data.comments[i].text}`,
+        id: `comment-${i}-${post.id}`,
+        size: 50,
+      })}
       </div>`;
       container
         .querySelector(`#comment-${i}-${post.id}`)

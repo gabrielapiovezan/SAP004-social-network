@@ -1,6 +1,8 @@
+import { dataUser, updateProfile, fileProfile } from './data.js'
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
+import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 
@@ -12,33 +14,29 @@ export default () => {
     <figure>
     ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "img-login", alt: "logo-umâmi" })}
     </figure>
-    <div class="profile">
+    <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
       <h2>Perfil</h2>
       <img id="photo" class="img-post"/>
       <div class="send-post">
         <input type="file" id= "file" accept= "image/*">
         <label for="file">${image({ id: "img-upload", class: "icon", src: "./pages/elementos/icones/img-1.png" })}</label>                     
-        ${icon({ name: 'talher', id: 'remove-photo', class: "disappear" })}   
-        </div>
-      <form id="login-email">        
-          ${input({ type: "name", id: "name", placeholder: " Nome", class: "input" })}
-          ${input({ type: "email", id: "email", placeholder: " E-mail", class: "input" })}
-          ${input({ type: "password", id: "password", placeholder: " Senha", class: "input" })} 
-          ${input({ type: "password", id: "password", placeholder: " Confirmar Senha", class: "input" })}   
-          ${button({ name: "Deletar Conta" })}   
-          ${button({ name: "Salvar" })}
-      </form>
+        ${icon({ name: 'talher', id: 'remove-photo', class: "disappear" })} 
+      </div>
+        <form>        
+            ${input({ type: "name", id: "name", placeholder: " Nome", class: "input" })}        
+            ${button({ name: "Salvar", id: "save-profile" })}
+            ${button({ name: "Deletar Conta" })}   
+            ${link({ href: "#home", name: "Voltar", title: "voltar", target: "_self" })}
+        </form>
     </div>`;
-
-
 
   container.querySelector("#file").addEventListener("change", (event) => {
     event.preventDefault();
     const output = container.querySelector('#photo');
     output.src = URL.createObjectURL(event.target.files[0]);
+    container.querySelector("#iconremove-photo").classList.remove("disappear")
     output.onload = function () {
-      container.querySelector("#iconremove-photo").classList.remove("disappear")
       URL.revokeObjectURL(output.src) // free memory
     }
     container.querySelector("#img-upload").src = "./pages/elementos/icones/img-2.png"
@@ -46,10 +44,36 @@ export default () => {
 
   container.querySelector("#iconremove-photo").addEventListener("click", (event) => {
     event.preventDefault();
-    container.querySelector("#photo").src = "";
+    container.querySelector("#file").value = "";
+    container.querySelector("#photo").src = "./pages/elementos/imagens/chefe.png";
     container.querySelector("#iconremove-photo").classList.add("disappear")
     container.querySelector("#img-upload").src = "./pages/elementos/icones/img-1.png"
   })
+
+  function profile(data) {
+    console.log(data)
+    container.querySelector("#name").value = data.displayName;
+    container.querySelector("#photo").src = data.photoURL || "./pages/elementos/imagens/chefe.png";
+  }
+
+  container.querySelector("#save-profile").addEventListener('click', (event) => {
+    event.preventDefault();
+    const fileInpxut = container.querySelector("#file");
+    if (fileInpxut.files[0]) {
+      fileProfile(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveProfile)
+    } else { saveProfile(null) }
+
+
+    function saveProfile(urlFile) {
+      const profile = {
+        photoURL: urlFile ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` : null,
+        displayName: container.querySelector('#name').value
+      }
+      updateProfile(profile);
+    }
+  })
+
+  dataUser(profile);
 
   return container;
 };
