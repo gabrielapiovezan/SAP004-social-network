@@ -4,15 +4,13 @@
     "es6": true,
     "jest/globals": true
   },
-  "extends": [
-    "airbnb-base"
-  ],
+  "extends": ["airbnb-base", "airbnb", "prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly",
     "firebase": "readonly"
   },
-  "plugins": ["jest"],
+  "plugins": ["jest", "prettier"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
@@ -26,6 +24,7 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
+    "jest/valid-expect": "error",
+    "prettier/prettier": ["error"]
   }
 }
