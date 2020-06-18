@@ -51,7 +51,8 @@ export const loadPost = (
     deletePost,
     updatePost,
     commenter,
-    printComment
+    printComment,
+    textareaAdaptavel
 ) => {
     //export const readPosts = (callback) => {
     firebase
@@ -79,6 +80,9 @@ export const loadPost = (
             });
             snap.forEach((post) => {
                 printComment(post);
+            });
+            snap.forEach((post) => {
+                textareaAdaptavel(post);
             });
         });
 };

@@ -544,9 +544,31 @@ export default () => {
     editComments(data, post);
   }
 
+  function textareaAdaptavel() {
+    container.querySelectorAll('textarea').forEach((a) => {
+      // a.addEventListener('input', () => {
+      //   if (a.scrollHeight > a.offsetHeight) a.rows += 1;
+      // });
+      console.log(a.scrollHeight);
+      console.log(a.offsetHeight);
+      while (a.scrollHeight > a.offsetHeight) {
+        a.rows += 1;
+      }
+    });
+  }
+
   user();
   dataUser(profile);
-  loadPost(addPosts, like, likeClass, deletePost, editPost, commenter, printComment);
+  loadPost(
+    addPosts,
+    like,
+    likeClass,
+    deletePost,
+    editPost,
+    commenter,
+    printComment,
+    textareaAdaptavel
+  );
 
   return container;
 };
