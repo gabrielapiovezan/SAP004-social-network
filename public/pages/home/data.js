@@ -4,7 +4,7 @@ export const logout = () => {
 };
 
 export const user = () => {
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
         // Se troca essa variável por const ou let para de funcionar.
         var user = firebase.auth().currentUser;
         if (user) {
@@ -106,8 +106,9 @@ export const updateCollection = (post, data) => {
 };
 
 export const dataUser = (profile) => {
-    firebase.auth().onAuthStateChanged(function(user) {
-        profile(firebase.auth().currentUser.displayName, firebase.auth().currentUser.photoURL);
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user)
+            profile(user.displayName, user.photoURL);
     });
 };
 
@@ -117,10 +118,10 @@ export const postDelete = (post) => {
         .collection('posts')
         .doc(post)
         .delete()
-        .then(function() {
+        .then(function () {
             console.log('Document successfully deleted!');
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.error('Error removing document: ', error);
         });
 };
@@ -138,7 +139,7 @@ export const updatePost = (id, post) => {
 export const filePost = (file, name, callback) => {
     const ref = firebase.storage().ref();
     const filePostar = ref.child(name);
-    filePostar.put(file).then(function(snapshot) {
+    filePostar.put(file).then(function (snapshot) {
         console.log(snapshot);
         callback(filePostar.fullPath);
     });

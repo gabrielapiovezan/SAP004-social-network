@@ -1,4 +1,4 @@
-import { dataUser, updateProfile, fileProfile } from './data.js'
+import { dataUser, updateProfile, fileProfile, deleteConta } from './data.js'
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
@@ -26,7 +26,7 @@ export default () => {
         <form>        
             ${input({ type: "name", id: "name", placeholder: " Nome", class: "input" })}        
             ${button({ name: "Salvar", id: "save-profile" })}
-            ${button({ name: "Deletar Conta" })}   
+            ${button({ name: "Deletar Conta", id: "delete-profile" })}   
             ${link({ href: "#home", name: "Voltar", title: "voltar", target: "_self" })}
         </form>
     </div>`;
@@ -67,11 +67,23 @@ export default () => {
     function saveProfile(urlFile) {
       const profile = {
         photoURL: urlFile ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` : null,
-        displayName: container.querySelector('#name').value
+        displayName: container.querySelector('#name').value,
+        uid: firebase.auth().currentUser.uid,
       }
-      updateProfile(profile);
+      updateProfile(profile, redirectToHome);
     }
   })
+  function redirectToHome() {
+    window.location.hash = "home";
+  }
+
+  container.querySelector("#delete-profile").addEventListener('click', (event) => {
+    event.preventDefault();
+    deleteConta(redirectToLogin)
+  });
+  function redirectToLogin() {
+    window.location.hash = "login";
+  }
 
   dataUser(profile);
 
