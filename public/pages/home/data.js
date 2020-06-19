@@ -19,42 +19,7 @@ export const user = () => {
     });
 };
 
-//export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
-//   const postsCollection = firebase.firestore().collection("posts");
-//   postsCollection
-//     .orderBy("time", "desc")
-//     .get()
-//     .then(snap => {
-//       snap.forEach(post => {
-//         addPosts(post);
-//       });
-//       snap.forEach(post => {
-//         likeClass(post);
-//       });
-//       snap.forEach(post => {
-//         like(post);
-//       });
-//       snap.forEach(post => {
-//         deletePost(post);
-//       });
-//       snap.forEach(post => {
-//         updatePost(post);
-//       });
-
-//     });
-// };
-
-export const loadPost = (
-    addPosts,
-    like,
-    likeClass,
-    deletePost,
-    updatePost,
-    commenter,
-    printComment,
-    textareaAdaptavel
-) => {
-    //export const readPosts = (callback) => {
+export const loadPost = (addPosts, like, likeClass, deletePost, editPost) => {
     firebase
         .firestore()
         .collection('posts')
@@ -73,8 +38,16 @@ export const loadPost = (
                 deletePost(post);
             });
             snap.forEach((post) => {
-                updatePost(post);
+                editPost(post);
             });
+        });
+};
+
+export const loadComent = (commenter, printComment, textareaAdaptable) => {
+    firebase
+        .firestore()
+        .collection('posts')
+        .onSnapshot((snap) => {
             snap.forEach((post) => {
                 commenter(post);
             });
@@ -82,21 +55,10 @@ export const loadPost = (
                 printComment(post);
             });
             snap.forEach((post) => {
-                textareaAdaptavel(post);
+                textareaAdaptable(post);
             });
         });
 };
-
-//  .onSnapshot(function(querySnapshot) {
-//    var posts = [];
-//   querySnapshot.forEach(function(doc) {
-//               posts.push(doc.data());
-//           });
-//           callback(posts)
-//       });
-//   }
-// }
-
 export const updateCollection = (post, data) => {
     firebase.firestore().collection('posts').doc(`${post}`).update({
         liked: data.liked,

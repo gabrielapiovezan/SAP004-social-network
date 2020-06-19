@@ -1,20 +1,23 @@
 import {
-  user,
-  createPost,
-  logout,
-  loadPost,
-  dataUser,
-  updateCollection,
-  postDelete,
-  updatePost,
-  filePost,
+
+    user,
+    createPost,
+    logout,
+    loadPost,
+    dataUser,
+    updateCollection,
+    postDelete,
+    updatePost,
+    filePost,
+    loadComent,
+
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
-import { input } from '../elementos/objetos/input.js';
+// import { input } from '../elementos/objetos/input.js';
 
 export default () => {
   const container = document.createElement('div');
@@ -193,6 +196,7 @@ export default () => {
     </footer>
     `;
 
+
   container.querySelector('#post-btn').addEventListener('click', (event) => {
     event.preventDefault();
     const fileInpxut = container.querySelector('#file');
@@ -201,6 +205,7 @@ export default () => {
     } else {
       saveFirebase(null);
     }
+
 
     function saveFirebase(urlFile) {
       const postText = container.querySelector('#post-text').value;
@@ -273,9 +278,18 @@ export default () => {
     const postsTemplate = `
       <div li id = "li${post.id}" class="post" >
         <div class="user-post">
-          <div>
-            <h3>Publicado por: ${post.data().name}</h3>
-            <time>${dateAndHour(time)}</time>
+          <div class='flex-row'>
+            <figure>
+              ${image({
+                class: 'img-profile-post',
+                alt: 'foto-usuário',
+                src: `${post.data().photo}`,
+              })}
+            </figure>
+            <div>
+              <h3>Publicado por: ${post.data().name}</h3>
+              <time>${dateAndHour(time)}</time>
+            </div>
           </div>
         <div class="btn-post">
           ${icon({
@@ -295,6 +309,7 @@ export default () => {
           <textarea id="text${post.id}" rows="auto" disabled> ${post.data().text} </textarea>  
           ${renderImg(post.data().url_file)}
         </div>
+        <hr não apagar linha divisória>
         <div class="icon-post" > 
           ${post.data().liked.length}
           ${image({
@@ -306,7 +321,7 @@ export default () => {
           ${post.data().comments.length}
           ${icon({ name: 'comentario', id: `commenter-${post.id}` })}
         </div> 
-        <div id="comments${post.id}" class="disappear">
+        <div id="comments${post.id}">
           ${textarea({
       id: `comment-text${post.id}`,
       type: 'text',
@@ -453,22 +468,23 @@ export default () => {
   });
 
   function commenter(post) {
-    container.querySelector(`#iconcommenter-${post.id}`).addEventListener('click', (event) => {
-      event.preventDefault();
-      const data = post.data();
+    container.querySelector(`#iconcommenter-${post.id}`).addEventListener('click', () => {
       container.querySelector(`#comments${post.id}`).classList.toggle('disappear');
-      container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
-        const comment = {
-          text: container.querySelector(`#comment-text${post.id}`).value,
-          user_id: firebase.auth().currentUser.uid,
-          user_name: firebase.auth().currentUser.displayName,
-          time: new Date().getTime(),
-        };
-        data.comments.push(comment);
-        updateCollection(post.id, data);
-      });
+    });
+    const data = post.data();
+    container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
+      const comment = {
+        text: container.querySelector(`#comment-text${post.id}`).value,
+        user_id: firebase.auth().currentUser.uid,
+        user_name: firebase.auth().currentUser.displayName,
+        photo: firebase.auth().currentUser.photoURL,
+        time: new Date().getTime(),
+      };
+      data.comments.unshift(comment);
+      updateCollection(post.id, data);
     });
   }
+
   function deleteComents(data, post) {
     for (let i in data.comments) {
       container.querySelector(`#iconclose-${i}-${post.id}`).addEventListener('click', (event) => {
@@ -493,6 +509,7 @@ export default () => {
         });
       });
     }
+    // printComment(post);
   }
 
   function printComment(post) {
@@ -504,39 +521,45 @@ export default () => {
 
       boxComments.innerHTML += `
       <div  class="comment">
-        <div class="comment-box">
-          <div>
-            <h3>${data.comments[i].user_name}:</h3>
-            <time>${dateAndHour(time)}</time>
-          </div>
-          <div>
-            ${icon({
-        name: 'edit',
-        id: `edit-${i}-${post.id}`,
-        class: 'disappear',
-      })}
-            ${icon({
-        name: 'checked',
-        id: `checked-${i}-${post.id}`,
-        class: 'disappear',
-      })}
-            ${icon({
-        name: 'talher',
-        id: `close-${i}-${post.id}`,
-        class: 'disappear',
-      })}
-          </div>
+
+        <figure>
+          ${image({
+            class: 'img-profile-comment',
+            alt: 'foto-usuário',
+            src: `${data.comments[i].photo}`,
+          })}
+        </figure>
+        <div class='comment-box'>
+          <h3>${data.comments[i].user_name}</h3> 
+          <time>${dateAndHour(time)}</time> 
+          ${textarea({
+            value: `${data.comments[i].text}`,
+            id: `comment-${i}-${post.id}`,
+            size: 50,
+          })}
         </div>
-        ${textarea({
-        value: `${data.comments[i].text}`,
-        id: `comment-${i}-${post.id}`,
-        size: 50,
-      })}
+        <div class='icons-comment'>
+          ${icon({
+            name: 'edit',
+            id: `edit-${i}-${post.id}`,
+            class: 'disappear',
+          })}
+          ${icon({
+            name: 'checked',
+            id: `checked-${i}-${post.id}`,
+            class: 'disappear',
+          })}
+          ${icon({
+            name: 'talher',
+            id: `close-${i}-${post.id}`,
+            class: 'disappear',
+          })}
+        </div>
+
       </div>`;
       container.querySelector(`#comment-${i}-${post.id}`).setAttribute('disabled', true);
       if (firebase.auth().currentUser.uid === data.comments[i].user_id) {
         container.querySelector(`#iconclose-${i}-${post.id}`).classList.remove('disappear');
-
         container.querySelector(`#iconedit-${i}-${post.id}`).classList.remove('disappear');
       }
     }
@@ -544,31 +567,26 @@ export default () => {
     editComments(data, post);
   }
 
-  function textareaAdaptavel() {
+  function textareaAdaptable(post) {
     container.querySelectorAll('textarea').forEach((a) => {
-      // a.addEventListener('input', () => {
-      //   if (a.scrollHeight > a.offsetHeight) a.rows += 1;
-      // });
+
+      a.addEventListener('input', () => {
+        if (a.scrollHeight >= a.offsetHeight) a.rows++;
+        else if (a.scrollHeight < a.offsetHeight) a.rows--;
+      });
+
       // console.log(a.scrollHeight);
       // console.log(a.offsetHeight);
       while (a.scrollHeight > a.offsetHeight) {
         a.rows += 1;
       }
     });
+    container.querySelector(`#comments${post.id}`).classList.add('disappear');
   }
 
   user();
   dataUser(profile);
-  loadPost(
-    addPosts,
-    like,
-    likeClass,
-    deletePost,
-    editPost,
-    commenter,
-    printComment,
-    textareaAdaptavel
-  );
-
+  loadPost(addPosts, like, likeClass, deletePost, editPost);
+  loadComent(commenter, printComment, textareaAdaptable);
   return container;
 };

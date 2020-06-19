@@ -6,6 +6,12 @@ body {
     padding: 0;
 }
 
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container-home,
 .container {
     display: flex;
@@ -123,7 +129,7 @@ header {
 
 header h1 {
     font-weight: normal;
-    margin-left: 15%;
+    margin-left: 12%;
 }
 
 #menuToggle {
@@ -241,8 +247,13 @@ figure {
     margin: 0;
 }
 
+.img-profile-post,
+.img-profile-comment,
 .img-profile {
     clip-path: circle(50% at 50% 50%);
+}
+
+.img-profile {
     width: 85px;
 }
 
@@ -265,6 +276,10 @@ figure {
     background-color: #faf7f3;
 }
 
+.box .textarea {
+    min-height: 70px;
+}
+
 .icon-left {
     margin-left: 15px;
 }
@@ -275,7 +290,6 @@ figure {
     border-radius: 7px;
     border: solid 1px #3c2415;
     width: 90%;
-    /* height: 70px; */
     resize: none;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
@@ -308,7 +322,7 @@ input[type='file'] {
 
 .icon {
     width: 27px;
-    padding: 0 6px 0 3px;
+    padding: 0 10px 5px 3px;
 }
 
 .icon:hover {
@@ -320,6 +334,7 @@ input[type='file'] {
 }
 
 .post-box {
+    align-items: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -339,20 +354,25 @@ input[type='file'] {
     align-items: center;
 }
 
+.img-profile-post {
+    width: 50px;
+}
+
 .user-post h3 {
-    padding: 0;
+    padding-left: 10px;
     margin: 0;
     font-size: 17px;
 }
 
 .comment h3,
 .user-post time {
-    padding: 0;
+    padding: 5px 10px 2px;
     margin: 0;
     font-size: 15px;
 }
 
 .comment time {
+    padding: 0 10px 5px;
     font-size: 13px;
 }
 
@@ -420,22 +440,42 @@ hr {
 
 .comment {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #ffd932;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    /* background-color: #ffd932; */
     padding: 10px;
     margin-top: 10px;
 }
 
+.img-profile-comment {
+    width: 40px;
+}
+
 .comment-box {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 75%;
+    background-color: #dbd7d7;
+    border-radius: 9px;
 }
 
 .comment textarea {
-    background-color: #fff;
-    margin: 10px;
-    width: 95%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0 10px 8px;
+    width: 94%;
+    align-self: auto;
+}
+
+.comment textarea:hover {
+    background-color: transparent;
+}
+
+.icons-comment {
+    display: flex;
+    flex-direction: column;
 }
 
 .footer {
@@ -587,6 +627,9 @@ hr {
     }
     .textarea {
         box-shadow: 0px 0px 2px #999999;
+    }
+    .comment textarea {
+        box-shadow: none;
     }
     .box {
         width: 100%;
