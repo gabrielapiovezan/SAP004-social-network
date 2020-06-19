@@ -205,9 +205,11 @@ header h1 {
 
 #menu {
   position: absolute;
+
   width: 40px;
   margin: -100px 0 0 -50px;
   padding: 125px 50px 10px;
+
   background: #ffd932;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
@@ -217,8 +219,10 @@ header h1 {
 }
 
 #menu li {
+
   padding: 5px 10px;
   font-size: 25px;
+
 }
 
 #menuToggle input:checked ~ ul {
@@ -255,11 +259,13 @@ figure {
 .img-profile-comment,
 .img-profile {
   clip-path: circle(50% at 50% 50%);
+
 }
 
 .img-profile-change {
   width: 160px;
   margin: 25px 0 17px;
+
 }
 
 .img-profile {
@@ -484,6 +490,7 @@ hr {
 .icons-comment {
   display: flex;
   flex-direction: column;
+
 }
 
 .form-profile {
@@ -509,6 +516,7 @@ hr {
 .container-profile h2 {
   font-size: 30px;
   margin: 0;
+
 }
 
 .footer {
@@ -627,7 +635,9 @@ hr {
   }
   header h1 {
     font-weight: normal;
+
     margin-left: 10%;
+
   }
   .timeline {
     flex-direction: row;
@@ -668,6 +678,7 @@ hr {
     width: 100%;
     align-self: flex-end;
   }
+
   .form-profile {
     width: 40%;
   }
@@ -678,6 +689,7 @@ hr {
   .form-profile .button {
     width: 100%;
   }
+
   .footer h5 {
     display: inline-flex;
     justify-content: space-between;
