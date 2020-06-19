@@ -36,8 +36,8 @@
         "jest": "^24.8.0",
         "prettier": "^2.0.5",
         "regenerator-runtime": "^0.13.1",
-        "serve": "^11.0.2",
-        "stylelint": "^10.1.0",
+        "serve": "^11.3.2",
+        "stylelint": "^13.6.1",
         "stylelint-config-recommended": "^2.2.0"
     }
 }
