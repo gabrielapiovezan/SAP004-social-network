@@ -205,9 +205,9 @@ header h1 {
 
 #menu {
   position: absolute;
-  width: 25px;
+  width: 40px;
   margin: -100px 0 0 -50px;
-  padding: 125px 40px 5px;
+  padding: 125px 50px 10px;
   background: #ffd932;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
@@ -217,8 +217,8 @@ header h1 {
 }
 
 #menu li {
-  padding: 5px 0;
-  font-size: 20px;
+  padding: 5px 10px;
+  font-size: 25px;
 }
 
 #menuToggle input:checked ~ ul {
