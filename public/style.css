@@ -277,7 +277,7 @@ figure {
 }
 
 .box .textarea {
-    height: 70px;
+    min-height: 70px;
 }
 
 .icon-left {

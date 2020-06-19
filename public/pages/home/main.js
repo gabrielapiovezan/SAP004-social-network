@@ -8,6 +8,7 @@ import {
     postDelete,
     updatePost,
     filePost,
+    loadComent,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -317,7 +318,7 @@ export default () => {
           ${post.data().comments.length}
           ${icon({ name: 'comentario', id: `commenter-${post.id}` })}
         </div> 
-        <div id="comments${post.id}" class="disappear">
+        <div id="comments${post.id}">
           ${textarea({
             id: `comment-text${post.id}`,
             type: 'text',
@@ -464,23 +465,23 @@ export default () => {
   });
 
   function commenter(post) {
-    container.querySelector(`#iconcommenter-${post.id}`).addEventListener('click', (event) => {
-      event.preventDefault();
-      const data = post.data();
+    container.querySelector(`#iconcommenter-${post.id}`).addEventListener('click', () => {
       container.querySelector(`#comments${post.id}`).classList.toggle('disappear');
-      container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
-        const comment = {
-          text: container.querySelector(`#comment-text${post.id}`).value,
-          user_id: firebase.auth().currentUser.uid,
-          user_name: firebase.auth().currentUser.displayName,
-          photo: firebase.auth().currentUser.photoURL,
-          time: new Date().getTime(),
-        };
-        data.comments.push(comment);
-        updateCollection(post.id, data);
-      });
+    });
+    const data = post.data();
+    container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
+      const comment = {
+        text: container.querySelector(`#comment-text${post.id}`).value,
+        user_id: firebase.auth().currentUser.uid,
+        user_name: firebase.auth().currentUser.displayName,
+        photo: firebase.auth().currentUser.photoURL,
+        time: new Date().getTime(),
+      };
+      data.comments.unshift(comment);
+      updateCollection(post.id, data);
     });
   }
+
   function deleteComents(data, post) {
     for (let i in data.comments) {
       container.querySelector(`#iconclose-${i}-${post.id}`).addEventListener('click', (event) => {
@@ -505,6 +506,7 @@ export default () => {
         });
       });
     }
+    // printComment(post);
   }
 
   function printComment(post) {
@@ -560,31 +562,24 @@ export default () => {
     editComments(data, post);
   }
 
-  function textareaAdaptable() {
+  function textareaAdaptable(post) {
     container.querySelectorAll('textarea').forEach((a) => {
-      // a.addEventListener('input', () => {
-      //   if (a.scrollHeight > a.offsetHeight) a.rows += 1;
-      // });
+      a.addEventListener('input', () => {
+        if (a.scrollHeight >= a.offsetHeight) a.rows++;
+        else if (a.scrollHeight < a.offsetHeight) a.rows--;
+      });
       // console.log(a.scrollHeight);
       // console.log(a.offsetHeight);
       while (a.scrollHeight > a.offsetHeight) {
         a.rows += 1;
       }
     });
+    container.querySelector(`#comments${post.id}`).classList.add('disappear');
   }
 
   user();
   dataUser(profile);
-  loadPost(
-    addPosts,
-    like,
-    likeClass,
-    deletePost,
-    editPost,
-    commenter,
-    printComment,
-    textareaAdaptable
-  );
-
+  loadPost(addPosts, like, likeClass, deletePost, editPost);
+  loadComent(commenter, printComment, textareaAdaptable);
   return container;
 };

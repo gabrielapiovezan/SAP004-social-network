@@ -19,41 +19,7 @@ export const user = () => {
     });
 };
 
-//export const loadPost = (addPosts, like, likeClass, deletePost, updatePost) => {
-//   const postsCollection = firebase.firestore().collection("posts");
-//   postsCollection
-//     .orderBy("time", "desc")
-//     .get()
-//     .then(snap => {
-//       snap.forEach(post => {
-//         addPosts(post);
-//       });
-//       snap.forEach(post => {
-//         likeClass(post);
-//       });
-//       snap.forEach(post => {
-//         like(post);
-//       });
-//       snap.forEach(post => {
-//         deletePost(post);
-//       });
-//       snap.forEach(post => {
-//         updatePost(post);
-//       });
-
-//     });
-// };
-
-export const loadPost = (
-    addPosts,
-    like,
-    likeClass,
-    deletePost,
-    updatePost,
-    commenter,
-    printComment,
-    textareaAdaptable
-) => {
+export const loadPost = (addPosts, like, likeClass, deletePost, editPost) => {
     firebase
         .firestore()
         .collection('posts')
@@ -72,8 +38,16 @@ export const loadPost = (
                 deletePost(post);
             });
             snap.forEach((post) => {
-                updatePost(post);
+                editPost(post);
             });
+        });
+};
+
+export const loadComent = (commenter, printComment, textareaAdaptable) => {
+    firebase
+        .firestore()
+        .collection('posts')
+        .onSnapshot((snap) => {
             snap.forEach((post) => {
                 commenter(post);
             });
@@ -85,7 +59,6 @@ export const loadPost = (
             });
         });
 };
-
 export const updateCollection = (post, data) => {
     firebase.firestore().collection('posts').doc(`${post}`).update({
         liked: data.liked,
