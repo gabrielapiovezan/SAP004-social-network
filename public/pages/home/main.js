@@ -14,7 +14,7 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 import { textarea } from '../elementos/objetos/textarea.js';
 import { image } from '../elementos/objetos/image.js';
-import { input } from '../elementos/objetos/input.js';
+// import { input } from '../elementos/objetos/input.js';
 
 export default () => {
   const container = document.createElement('div');
