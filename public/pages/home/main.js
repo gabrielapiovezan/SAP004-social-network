@@ -1,13 +1,13 @@
 import {
-  user,
-  createPost,
-  logout,
-  loadPost,
-  dataUser,
-  updateCollection,
-  postDelete,
-  updatePost,
-  filePost,
+    user,
+    createPost,
+    logout,
+    loadPost,
+    dataUser,
+    updateCollection,
+    postDelete,
+    updatePost,
+    filePost,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -17,11 +17,11 @@ import { image } from '../elementos/objetos/image.js';
 // import { input } from '../elementos/objetos/input.js';
 
 export default () => {
-  const container = document.createElement('div');
+    const container = document.createElement('div');
 
-  container.classList.add('container-home');
+    container.classList.add('container-home');
 
-  container.innerHTML = `
+    container.innerHTML = `
     <div id="modal" class="modal disappear">
       <div class="modal-content">
         <span class="close close-modal">&times;</span>
@@ -193,85 +193,85 @@ export default () => {
     </footer>
     `;
 
-  container.querySelector('#post-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    const fileInpxut = container.querySelector('#file');
-    if (fileInpxut.files[0]) {
-      filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase);
-    } else {
-      saveFirebase(null);
+    container.querySelector('#post-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        const fileInpxut = container.querySelector('#file');
+        if (fileInpxut.files[0]) {
+            filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase);
+        } else {
+            saveFirebase(null);
+        }
+
+        function saveFirebase(urlFile) {
+            const postText = container.querySelector('#post-text').value;
+            const post = {
+                url_file: urlFile ?
+                    `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` :
+                    null,
+                name: firebase.auth().currentUser.displayName,
+                photo: firebase.auth().currentUser.photoURL,
+                text: postText,
+                user_id: firebase.auth().currentUser.uid,
+                likes: 0,
+                liked: [],
+                comments: [],
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+            };
+            container.querySelector('#post-text').value = '';
+            container.querySelector('#posts').innerHTML = '';
+            container.querySelector('#photo').src = '';
+            container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+            createPost(post);
+        }
+    });
+    container.querySelector('#logout-btn').addEventListener('click', (event) => {
+        event.preventDefault();
+        logout();
+    });
+
+    function likeClass(id, valid) {
+        let adress = container.querySelector(`#icon-variable-${id}`).src;
+        if (valid === 1) {
+            adress = adress.replace('1', '2');
+            container.querySelector(`#icon-variable-${id}`).src = adress;
+        } else {
+            adress = adress.replace('2', '1');
+            container.querySelector(`#icon-variable-${id}`).src = adress;
+        }
     }
 
-    function saveFirebase(urlFile) {
-      const postText = container.querySelector('#post-text').value;
-      const post = {
-        url_file: urlFile
-          ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
-          : null,
-        name: firebase.auth().currentUser.displayName,
-        photo: firebase.auth().currentUser.photoURL,
-        text: postText,
-        user_id: firebase.auth().currentUser.uid,
-        likes: 0,
-        liked: [],
-        comments: [],
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-      };
-      container.querySelector('#post-text').value = '';
-      container.querySelector('#posts').innerHTML = '';
-      container.querySelector('#photo').src = '';
-      container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
-      createPost(post);
+    function renderImg(url_file) {
+        return url_file ? `${image({ src: url_file, class: 'img-post' })}` : '';
     }
-  });
-  container.querySelector('#logout-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    logout();
-  });
 
-  function likeClass(id, valid) {
-    let adress = container.querySelector(`#icon-variable-${id}`).src;
-    if (valid === 1) {
-      adress = adress.replace('1', '2');
-      container.querySelector(`#icon-variable-${id}`).src = adress;
-    } else {
-      adress = adress.replace('2', '1');
-      container.querySelector(`#icon-variable-${id}`).src = adress;
+    container.querySelector('#file').addEventListener('change', (event) => {
+        event.preventDefault();
+        const output = container.querySelector('#photo');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        container.querySelector('#iconremove-photo').classList.remove('disappear');
+        output.onload = function() {
+            URL.revokeObjectURL(output.src); // free memory
+        };
+        container.querySelector('#img-upload').src = './pages/elementos/icones/img-2.png';
+    });
+
+    container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
+        event.preventDefault();
+        container.querySelector('#file').value = '';
+        container.querySelector('#photo').src = '';
+        container.querySelector('#iconremove-photo').classList.add('disappear');
+        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+    });
+
+    function dateAndHour(time) {
+        const options = { dateStyle: 'short', timeStyle: 'short' };
+        return time.toLocaleDateString('pt-BR', options);
     }
-  }
 
-  function renderImg(url_file) {
-    return url_file ? `${image({ src: url_file, class: 'img-post' })}` : '';
-  }
+    function addPosts(post) {
+        let time = new Date(post.data().time.seconds * 1000);
 
-  container.querySelector('#file').addEventListener('change', (event) => {
-    event.preventDefault();
-    const output = container.querySelector('#photo');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    container.querySelector('#iconremove-photo').classList.remove('disappear');
-    output.onload = function () {
-      URL.revokeObjectURL(output.src); // free memory
-    };
-    container.querySelector('#img-upload').src = './pages/elementos/icones/img-2.png';
-  });
-
-  container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
-    event.preventDefault();
-    container.querySelector('#file').value = '';
-    container.querySelector('#photo').src = '';
-    container.querySelector('#iconremove-photo').classList.add('disappear');
-    container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
-  });
-
-  function dateAndHour(time) {
-    const options = { dateStyle: 'short', timeStyle: 'short' };
-    return time.toLocaleDateString('pt-BR', options);
-  }
-
-  function addPosts(post) {
-    let time = new Date(post.data().time.seconds * 1000);
-
-    const postsTemplate = `
+        const postsTemplate = `
       <div li id = "li${post.id}" class="post" >
         <div class="user-post">
           <div class='flex-row'>
@@ -560,7 +560,7 @@ export default () => {
     editComments(data, post);
   }
 
-  function textareaAdaptavel() {
+  function textareaAdaptable() {
     container.querySelectorAll('textarea').forEach((a) => {
       // a.addEventListener('input', () => {
       //   if (a.scrollHeight > a.offsetHeight) a.rows += 1;
@@ -583,7 +583,7 @@ export default () => {
     editPost,
     commenter,
     printComment,
-    textareaAdaptavel
+    textareaAdaptable
   );
 
   return container;

@@ -52,9 +52,8 @@ export const loadPost = (
     updatePost,
     commenter,
     printComment,
-    textareaAdaptavel
+    textareaAdaptable
 ) => {
-    //export const readPosts = (callback) => {
     firebase
         .firestore()
         .collection('posts')
@@ -82,20 +81,10 @@ export const loadPost = (
                 printComment(post);
             });
             snap.forEach((post) => {
-                textareaAdaptavel(post);
+                textareaAdaptable(post);
             });
         });
 };
-
-//  .onSnapshot(function(querySnapshot) {
-//    var posts = [];
-//   querySnapshot.forEach(function(doc) {
-//               posts.push(doc.data());
-//           });
-//           callback(posts)
-//       });
-//   }
-// }
 
 export const updateCollection = (post, data) => {
     firebase.firestore().collection('posts').doc(`${post}`).update({
