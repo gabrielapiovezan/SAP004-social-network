@@ -12,6 +12,7 @@ body {
   align-items: center;
 }
 
+.container-profile,
 .container-home,
 .container {
   display: flex;
@@ -249,10 +250,16 @@ figure {
   margin: 0;
 }
 
+.img-profile-change,
 .img-profile-post,
 .img-profile-comment,
 .img-profile {
   clip-path: circle(50% at 50% 50%);
+}
+
+.img-profile-change {
+  width: 160px;
+  margin: 25px 0 17px;
 }
 
 .img-profile {
@@ -479,6 +486,31 @@ hr {
   flex-direction: column;
 }
 
+.form-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.form-profile input {
+  width: 90%;
+  height: 35px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.form-profile .button {
+  width: 95%;
+  height: 35px;
+  font-size: 20px;
+}
+
+.container-profile h2 {
+  font-size: 30px;
+  margin: 0;
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -595,7 +627,7 @@ hr {
   }
   header h1 {
     font-weight: normal;
-    margin-left: 0;
+    margin-left: 10%;
   }
   .timeline {
     flex-direction: row;
@@ -635,6 +667,16 @@ hr {
   .box {
     width: 100%;
     align-self: flex-end;
+  }
+  .form-profile {
+    width: 40%;
+  }
+  .form-profile input {
+    width: 95%;
+  }
+
+  .form-profile .button {
+    width: 100%;
   }
   .footer h5 {
     display: inline-flex;
