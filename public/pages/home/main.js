@@ -1,13 +1,13 @@
 import {
-    //  user,
-    createPost,
-    logout,
-    loadPost,
-    dataUser,
-    updateCollection,
-    postDelete,
-    updatePost,
-    filePost,
+  //  user,
+  createPost,
+  logout,
+  loadPost,
+  dataUser,
+  updateCollection,
+  postDelete,
+  updatePost,
+  filePost,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -17,11 +17,11 @@ import { image } from '../elementos/objetos/image.js';
 // import { input } from '../elementos/objetos/input.js';
 
 export default () => {
-    const container = document.createElement('div');
+  const container = document.createElement('div');
 
-    container.classList.add('container-home');
+  container.classList.add('container-home');
 
-    container.innerHTML = `
+  container.innerHTML = `
     <div id="modal" class="modal disappear">
       <div class="modal-content">
         <span class="close close-modal">&times;</span>
@@ -193,91 +193,92 @@ export default () => {
     </footer>
     `;
 
-    function createNewPost() {
-        let privacy = false;
-        container.querySelector('#icon-variable-loker').addEventListener('click', () => {
-            privacy === false ? (privacy = true) : (privacy = false);
-            likeClass('loker', privacy);
-        });
-        container.querySelector('#post-btn').addEventListener('click', (event) => {
-            event.preventDefault();
-            const fileInpxut = container.querySelector('#file');
-            if (fileInpxut.files[0]) {
-                filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase, privacy);
-            } else {
-                saveFirebase(null, privacy);
-            }
-        });
-    }
-
-    function saveFirebase(urlFile, privacy) {
-        const postText = container.querySelector('#post-text').value;
-        const post = {
-            url_file: urlFile ?
-                `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` :
-                null,
-            name: firebase.auth().currentUser.displayName,
-            photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-            text: postText,
-            user_id: firebase.auth().currentUser.uid,
-            likes: 0,
-            liked: [],
-            comments: [],
-            time: firebase.firestore.FieldValue.serverTimestamp(),
-            privacy: privacy,
-        };
-        container.querySelector('#post-text').value = '';
-        container.querySelector('#posts').innerHTML = '';
-        container.querySelector('#photo').src = '';
-        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
-        createPost(post);
-    }
-
-    container.querySelector('#logout-btn').addEventListener('click', (event) => {
-        event.preventDefault();
-        logout();
+  function createNewPost() {
+    let privacy = false;
+    container.querySelector('#icon-variable-loker').addEventListener('click', () => {
+      privacy === false ? (privacy = true) : (privacy = false);
+      likeClass('loker', privacy);
     });
-
-    function likeClass(id, valid) {
-        let adress = container.querySelector(`#icon-variable-${id}`).src;
-
-        valid === true ? (adress = adress.replace('1', '2')) : (adress = adress.replace('2', '1'));
-
-        container.querySelector(`#icon-variable-${id}`).src = adress;
-    }
-
-    function renderImg(url_file) {
-        return url_file ? `${image({ src: url_file, class: 'img-post' })}` : '';
-    }
-
-    container.querySelector('#file').addEventListener('change', (event) => {
-        event.preventDefault();
-        const output = container.querySelector('#photo');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        container.querySelector('#iconremove-photo').classList.remove('disappear');
-        output.onload = function() {
-            URL.revokeObjectURL(output.src); // free memory
-        };
-        container.querySelector('#img-upload').src = './pages/elementos/icones/img-2.png';
+    container.querySelector('#post-btn').addEventListener('click', (event) => {
+      event.preventDefault();
+      const fileInpxut = container.querySelector('#file');
+      if (fileInpxut.files[0]) {
+        filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase, privacy);
+      } else {
+        saveFirebase(null, privacy);
+      }
     });
+  }
 
-    container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
-        event.preventDefault();
-        container.querySelector('#file').value = '';
-        container.querySelector('#photo').src = '';
-        container.querySelector('#iconremove-photo').classList.add('disappear');
-        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
-    });
+  function saveFirebase(urlFile, privacy) {
+    const postText = container.querySelector('#post-text').value;
+    const post = {
+      url_file: urlFile
+        ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
+        : null,
+      name: firebase.auth().currentUser.displayName,
+      photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
+      text: postText,
+      user_id: firebase.auth().currentUser.uid,
+      likes: 0,
+      liked: [],
+      comments: [],
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      date: new Date().getTime(),
+      privacy: privacy,
+    };
+    container.querySelector('#post-text').value = '';
+    container.querySelector('#posts').innerHTML = '';
+    container.querySelector('#photo').src = '';
+    container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+    createPost(post);
+  }
 
-    function dateAndHour(time) {
-        const options = { dateStyle: 'short', timeStyle: 'short' };
-        return time.toLocaleDateString('pt-BR', options);
-    }
+  container.querySelector('#logout-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    logout();
+  });
 
-    function addPosts(post) {
-        let time = new Date(post.data().time.seconds * 1000);
+  function likeClass(id, valid) {
+    let adress = container.querySelector(`#icon-variable-${id}`).src;
 
-        const postsTemplate = `
+    valid === true ? (adress = adress.replace('1', '2')) : (adress = adress.replace('2', '1'));
+
+    container.querySelector(`#icon-variable-${id}`).src = adress;
+  }
+
+  function renderImg(url_file) {
+    return url_file ? `${image({ src: url_file, class: 'img-post' })}` : '';
+  }
+
+  container.querySelector('#file').addEventListener('change', (event) => {
+    event.preventDefault();
+    const output = container.querySelector('#photo');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    container.querySelector('#iconremove-photo').classList.remove('disappear');
+    output.onload = function () {
+      URL.revokeObjectURL(output.src); // free memory
+    };
+    container.querySelector('#img-upload').src = './pages/elementos/icones/img-2.png';
+  });
+
+  container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
+    event.preventDefault();
+    container.querySelector('#file').value = '';
+    container.querySelector('#photo').src = '';
+    container.querySelector('#iconremove-photo').classList.add('disappear');
+    container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+  });
+
+  function dateAndHour(date) {
+    const options = { dateStyle: 'short', timeStyle: 'short' };
+    return date.toLocaleDateString('pt-BR', options);
+  }
+
+  function addPosts(post) {
+    const date = new Date(post.data().date);
+
+    const postsTemplate = `
       <div li id = "li${post.id}" class="post" >
         <div class="user-post">
           <div class='flex-row'>
@@ -290,7 +291,7 @@ export default () => {
             </figure>
             <div>
               <h3>Publicado por: ${post.data().name}</h3>
-              <time>${dateAndHour(time)}</time>
+              <time>${dateAndHour(date)}</time>
             </div>
                 ${image({
                   id: `icon-variable-loker-${post.id}`,
@@ -371,7 +372,7 @@ export default () => {
       func(post, i);
     });
     window.addEventListener('dblclick', (event) => {
-      if (event.target == modal) {
+      if (event.target === modal) {
         modal.classList.add('disappear');
       }
     });
@@ -486,7 +487,7 @@ export default () => {
         user_id: firebase.auth().currentUser.uid,
         user_name: firebase.auth().currentUser.displayName,
         photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-        time: new Date().getTime(),
+        date: new Date().getTime(),
       };
       data.comments.unshift(comment);
       updateCollection(post.id, data);
@@ -524,7 +525,7 @@ export default () => {
     const data = post.data();
     boxComments.innerHTML = '';
     for (let i in data.comments) {
-      let time = new Date(data.comments[i].time);
+      const date = new Date(data.comments[i].date);
 
       boxComments.innerHTML += `
       <div  class="comment">
@@ -538,7 +539,7 @@ export default () => {
         </figure>
         <div class='comment-box'>
           <h3>${data.comments[i].user_name}</h3> 
-          <time>${dateAndHour(time)}</time> 
+          <time>${dateAndHour(date)}</time> 
           ${textarea({
             value: `${data.comments[i].text}`,
             id: `comment-${i}-${post.id}`,
@@ -547,6 +548,11 @@ export default () => {
         </div>
         <div class='icons-comment'>
           ${icon({
+            name: 'talher',
+            id: `close-${i}-${post.id}`,
+            class: 'disappear',
+          })}
+          ${icon({
             name: 'edit',
             id: `edit-${i}-${post.id}`,
             class: 'disappear',
@@ -554,11 +560,6 @@ export default () => {
           ${icon({
             name: 'checked',
             id: `checked-${i}-${post.id}`,
-            class: 'disappear',
-          })}
-          ${icon({
-            name: 'talher',
-            id: `close-${i}-${post.id}`,
             class: 'disappear',
           })}
         </div>
