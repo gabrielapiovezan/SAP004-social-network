@@ -1,18 +1,35 @@
 export const dataUser = (profile) => {
   firebase.auth().onAuthStateChanged(function (user) {
-    profile(firebase.auth().currentUser);
+    if (user)
+      profile(user.currentUser);
   });
-};
+}
 
-export const updateProfile = (profile) => {
+export const updateProfile = (profile, callback) => {
   firebase.auth().currentUser.updateProfile({
     displayName: profile.displayName,
     photoURL: profile.photoURL,
   }).then(function () {
-    window.location.hash = "home";
+    updatePostsUser(profile.uid, profile.displayName, callback)
   }).catch(function (error) {
     console.error("Error removing document: ", error);
   });
+}
+
+export const updatePostsUser = (userId, name, callback) => {
+  firebase.firestore().collection('posts').where("user_id", "==", userId)
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        firebase.firestore().collection('posts').doc(doc.id).update({
+          name: name,
+        })
+      });
+      callback()
+    })
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
 }
 
 export const fileProfile = (file, name, callback) => {
@@ -23,3 +40,28 @@ export const fileProfile = (file, name, callback) => {
     callback(fileProfile.fullPath);
   });
 };
+
+export const deleteConta = (callback) => {
+  const user = firebase.auth().currentUser
+  user.delete()
+    .then(function () {
+      deletePostsUser(user.uid, callback)
+    }).catch(function (error) {
+      // An error happened.
+    });
+
+}
+
+export const deletePostsUser = (userId, callback) => {
+  firebase.firestore().collection('posts').where("user_id", "==", userId)
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        firebase.firestore().collection('posts').doc(doc.id).delete()
+      });
+      callback()
+    })
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
+}
