@@ -22,6 +22,7 @@ export default () => {
   container.classList.add('container-home');
 
   container.innerHTML = `
+
     <div id="modal" class="modal disappear">
       <div class="modal-content">
         <span class="close close-modal">&times;</span>
