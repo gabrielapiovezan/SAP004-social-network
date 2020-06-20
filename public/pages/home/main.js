@@ -529,7 +529,6 @@ export default () => {
 
       boxComments.innerHTML += `
       <div  class="comment">
-
         <figure>
           ${image({
             class: 'img-profile-comment',
