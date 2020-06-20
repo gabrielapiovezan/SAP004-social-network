@@ -15,7 +15,7 @@ export default () => {
         <span class="close close-modal">&times;</span>
         <h2>Tem certeza que deseja deletar?</h2>
         ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
-        ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal', })}
+        ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
       </div>
  </div>
   <header>
@@ -28,19 +28,19 @@ export default () => {
         <ul id="menu">
           <li>
             ${link({
-    href: '#home',
-    name: 'Voltar',
-    title: 'voltar',
-    target: '_self',
-  })}
+              href: '#home',
+              name: 'Voltar',
+              title: 'voltar',
+              target: '_self',
+            })}
           </li>
           <li>
             ${link({
-    id: 'logout-btn',
-    name: 'Sair',
-    title: 'deslogar',
-    target: '_self',
-  })}
+              id: 'logout-btn',
+              name: 'Sair',
+              title: 'deslogar',
+              target: '_self',
+            })}
           </li>
         </ul>
       </div>
@@ -48,10 +48,10 @@ export default () => {
     <h1> &lt; Umâmi &gt; </h1>
     <figure>
       ${image({
-    src: '/pages/elementos/imagens/logo.png',
-    class: 'img-header',
-    alt: 'logo-umâmi',
-  })}
+        src: '/pages/elementos/imagens/logo.png',
+        class: 'img-header',
+        alt: 'logo-umâmi',
+      })}
     </figure>
   </header>
   ${image({
@@ -66,17 +66,20 @@ export default () => {
     <input type="file" id= "file" accept= "image/*">
     <label for="file">
       ${image({
-    id: 'img-upload',
-    class: 'icon',
-    src: './pages/elementos/icones/img-1.png',
-  })}
+        id: 'img-upload',
+        class: 'icon',
+        src: './pages/elementos/icones/img-1.png',
+      })}
     </label>                     
     ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
   </div>
   <form class='form-profile'>
-    ${input({ type: 'name', id: 'name', placeholder: ' Nome' })}        
-    ${button({ name: 'Salvar alterações', id: 'save-profile' })}
-    ${button({ name: 'Deletar a conta', id: 'delete-profile' })}  
+    ${button({ name: 'Alterar informações', id: 'infos' })} 
+    <div id='form'> 
+      ${input({ type: 'name', id: 'name', placeholder: ' Nome', class: 'disappear' })}        
+      ${button({ name: 'Salvar alterações', id: 'save-profile', class: 'disappear' })}
+      ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'disappear' })}
+    </div>  
   </form>
   ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
 
@@ -97,6 +100,14 @@ export default () => {
     container.querySelector('#photo').src = './pages/elementos/imagens/chefe.png';
     container.querySelector('#iconremove-photo').classList.add('disappear');
     container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+  });
+
+  container.querySelector('#infos').addEventListener('click', (event) => {
+    event.preventDefault();
+    container.querySelector('#form').classList.toggle('disappear');
+    container.querySelector('#name').classList.remove('disappear');
+    container.querySelector('#save-profile').classList.remove('disappear');
+    container.querySelector('#delete-profile').classList.remove('disappear');
   });
 
   function profile(data) {
@@ -153,7 +164,6 @@ export default () => {
   container.querySelector('#delete-profile').addEventListener('click', (event) => {
     event.preventDefault();
     modal(removeAccount);
-
   });
   function redirectToLogin() {
     window.location.hash = 'login';
