@@ -69,7 +69,8 @@ export default () => {
     ${input({ type: 'name', id: 'name', placeholder: ' Nome' })}        
     ${button({ name: 'Salvar alterações', id: 'save-profile' })}
     ${button({ name: 'Deletar a conta', id: 'delete-profile' })}  
-  </form>`;
+  </form>
+  ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
 
   container.querySelector('#file').addEventListener('change', (event) => {
     event.preventDefault();
