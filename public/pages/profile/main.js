@@ -10,6 +10,14 @@ export default () => {
   container.classList.add('container-profile');
 
   container.innerHTML = `
+  <div id="modal" class="modal disappear">
+      <div class="modal-content">
+        <span class="close close-modal">&times;</span>
+        <h2>Tem certeza que deseja deletar?</h2>
+        ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
+        ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal', })}
+      </div>
+ </div>
   <header>
     <nav role="navigation">
       <div id="menuToggle">
@@ -20,19 +28,19 @@ export default () => {
         <ul id="menu">
           <li>
             ${link({
-              href: '#home',
-              name: 'Voltar',
-              title: 'voltar',
-              target: '_self',
-            })}
+    href: '#home',
+    name: 'Voltar',
+    title: 'voltar',
+    target: '_self',
+  })}
           </li>
           <li>
             ${link({
-              id: 'logout-btn',
-              name: 'Sair',
-              title: 'deslogar',
-              target: '_self',
-            })}
+    id: 'logout-btn',
+    name: 'Sair',
+    title: 'deslogar',
+    target: '_self',
+  })}
           </li>
         </ul>
       </div>
@@ -40,10 +48,10 @@ export default () => {
     <h1> &lt; Umâmi &gt; </h1>
     <figure>
       ${image({
-        src: '/pages/elementos/imagens/logo.png',
-        class: 'img-header',
-        alt: 'logo-umâmi',
-      })}
+    src: '/pages/elementos/imagens/logo.png',
+    class: 'img-header',
+    alt: 'logo-umâmi',
+  })}
     </figure>
   </header>
   ${image({
@@ -58,10 +66,10 @@ export default () => {
     <input type="file" id= "file" accept= "image/*">
     <label for="file">
       ${image({
-        id: 'img-upload',
-        class: 'icon',
-        src: './pages/elementos/icones/img-1.png',
-      })}
+    id: 'img-upload',
+    class: 'icon',
+    src: './pages/elementos/icones/img-1.png',
+  })}
     </label>                     
     ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
   </div>
@@ -121,9 +129,31 @@ export default () => {
     window.location.hash = 'home';
   }
 
+  function modal(callback) {
+    const modal = container.querySelector('#modal');
+    modal.classList.remove('disappear');
+    container.querySelector('#delete-yes').addEventListener('click', () => {
+      callback();
+    });
+    window.addEventListener('dblclick', (event) => {
+      if (event.target === modal) {
+        modal.classList.add('disappear');
+      }
+    });
+
+    container.querySelectorAll('.close-modal').forEach((a) => {
+      a.addEventListener('click', () => {
+        modal.classList.add('disappear');
+      });
+    });
+  }
+  function removeAccount() {
+    deleteConta(redirectToLogin);
+  }
   container.querySelector('#delete-profile').addEventListener('click', (event) => {
     event.preventDefault();
-    deleteConta(redirectToLogin);
+    modal(removeAccount);
+
   });
   function redirectToLogin() {
     window.location.hash = 'login';
