@@ -20,7 +20,6 @@ export default () => {
     const container = document.createElement('div');
 
     container.classList.add('container-home');
-
     container.innerHTML = `
     <div id="modal" class="modal disappear">
       <div class="modal-content">
