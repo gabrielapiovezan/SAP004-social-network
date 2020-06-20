@@ -513,6 +513,10 @@ hr {
   margin: 0;
 }
 
+.btn-delete {
+  background-color: red;
+}
+
 .footer {
   display: flex;
   justify-content: center;

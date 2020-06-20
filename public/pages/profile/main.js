@@ -1,4 +1,11 @@
-import { dataUser, updateProfile, fileProfile, deleteConta, logout } from './data.js';
+import {
+  dataUser,
+  updateProfile,
+  fileProfile,
+  deleteConta,
+  logout,
+  updatePassword,
+} from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
@@ -74,12 +81,18 @@ export default () => {
     ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
   </div>
   <form class='form-profile'>
-    ${button({ name: 'Alterar informações', id: 'infos' })} 
-    <div id='form'> 
-      ${input({ type: 'name', id: 'name', placeholder: ' Nome', class: 'disappear' })}        
-      ${button({ name: 'Salvar alterações', id: 'save-profile', class: 'disappear' })}
-      ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'disappear' })}
-    </div>  
+    ${input({ type: 'name', id: 'name', placeholder: ' Nome' })}
+    ${button({ name: 'Salvar alterações', id: 'save-profile' })}
+    ${button({ name: 'Alterar senha', id: 'change-password' })} 
+    ${input({
+      type: 'password',
+      id: 'password',
+      placeholder: 'Nova senha',
+      class: 'disappear',
+    })}
+    ${button({ name: 'Enviar', id: 'save-password', class: 'disappear' })}
+    ${button({ name: 'Cancelar', id: 'cancel-password', class: 'disappear' })}
+    ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'disappear btn-delete' })}
   </form>
   ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
 
@@ -102,12 +115,27 @@ export default () => {
     container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
   });
 
-  container.querySelector('#infos').addEventListener('click', (event) => {
+  container.querySelector('#change-password').addEventListener('click', (event) => {
     event.preventDefault();
-    container.querySelector('#form').classList.toggle('disappear');
+    container.querySelector('#change-password').classList.add('disappear');
+    container.querySelector('#name').classList.add('disappear');
+    container.querySelector('#save-profile').classList.add('disappear');
+    container.querySelector('#img-upload').classList.add('disappear');
+    container.querySelector('#save-password').classList.remove('disappear');
+    container.querySelector('#password').classList.remove('disappear');
+    container.querySelector('#cancel-password').classList.remove('disappear');
+    container.querySelector('#delete-profile').classList.remove('disappear');
+  });
+
+  container.querySelector('#cancel-password').addEventListener('click', (event) => {
+    event.preventDefault();
+    container.querySelector('#change-password').classList.remove('disappear');
     container.querySelector('#name').classList.remove('disappear');
     container.querySelector('#save-profile').classList.remove('disappear');
-    container.querySelector('#delete-profile').classList.remove('disappear');
+    container.querySelector('#save-password').classList.add('disappear');
+    container.querySelector('#password').classList.add('disappear');
+    container.querySelector('#cancel-password').classList.add('disappear');
+    container.querySelector('#delete-profile').classList.add('disappear');
   });
 
   function profile(data) {
@@ -129,10 +157,11 @@ export default () => {
       const profile = {
         photoURL: urlFile
           ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
-          : null,
+          : firebase.auth().currentUser.photoURL,
         displayName: container.querySelector('#name').value,
         uid: firebase.auth().currentUser.uid,
       };
+
       updateProfile(profile, redirectToHome);
     }
   });
@@ -172,6 +201,12 @@ export default () => {
   container.querySelector('#logout-btn').addEventListener('click', (event) => {
     event.preventDefault();
     logout();
+  });
+
+  container.querySelector('#save-password').addEventListener('click', (event) => {
+    event.preventDefault();
+    let newPassword = container.querySelector('#password').value;
+    updatePassword(newPassword);
   });
 
   dataUser(profile);

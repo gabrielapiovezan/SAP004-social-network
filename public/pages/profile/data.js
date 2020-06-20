@@ -80,3 +80,16 @@ export const logout = () => {
   firebase.auth().signOut();
   window.location.hash = '';
 };
+
+export const updatePassword = (newPassword) => {
+  var user = firebase.auth().currentUser;
+
+  user
+    .updatePassword(newPassword)
+    .then(function () {
+      console.log('Update successful.');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
