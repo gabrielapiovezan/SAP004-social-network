@@ -77,7 +77,7 @@ export default () => {
     output.src = URL.createObjectURL(event.target.files[0]);
     container.querySelector('#iconremove-photo').classList.remove('disappear');
     output.onload = function () {
-      URL.revokeObjectURL(output.src); // free memory
+      URL.revokeObjectURL(output.src);
     };
     container.querySelector('#img-upload').src = './pages/elementos/icones/img-2.png';
   });
