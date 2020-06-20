@@ -39,14 +39,16 @@ export default () => {
             userUid: '',
             userName: container.querySelector('#name').value,
             email: container.querySelector('#email').value,
-            password: container.querySelector('#password').value,
             profession: container.querySelector('#profession').value,
             age: container.querySelector('#age').value,
         };
 
+        const password = container.querySelector('#password').value;
         const confirmPassword = container.querySelector('#confirm-password').value;
         const error = 'As senhas não conferem.';
-        user.password === confirmPassword ? register(user, printErrorLogin) : printErrorLogin(error);
+        password === confirmPassword ?
+            register(user, password, printErrorLogin) :
+            printErrorLogin(error);
     });
 
     const printErrorLogin = (answer) => {
