@@ -221,7 +221,6 @@ export default () => {
             photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
             text: postText,
             user_id: firebase.auth().currentUser.uid,
-            likes: 0,
             liked: [],
             comments: [],
             time: firebase.firestore.FieldValue.serverTimestamp(),
@@ -357,8 +356,9 @@ export default () => {
       container.querySelector(`#icon-variable-loker-${post.id}`).addEventListener('click', () => {
         let data = post.data();
         data.privacy === true ? (data.privacy = false) : (data.privacy = true);
-        updateCollection(post.id, data);
         likeClass(`loker-${post.id}`, data.privacy);
+        container.querySelector('#posts').innerHTML = '';
+        updateCollection(post.id, data);
       });
     }
   }
@@ -496,6 +496,7 @@ export default () => {
         date: new Date().getTime(),
       };
       data.comments.unshift(comment);
+      container.querySelector('#posts').innerHTML = '';
       updateCollection(post.id, data);
     });
   }

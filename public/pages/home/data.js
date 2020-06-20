@@ -73,6 +73,14 @@ export const loadPost = (
                     post.data().privacy === false ||
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
+                    textareaAdaptable(post);
+                }
+            });
+            snap.forEach((post) => {
+                if (
+                    post.data().privacy === false ||
+                    firebase.auth().currentUser.uid === post.data().user_id
+                ) {
                     commenter(post);
                 }
             });
@@ -82,14 +90,6 @@ export const loadPost = (
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
                     printComment(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
-                    textareaAdaptable(post);
                 }
             });
         });
