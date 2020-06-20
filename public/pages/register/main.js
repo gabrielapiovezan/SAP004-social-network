@@ -18,7 +18,9 @@ export default () => {
       <h2>Bem vindo!</h2>
       <form id="register">
         ${input({ type: 'text', id: 'name', placeholder: 'Nome' })}
-        ${input({ type: 'email', id: 'email', placeholder: 'E-mail' })}
+                ${input({ type: 'email', id: 'email', placeholder: 'E-mail' })}
+                ${input({ type: 'date', id: 'age' })}
+                 ${input({ type: 'text', id: 'profession', placeholder: 'Profissão' })}
         ${input({ type: 'password', id: 'password', placeholder: 'Senha' })} 
                 ${input({
                   type: 'password',
@@ -33,14 +35,18 @@ export default () => {
 
     container.querySelector('#register').addEventListener('submit', (event) => {
         event.preventDefault();
-        const name = container.querySelector('#name').value;
-        const email = container.querySelector('#email').value;
-        const password = container.querySelector('#password').value;
+        const user = {
+            userUid: '',
+            userName: container.querySelector('#name').value,
+            email: container.querySelector('#email').value,
+            password: container.querySelector('#password').value,
+            profession: container.querySelector('#profession').value,
+            age: container.querySelector('#age').value,
+        };
+
         const confirmPassword = container.querySelector('#confirm-password').value;
         const error = 'As senhas não conferem.';
-        password === confirmPassword ?
-            register(email, password, name, printErrorLogin) :
-            printErrorLogin(error);
+        user.password === confirmPassword ? register(user, printErrorLogin) : printErrorLogin(error);
     });
 
     const printErrorLogin = (answer) => {
