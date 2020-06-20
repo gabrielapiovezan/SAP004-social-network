@@ -19,6 +19,7 @@ export const register = (email, password, username, printErrorLogin) => {
                 // Handle Errors here.
                 // const errorCode = error.code;
                 // const errorMessage = error.message;
+                console.log(error.code);
                 printErrorLogin(errorHandling(error.code));
                 // window.alert(errorMessage);
             });
