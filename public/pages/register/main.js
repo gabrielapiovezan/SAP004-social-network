@@ -6,37 +6,46 @@ import { image } from '../elementos/objetos/image.js';
 /* <input type="file" placeholder="Foto" id="photo" accept="image/*"></input> */
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add("container");
+    const container = document.createElement('div');
+    container.classList.add('container');
 
-  container.innerHTML = `
+    container.innerHTML = `
     <figure>
-    ${image({ src: "/pages/elementos/imagens/IMG2.png", class: "img-login", alt: "logo-umâmi" })}
+    ${image({ src: '/pages/elementos/imagens/IMG2.png', class: 'img-login', alt: 'logo-umâmi' })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
       <h2>Bem vindo!</h2>
       <form id="register">
-        ${input({ type: "text", id: "name", placeholder: "Nome" })}
-        ${input({ type: "email", id: "email", placeholder: "E-mail" })}
-        ${input({ type: "password", id: "password", placeholder: "Senha" })}  
-        ${button({ name: "Registrar" })}
+        ${input({ type: 'text', id: 'name', placeholder: 'Nome' })}
+        ${input({ type: 'email', id: 'email', placeholder: 'E-mail' })}
+        ${input({ type: 'password', id: 'password', placeholder: 'Senha' })} 
+                ${input({
+                  type: 'password',
+                  id: 'confirm-password',
+                  placeholder: 'Confirmar senha',
+                })} 
+        ${button({ name: 'Registrar' })}
         <div id="error" class="error"></div>
       </form>
-      ${link({ href: "#", name: "Voltar", title:"voltar", target:"_self" })}
+      ${link({ href: '#', name: 'Voltar', title: 'voltar', target: '_self' })}
     </div>`;
 
-  container.querySelector("#register").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const name = container.querySelector('#name').value;
-    const email = container.querySelector('#email').value;
-    const password = container.querySelector('#password').value;
-    register(email, password, name, printErrorLogin);
-  });
+    container.querySelector('#register').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = container.querySelector('#name').value;
+        const email = container.querySelector('#email').value;
+        const password = container.querySelector('#password').value;
+        const confirmPassword = container.querySelector('#confirm-password').value;
+        const error = 'As senhas não conferem.';
+        password === confirmPassword ?
+            register(email, password, name, printErrorLogin) :
+            printErrorLogin(error);
+    });
 
-  const printErrorLogin = (answer) => {
-    container.querySelector("#error").innerHTML = answer;
-  };
+    const printErrorLogin = (answer) => {
+        container.querySelector('#error').innerHTML = answer;
+    };
 
-  return container;
-}
+    return container;
+};
