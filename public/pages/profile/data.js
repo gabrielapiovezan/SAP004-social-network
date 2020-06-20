@@ -93,3 +93,15 @@ export const updatePassword = (newPassword) => {
       console.log(error);
     });
 };
+
+export const loadProfile = (profile) => {
+  firebase.firestore().collection('users').onSnapshot((snap) => {
+    snap.forEach((user) => {
+      console.log(user.data().userUid)
+      if (firebase.auth().currentUser.uid === user.data().userUid) {
+        profile(user);
+      }
+    });
+  });
+}
+
