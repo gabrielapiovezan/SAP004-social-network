@@ -1,5 +1,5 @@
 export default (errorCode) => {
-    errorCode === 'auth/email-already-exists' || 'auth/email-already-in-use' ?
+    errorCode === 'auth/email-already-exists' || errorCode === 'auth/email-already-in-use' ?
         (errorCode = 'O e-mail fornecido já está em uso por outro usuário. ') :
         errorCode === 'auth/invalid-email' ?
         (errorCode = 'E-mail inválido. Favor inserir um e-mail válido.') :
