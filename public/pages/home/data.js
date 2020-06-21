@@ -104,11 +104,11 @@ export const updateCollection = (post, data) => {
     });
 };
 
-export const dataUser = (profile) => {
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) profile(user.displayName, user.photoURL);
-    });
-};
+// export const dataUser = (profile) => {
+//     firebase.auth().onAuthStateChanged(function(user) {
+//         if (user) profile(user.displayName, user.photoURL);
+//     });
+// };
 
 export const postDelete = (post) => {
     firebase
@@ -138,7 +138,6 @@ export const filePost = (file, name, callback, privacy) => {
     const ref = firebase.storage().ref();
     const filePostar = ref.child(name);
     filePostar.put(file).then(function(snapshot) {
-        console.log(snapshot);
         callback(filePostar.fullPath, privacy);
     });
 };
@@ -149,3 +148,18 @@ function iconVerific(post, likeClass) {
     });
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
+
+export const loadProfile = (profile) => {
+    let dataUser;
+    firebase
+        .firestore()
+        .collection('users')
+        .onSnapshot((snap) => {
+            snap.forEach((user) => {
+                if (firebase.auth().currentUser.uid === user.data().userUid) {
+                    const dataUser = user.data();
+                    profile(dataUser);
+                }
+            });
+        });
+};
