@@ -104,11 +104,11 @@ export const updateCollection = (post, data) => {
     });
 };
 
-export const dataUser = (profile) => {
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) profile(user.displayName, user.photoURL);
-    });
-};
+// export const dataUser = (profile) => {
+//     firebase.auth().onAuthStateChanged(function(user) {
+//         if (user) profile(user.displayName, user.photoURL);
+//     });
+// };
 
 export const postDelete = (post) => {
     firebase
@@ -150,13 +150,15 @@ function iconVerific(post, likeClass) {
 }
 
 export const loadProfile = (profile) => {
+    let dataUser;
     firebase
         .firestore()
         .collection('users')
         .onSnapshot((snap) => {
             snap.forEach((user) => {
                 if (firebase.auth().currentUser.uid === user.data().userUid) {
-                    profile(user);
+                    const dataUser = user.data();
+                    profile(dataUser);
                 }
             });
         });

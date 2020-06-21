@@ -122,11 +122,12 @@ export const userDelete = (user) => {
 };
 
 export const updateCollection = (user, userData) => {
+    console.log(userData.age);
     firebase.firestore().collection('users').doc(`${user}`).update({
-        //   photo: userData.photo,
+        photo: userData.photo,
         userName: userData.userName,
-        //  email: userData.email,
-        //  profession: userData.profession,
-        //  age: userData.age,
+        //     email: userData.email,
+        profession: userData.profession,
+        age: userData.age,
     });
 };

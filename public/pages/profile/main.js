@@ -187,12 +187,12 @@ export default () => {
           displayName: container.querySelector('#name').value,
           uid: firebase.auth().currentUser.uid,
         };
-        // userData.photo = profile.photoURL;
+        userData.photo = profile.photoURL;
         userData.userName = profile.displayName;
         //  userData.userUid = profile.uid;
-        //  userData.profession = container.querySelector('#profession');
-        //  userData.age = container.querySelector('#age');
-        //  userData.email = firebase.auth().currentUser.email;
+        userData.profession = container.querySelector('#profession').value;
+        userData.age = container.querySelector('#age').value;
+        //userData.email = firebase.auth().currentUser.email;
         updateCollection(user.id, userData);
         updateProfile(profile, redirectToHome);
       }

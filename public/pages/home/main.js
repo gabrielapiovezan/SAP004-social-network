@@ -3,11 +3,12 @@ import {
     createPost,
     logout,
     loadPost,
-    dataUser,
+    //  dataUser,
     updateCollection,
     postDelete,
     updatePost,
     filePost,
+    loadProfile,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -77,6 +78,7 @@ export default () => {
           })}
         </figure>
         <h3 id="nameUser" class="name-user"></h3>
+        <h4 id="profession"></h4>
       </div>
       ${image({
         src: '/pages/elementos/imagens/fundo.png',
@@ -424,9 +426,11 @@ export default () => {
     });
   }
 
-  function profile(name, img) {
-    container.querySelector('#img-profile').src = img || './pages/elementos/imagens/chefe.png';
-    container.querySelector('#nameUser').innerHTML = `Olá, ${name}!`;
+  function profile(dataUser) {
+    container.querySelector('#img-profile').src =
+      dataUser.photo || './pages/elementos/imagens/chefe.png';
+    container.querySelector('#nameUser').innerHTML = `Olá, ${dataUser.userName}!`;
+    container.querySelector('#profession').innerHTML = ` ${dataUser.profession}`;
   }
 
   let editing = false;
@@ -596,7 +600,9 @@ export default () => {
   }
   createNewPost();
   //user();
-  dataUser(profile);
+
+  loadProfile(profile);
+  // dataUser(profile);
   loadPost(
     addPosts,
     like,
