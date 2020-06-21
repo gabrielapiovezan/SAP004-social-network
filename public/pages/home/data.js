@@ -149,7 +149,7 @@ function iconVerific(post, likeClass) {
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
 
-export const loadProfile = (profile) => {
+export const loadProfile = (callnack) => {
     let dataUser;
     firebase
         .firestore()
@@ -158,7 +158,22 @@ export const loadProfile = (profile) => {
             snap.forEach((user) => {
                 if (firebase.auth().currentUser.uid === user.data().userUid) {
                     const dataUser = user.data();
-                    profile(dataUser);
+                    callnack(dataUser);
+                }
+            });
+        });
+};
+
+export const loadUserPost = (post, callnack) => {
+    let dataUser;
+    firebase
+        .firestore()
+        .collection('users')
+        .onSnapshot((snap) => {
+            snap.forEach((user) => {
+                if (post.data().user_id === user.data().userUid) {
+                    const dataUser = user.data();
+                    callnack(dataUser);
                 }
             });
         });

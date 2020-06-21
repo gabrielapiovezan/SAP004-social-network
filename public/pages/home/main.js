@@ -9,6 +9,7 @@ import {
     updatePost,
     filePost,
     loadProfile,
+    loadUserPost,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -286,13 +287,14 @@ export default () => {
           <div class='flex-row'>
             <figure>
               ${image({
+                id: `photo${post.id}`,
                 class: 'img-profile-post',
                 alt: 'foto-usuário',
                 src: `${post.data().photo}`,
               })}
             </figure>
             <div>
-              <h3>Publicado por: ${post.data().name}</h3>
+              <h3 id="nameUser${post.id}"></h3>
               <time>${dateAndHour(date)}</time>
             </div>
                 ${image({
@@ -348,6 +350,14 @@ export default () => {
         </div>
       </div>`;
     container.querySelector('#posts').innerHTML += postsTemplate;
+
+    const getDataUser = (dataUser) => {
+      container.querySelector(`#photo${post.id}`).src = dataUser.photo;
+      container.querySelector(
+        `#nameUser${post.id}`
+      ).innerHTML = `Publicado por:${dataUser.userName}`;
+    };
+    loadUserPost(post, getDataUser);
   }
 
   function lokerPost(post) {
