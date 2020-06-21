@@ -8,13 +8,7 @@ export const login = (email, password, printErrorLogin) => {
             window.location.hash = 'home';
         })
         .catch(function(error) {
-            // Handle Errors here.
-            //    const errorCode = error.code;
-            // const errorResult = errorHandling(errorCode);
-
-            //  const errorMessage = error.message;
             printErrorLogin(errorHandling(error.code));
-            //window.alert(errorMessage);
         });
 };
 
@@ -27,9 +21,21 @@ export const loginGoogle = () => {
         .signInWithPopup(provider)
         .then(function(result) {
             window.location.hash = 'home';
+
             // This gives you a Google Access Token.
             const token = result.credential.accessToken;
             // The signed-in user info.
             const user = result.user;
+            if (result.additionalUserInfo.isNewUser) {
+                const user = {
+                    userUid: firebase.auth().currentUser.uid,
+                    photo: './pages/elementos/imagens/chefe.png',
+                    userName: firebase.auth().currentUser.displayName,
+                    email: firebase.auth().currentUser.email,
+                    profession: '',
+                    age: '',
+                };
+                firebase.firestore().collection('users').add(user);
+            }
         });
 };

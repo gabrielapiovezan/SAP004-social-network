@@ -138,7 +138,6 @@ export const filePost = (file, name, callback, privacy) => {
     const ref = firebase.storage().ref();
     const filePostar = ref.child(name);
     filePostar.put(file).then(function(snapshot) {
-        console.log(snapshot);
         callback(filePostar.fullPath, privacy);
     });
 };
@@ -149,3 +148,16 @@ function iconVerific(post, likeClass) {
     });
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
+
+export const loadProfile = (profile) => {
+    firebase
+        .firestore()
+        .collection('users')
+        .onSnapshot((snap) => {
+            snap.forEach((user) => {
+                if (firebase.auth().currentUser.uid === user.data().userUid) {
+                    profile(user);
+                }
+            });
+        });
+};
