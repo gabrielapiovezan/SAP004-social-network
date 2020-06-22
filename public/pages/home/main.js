@@ -360,6 +360,7 @@ export default () => {
       ).innerHTML = `Publicado por: ${dataUser.userName}`;
     };
     loadUserPost(getDataUser, post);
+    //  like(post);
   }
 
   function lokerPost(post) {
@@ -436,6 +437,7 @@ export default () => {
       //container.querySelector('#posts').innerHTML = '';
       updateCollection(post.id, data);
     });
+    //   likeClass(post);
   }
 
   function profile(dataUser) {
