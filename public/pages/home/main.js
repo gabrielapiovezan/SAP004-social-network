@@ -6,9 +6,9 @@ import {
     //  dataUser,
     updateCollection,
     postDelete,
-    updatePost,
+    //  updatePost,
     filePost,
-    loadProfile,
+    //   loadProfile,
     loadUserPost,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
@@ -359,7 +359,7 @@ export default () => {
         `#nameUser${post.id}`
       ).innerHTML = `Publicado por: ${dataUser.userName}`;
     };
-    loadUserPost(post, getDataUser);
+    loadUserPost(getDataUser, post);
   }
 
   function lokerPost(post) {
@@ -448,6 +448,7 @@ export default () => {
   let editing = false;
 
   function editPost(post) {
+    const data = post.data();
     const edit = container.querySelector(`#iconedit-${post.id} `);
     const save = container.querySelector(`#iconsave-${post.id} `);
 
@@ -480,7 +481,7 @@ export default () => {
           container.querySelector(`#icon${post.id} `).classList.add('disappear');
 
           save.addEventListener('click', async () => {
-            const valor = newPost.firstElementChild.value;
+            data.text = newPost.firstElementChild.value;
             container.querySelector(`#iconsave-${post.id} `).classList.add('disappear');
             container.querySelector(`#iconedit-${post.id} `).classList.remove('disappear');
             container.querySelector(`#icon${post.id} `).classList.remove('disappear');
@@ -489,7 +490,7 @@ export default () => {
             container.querySelector(`#text${post.id}`).classList.remove('disappear');
             container.querySelector('#edit-post').remove();
 
-            await updatePost(post.id, valor);
+            updateCollection(post.id, data);
 
             editing = false;
           });
@@ -615,7 +616,7 @@ export default () => {
   }
   createNewPost();
 
-  loadProfile(profile);
+  loadUserPost(profile);
 
   loadPost(
     clearPost,
