@@ -42,7 +42,6 @@ export const fileProfile = (file, name, callback) => {
     const ref = firebase.storage().ref();
     const fileProfile = ref.child(name);
     fileProfile.put(file).then(function(snapshot) {
-        console.log(snapshot);
         callback(fileProfile.fullPath);
     });
 };
@@ -122,7 +121,6 @@ export const userDelete = (user) => {
 };
 
 export const updateCollection = (user, userData) => {
-    console.log(userData.age);
     firebase.firestore().collection('users').doc(`${user}`).update({
         photo: userData.photo,
         userName: userData.userName,
