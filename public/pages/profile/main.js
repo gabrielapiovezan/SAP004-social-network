@@ -23,6 +23,7 @@ export default () => {
     function addProfile(user) {
         const userData = user.data();
 
+<<<<<<< HEAD
         const template = `
         
         <div id="modal" class="modal disappear">
@@ -31,8 +32,17 @@ export default () => {
         <h2>Tem certeza que deseja deletar?</h2>
         ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
         ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
+=======
+    const template = `
+      <div id="modal" class="modal disappear">
+        <div class="modal-content">
+          <span class="close close-modal">&times;</span>
+          <h2>Tem certeza que deseja deletar?</h2>
+          ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
+          ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
+        </div>
+>>>>>>> 07fc5bcfab0e2e577d8981cd9c5a1bc8f3012999
       </div>
-    </div>
       <header>
         <nav role="navigation">
           <div id="menuToggle">
@@ -69,12 +79,11 @@ export default () => {
           })}
         </figure>
       </header>
-  ${image({
-    src: '/pages/elementos/imagens/fundo.png',
-    class: 'disappear image-back',
-  })}
-    <h2>Perfil</h2>
-    
+      ${image({
+        src: '/pages/elementos/imagens/fundo.png',
+        class: 'disappear image-back',
+      })}
+      <h2>Perfil</h2>
       <figure>
         ${image({
           id: 'photo',
@@ -85,25 +94,24 @@ export default () => {
       </figure>
       <h2>${userData.userName}</h2>
       <h3>${userData.profession}</h3>
-      <h4>${userData.age}</h4>
+      <h4 id='print-age'></h4>
       <form class='form-profile'>
-      ${button({ name: 'Alterar dados', id: 'change-profile' })}
-      ${button({ name: 'Configurações da conta', id: 'change-password' })}
-      <div id='profile-div' class='disappear'>
-      <div class='flex-row'>
-        <input type="file" id="file" accept="image/*">
-          <label for="file">
-            ${image({
-              id: 'img-upload',
-              class: 'icon',
-              src: './pages/elementos/icones/img-1.png',
-            })}
-          </label>
-    ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
-  </div>
-        
+        ${button({ name: 'Alterar dados', id: 'change-profile' })}
+        ${button({ name: 'Configurações da conta', id: 'change-password' })}
+        <div id='profile-div' class='disappear'>
+          <div class='flex-row'>
+            <input type="file" id="file" accept="image/*">
+            <label for="file">
+              ${image({
+                id: 'img-upload',
+                class: 'icon',
+                src: './pages/elementos/icones/img-1.png',
+              })}
+            </label>
+            ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
+          </div>
           ${input({
-            type: 'name',
+            type: 'text',
             id: 'name',
             placeholder: ' Nome',
             value: `${userData.userName}`,
@@ -121,33 +129,33 @@ export default () => {
             placeholder: 'Profissão',
             value: `${userData.profession}`,
           })}
-    ${button({ name: 'Salvar alterações', id: 'save-profile' })}
-    ${button({ name: 'Cancelar', id: 'cancel-profile' })}
-    
-    </div>
-    <div id='password-div' class='disappear'>
-    ${input({
-      type: 'password',
-      id: 'current-password',
-      placeholder: 'Senha atual',
-    })} 
-    ${input({
-      type: 'password',
-      id: 'new-password',
-      placeholder: 'Nova senha',
-    })}
-    ${input({
-      type: 'password',
-      id: 'confirm-password',
-      placeholder: 'Confirme a senha',
-    })}
-    <div id="error" class="error"></div>
-    ${button({ name: 'Enviar', id: 'save-password' })}
-    ${button({ name: 'Cancelar', id: 'cancel-password' })}
-    ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'btn-delete' })}
-  </div>
-        </form>
-  ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
+          ${button({ name: 'Salvar alterações', id: 'save-profile' })}
+          ${button({ name: 'Cancelar', id: 'cancel-profile' })}
+        </div>
+        <div id='password-div' class='disappear'>
+        ${input({
+          type: 'password',
+          id: 'current-password',
+          placeholder: 'Senha atual',
+        })} 
+        ${input({
+          type: 'password',
+          id: 'new-password',
+          placeholder: 'Nova senha',
+        })}
+        ${input({
+          type: 'password',
+          id: 'confirm-password',
+          placeholder: 'Confirme a senha',
+        })}
+        <div id="error" class="error"></div>
+        ${button({ name: 'Enviar', id: 'save-password' })}
+        ${button({ name: 'Cancelar', id: 'cancel-password' })}
+        ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'btn-delete' })}
+      </div>
+      </form>
+      ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
+
     container.querySelector('#profile-template').innerHTML = template;
 
     container.querySelector('#file').addEventListener('change', (event) => {
@@ -288,18 +296,29 @@ export default () => {
       container.querySelector('#error').innerHTML = answer;
     };
 
-    // dataUser(profile);
+    const age = () => {
+      const birth = new Date(userData.age);
+      const dayBirth = birth.getUTCDate();
+      const monthBirth = birth.getUTCMonth() + 1;
+      const today = new Date();
+      const dayToday = today.getUTCDate();
+      const monthToday = today.getUTCMonth() + 1;
+      let difference = '';
 
-    //     // function profile(user) {
-    //     container.querySelector('#name').value = userData.userName;
-    //     container.querySelector('#email').value = userData.email;
-    //     container.querySelector('#profession').value = userData.profession;
-    //     // container.querySelector('#password').value = user.password;
-    //     container.querySelector('#age').value = userData.age;
-    //     container.querySelector('#photo').src = userData.photo;
-    //   }
+      if (monthToday < monthBirth || (monthToday === monthBirth && dayToday < dayBirth)) {
+        difference += today.getFullYear() - birth.getFullYear() - 1;
+      } else {
+        difference += today.getFullYear() - birth.getFullYear();
+      }
+      return difference;
+    };
+
+    const printAge = () => {
+      container.querySelector('#print-age').innerHTML = `${age()} anos`;
+    };
+
+    printAge();
   }
-
   loadProfile(addProfile);
 
   return container;
