@@ -280,8 +280,7 @@ export const loadUserPost = (callback, post) => {
                         const dataUser = user.data();
                         callback(dataUser);
                     }
-                }
-                if (firebase.auth().currentUser.uid === user.data().userUid) {
+                } else if (firebase.auth().currentUser.uid === user.data().userUid) {
                     const dataUser = user.data();
                     callback(dataUser);
                 }

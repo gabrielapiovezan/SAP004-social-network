@@ -357,7 +357,7 @@ export default () => {
       container.querySelector(`#photo${post.id}`).src = dataUser.photo;
       container.querySelector(
         `#nameUser${post.id}`
-      ).innerHTML = `Publicado por: ${dataUser.userName}`;
+      ).innerHTML = `Publicado por:  ${dataUser.userName}`;
     };
     loadUserPost(getDataUser, post);
     //  like(post);
