@@ -103,6 +103,7 @@ export const updateCollection = (post, data) => {
         comments: data.comments,
         text: data.text,
         privacy: data.privacy,
+        text: data.text,
     });
 };
 
@@ -130,11 +131,11 @@ export const createPost = (post) => {
     firebase.firestore().collection('posts').add(post);
 };
 
-export const updatePost = (id, post) => {
-    return firebase.firestore().collection('posts').doc(id).update({
-        text: post,
-    });
-};
+// export const updatePost = (id, post) => {
+//     return firebase.firestore().collection('posts').doc(id).update({
+//         text: post,
+//     });
+// };
 
 export const filePost = (file, name, callback, privacy) => {
     const ref = firebase.storage().ref();
@@ -151,29 +152,20 @@ function iconVerific(post, likeClass) {
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
 
-export const loadProfile = (callnack) => {
-    let dataUser;
+export const loadUserPost = (callnack, post) => {
+    //  let dataUser;
     firebase
         .firestore()
         .collection('users')
         .onSnapshot((snap) => {
             snap.forEach((user) => {
-                if (firebase.auth().currentUser.uid === user.data().userUid) {
-                    const dataUser = user.data();
-                    callnack(dataUser);
+                if (post) {
+                    if (post.data().user_id === user.data().userUid) {
+                        const dataUser = user.data();
+                        callnack(dataUser);
+                    }
                 }
-            });
-        });
-};
-
-export const loadUserPost = (post, callnack) => {
-    let dataUser;
-    firebase
-        .firestore()
-        .collection('users')
-        .onSnapshot((snap) => {
-            snap.forEach((user) => {
-                if (post.data().user_id === user.data().userUid) {
+                if (firebase.auth().currentUser.uid === user.data().userUid) {
                     const dataUser = user.data();
                     callnack(dataUser);
                 }
