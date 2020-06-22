@@ -1,13 +1,13 @@
 import {
-    loadProfile,
-    dataUser,
-    updateProfile,
-    fileProfile,
-    deleteConta,
-    userDelete,
-    logout,
-    updatePassword,
-    updateCollection,
+  loadProfile,
+  dataUser,
+  updateProfile,
+  fileProfile,
+  deleteConta,
+  userDelete,
+  logout,
+  updatePassword,
+  updateCollection,
 } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
@@ -16,14 +16,14 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 export default () => {
-    const container = document.createElement('div');
-    //   container.classList.add('container-profile');
-    container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
+  const container = document.createElement('div');
+  //   container.classList.add('container-profile');
+  container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
-    function addProfile(user) {
-        const userData = user.data();
+  function addProfile(user) {
+    const userData = user.data();
 
-        const template = `
+    const template = `
         
         <div id="modal" class="modal disappear">
       <div class="modal-content">
@@ -74,6 +74,7 @@ export default () => {
     class: 'disappear image-back',
   })}
     <h2>Perfil</h2>
+    
       <figure>
         ${image({
           id: 'photo',
@@ -82,6 +83,13 @@ export default () => {
           src: userData.photo,
         })}
       </figure>
+      <h2>${userData.userName}</h2>
+      <h3>${userData.profession}</h3>
+      <h4>${userData.age}</h4>
+      <form class='form-profile'>
+      ${button({ name: 'Alterar dados', id: 'change-profile' })}
+      ${button({ name: 'Configurações da conta', id: 'change-password' })}
+      <div id='profile-div' class='disappear'>
       <div class='flex-row'>
         <input type="file" id="file" accept="image/*">
           <label for="file">
@@ -93,27 +101,51 @@ export default () => {
           </label>
     ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
   </div>
-        <form class='form-profile'>
+        
           ${input({
             type: 'name',
             id: 'name',
             placeholder: ' Nome',
             value: `${userData.userName}`,
           })}
+          ${input({
+            type: 'email',
+            id: 'email',
+            placeholder: 'E-mail',
+            value: `${userData.email}`,
+          })}
+          ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
+          ${input({
+            type: 'text',
+            id: 'profession',
+            placeholder: 'Profissão',
+            value: `${userData.profession}`,
+          })}
     ${button({ name: 'Salvar alterações', id: 'save-profile' })}
-    ${button({ name: 'Alterar senha', id: 'change-password' })}
-    ${input({ type: 'email', id: 'email', placeholder: 'E-mail', value: `${userData.email}` })}
-    ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
+    ${button({ name: 'Cancelar', id: 'cancel-profile' })}
+    
+    </div>
+    <div id='password-div' class='disappear'>
     ${input({
-      type: 'text',
-      id: 'profession',
-      placeholder: 'Profissão',
-      value: `${userData.profession}`,
+      type: 'password',
+      id: 'current-password',
+      placeholder: 'Senha atual',
+    })} 
+    ${input({
+      type: 'password',
+      id: 'new-password',
+      placeholder: 'Nova senha',
     })}
-    ${input({ type: 'password', id: 'password', placeholder: 'Nova senha', class: 'disappear' })}
-    ${button({ name: 'Enviar', id: 'save-password', class: 'disappear' })}
-    ${button({ name: 'Cancelar', id: 'cancel-password', class: 'disappear' })}
-    ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'disappear btn-delete' })}
+    ${input({
+      type: 'password',
+      id: 'confirm-password',
+      placeholder: 'Confirme a senha',
+    })}
+    <div id="error" class="error"></div>
+    ${button({ name: 'Enviar', id: 'save-password' })}
+    ${button({ name: 'Cancelar', id: 'cancel-password' })}
+    ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'btn-delete' })}
+  </div>
         </form>
   ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
     container.querySelector('#profile-template').innerHTML = template;
@@ -139,29 +171,33 @@ export default () => {
       container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
     });
 
+    container.querySelector('#change-profile').addEventListener('click', (event) => {
+      event.preventDefault();
+      container.querySelector('#change-profile').classList.add('disappear');
+      container.querySelector('#profile-div').classList.remove('disappear');
+      container.querySelector('#password-div').classList.add('disappear');
+    });
+
+    container.querySelector('#cancel-profile').addEventListener('click', (event) => {
+      event.preventDefault();
+      container.querySelector('#profile-div').classList.add('disappear');
+      container.querySelector('#change-profile').classList.remove('disappear');
+      container.querySelector('#change-password').classList.remove('disappear');
+    });
+
     container.querySelector('#change-password').addEventListener('click', (event) => {
       event.preventDefault();
       container.querySelector('#change-password').classList.add('disappear');
-      container.querySelector('#name').classList.add('disappear');
-      container.querySelector('#save-profile').classList.add('disappear');
-      container.querySelector('#img-upload').classList.add('disappear');
-      container.querySelector('#save-password').classList.remove('disappear');
-      container.querySelector('#password').classList.remove('disappear');
-      container.querySelector('#cancel-password').classList.remove('disappear');
-      container.querySelector('#delete-profile').classList.remove('disappear');
+      container.querySelector('#password-div').classList.remove('disappear');
+      container.querySelector('#profile-div').classList.add('disappear');
     });
 
     container.querySelector('#cancel-password').addEventListener('click', (event) => {
       event.preventDefault();
+      container.querySelector('#password-div').classList.add('disappear');
+      container.querySelector('#change-profile').classList.remove('disappear');
       container.querySelector('#change-password').classList.remove('disappear');
-      container.querySelector('#name').classList.remove('disappear');
-      container.querySelector('#save-profile').classList.remove('disappear');
-      container.querySelector('#save-password').classList.add('disappear');
-      container.querySelector('#password').classList.add('disappear');
-      container.querySelector('#cancel-password').classList.add('disappear');
-      container.querySelector('#delete-profile').classList.add('disappear');
     });
-
     // // function profile(user) {
     // container.querySelector('#name').value = userData.userName;
     // container.querySelector('#email').value = userData.email;
@@ -239,9 +275,18 @@ export default () => {
 
     container.querySelector('#save-password').addEventListener('click', (event) => {
       event.preventDefault();
-      let newPassword = container.querySelector('#password').value;
-      updatePassword(newPassword);
+      const currentPassword = container.querySelector('#current-password').value;
+      const newPassword = container.querySelector('#new-password').value;
+      const confirmPassword = container.querySelector('#confirm-password').value;
+      const error = 'As senhas devem ser iguais.';
+      newPassword === confirmPassword
+        ? updatePassword(currentPassword, newPassword, printError)
+        : printError(error);
     });
+
+    const printError = (answer) => {
+      container.querySelector('#error').innerHTML = answer;
+    };
 
     // dataUser(profile);
 

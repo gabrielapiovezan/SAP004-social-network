@@ -244,7 +244,16 @@ header h1 {
 .profile {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.profile div {
+  padding: 0 0 10px 15px;
+}
+
+.profile h3,
+h4 {
+  margin: 0;
 }
 
 figure {
@@ -266,12 +275,6 @@ figure {
 
 .img-profile {
   width: 85px;
-}
-
-.name-user {
-  font-weight: 600;
-  font-size: 20px;
-  padding: 40px 0 0 10px;
 }
 
 .post,
@@ -514,7 +517,7 @@ hr {
 }
 
 .btn-delete {
-  background-color: red;
+  background-color: #b10000;
 }
 
 .footer {
@@ -651,10 +654,6 @@ hr {
     align-items: flex-end;
     width: 23%;
     box-shadow: 0 0 3px 0px #4e4e4e;
-  }
-  .name-user {
-    padding: 0;
-    padding-left: 15px;
   }
   .posts {
     width: 40%;
