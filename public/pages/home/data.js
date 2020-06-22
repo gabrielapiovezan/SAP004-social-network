@@ -3,6 +3,100 @@ export const logout = () => {
     window.location.hash = '';
 };
 
+// export const loadPost = (
+//     //  checkedPrivacy,
+//     clearPost,
+//     addPosts,
+//     like,
+//     likeClass,
+//     deletePost,
+//     editPost,
+//     lokerPost,
+//     commenter,
+//     printComment,
+//     textareaAdaptable
+// ) => {
+//     firebase
+//         .firestore()
+//         .collection('posts')
+//         .orderBy('time', 'desc')
+//         .onSnapshot((snap) => {
+//             clearPost();
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     addPosts(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     iconVerific(post, likeClass);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     like(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     deletePost(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     editPost(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     lokerPost(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     textareaAdaptable(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     commenter(post);
+//                 }
+//             });
+//             snap.forEach((post) => {
+//                 if (
+//                     post.data().privacy === false ||
+//                     firebase.auth().currentUser.uid === post.data().user_id
+//                 ) {
+//                     printComment(post);
+//                 }
+//             });
+//         });
+// };
+
 export const loadPost = (
     //  checkedPrivacy,
     clearPost,
@@ -28,6 +122,10 @@ export const loadPost = (
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
                     addPosts(post);
+                    //   iconVerific(post, likeClass);
+                    //     like(post);
+                    //  deletePost(post);
+                    //    textareaAdaptable(post);
                 }
             });
             snap.forEach((post) => {
@@ -35,65 +133,81 @@ export const loadPost = (
                     post.data().privacy === false ||
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
+                    //  addPosts(post);
                     iconVerific(post, likeClass);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
                     like(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
                     deletePost(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
                     editPost(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
-                    lokerPost(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
                     textareaAdaptable(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
+                    lokerPost(post);
                     commenter(post);
-                }
-            });
-            snap.forEach((post) => {
-                if (
-                    post.data().privacy === false ||
-                    firebase.auth().currentUser.uid === post.data().user_id
-                ) {
                     printComment(post);
                 }
             });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         iconVerific(post, likeClass);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         like(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         deletePost(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         editPost(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         lokerPost(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         textareaAdaptable(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         commenter(post);
+            //     }
+            // });
+            // snap.forEach((post) => {
+            //     if (
+            //         post.data().privacy === false ||
+            //         firebase.auth().currentUser.uid === post.data().user_id
+            //     ) {
+            //         printComment(post);
+            //     }
+            // });
         });
 };
 
@@ -147,12 +261,14 @@ export const filePost = (file, name, callback, privacy) => {
 
 function iconVerific(post, likeClass) {
     post.data().liked.forEach((a) => {
-        if (a === firebase.auth().currentUser.uid) likeClass(post.id, true);
+        if (a === firebase.auth().currentUser.uid) {
+            likeClass(post.id, true);
+        }
     });
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
 
-export const loadUserPost = (callnack, post) => {
+export const loadUserPost = (callback, post) => {
     //  let dataUser;
     firebase
         .firestore()
@@ -162,12 +278,12 @@ export const loadUserPost = (callnack, post) => {
                 if (post) {
                     if (post.data().user_id === user.data().userUid) {
                         const dataUser = user.data();
-                        callnack(dataUser);
+                        callback(dataUser);
                     }
                 }
                 if (firebase.auth().currentUser.uid === user.data().userUid) {
                     const dataUser = user.data();
-                    callnack(dataUser);
+                    callback(dataUser);
                 }
             });
         });
