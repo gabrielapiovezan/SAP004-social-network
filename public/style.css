@@ -335,7 +335,7 @@ input[type='file'] {
 }
 
 .icon {
-  width: 27px;
+  max-width: 27px;
   padding: 0 10px 5px 3px;
 }
 
