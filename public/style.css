@@ -332,7 +332,7 @@ input[type='file'] {
 }
 
 .icon {
-  width: 27px;
+  max-width: 27px;
   padding: 0 10px 5px 3px;
 }
 
@@ -513,8 +513,12 @@ hr {
   margin: 0;
 }
 
+.container-profile h4 {
+  margin-top: 0;
+}
+
 .btn-delete {
-  background-color: red;
+  background-color: #b10000;
 }
 
 .footer {
