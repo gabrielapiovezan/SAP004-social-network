@@ -5,6 +5,7 @@ export const logout = () => {
 
 export const loadPost = (
     //  checkedPrivacy,
+    clearPost,
     addPosts,
     like,
     likeClass,
@@ -20,6 +21,7 @@ export const loadPost = (
         .collection('posts')
         .orderBy('time', 'desc')
         .onSnapshot((snap) => {
+            clearPost();
             snap.forEach((post) => {
                 if (
                     post.data().privacy === false ||
