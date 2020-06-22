@@ -268,22 +268,26 @@ function iconVerific(post, likeClass) {
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
 
-export const loadUserPost = (callback, post) => {
+export const loadUserPost = (callback, postUser) => {
     //  let dataUser;
     firebase
         .firestore()
         .collection('users')
         .onSnapshot((snap) => {
             snap.forEach((user) => {
-                if (post) {
-                    if (post.data().user_id === user.data().userUid) {
-                        const dataUser = user.data();
-                        callback(dataUser);
-                    }
-                } else if (firebase.auth().currentUser.uid === user.data().userUid) {
+                //  if (post) {
+                if (
+                    postUser === user.data().userUid ||
+                    (firebase.auth().currentUser.uid === user.data().userUid && !postUser)
+                ) {
                     const dataUser = user.data();
-                    callback(dataUser);
+                    callback(user.data());
                 }
+                //    }
+                //  else if (firebase.auth().currentUser.uid === user.data().userUid) {
+                //     const dataUser = user.data();
+                //     callback(dataUser);
+                // }
             });
         });
 };

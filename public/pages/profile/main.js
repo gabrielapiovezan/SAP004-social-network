@@ -23,17 +23,7 @@ export default () => {
     function addProfile(user) {
         const userData = user.data();
 
-<<<<<<< HEAD
         const template = `
-        
-        <div id="modal" class="modal disappear">
-      <div class="modal-content">
-        <span class="close close-modal">&times;</span>
-        <h2>Tem certeza que deseja deletar?</h2>
-        ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
-        ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
-=======
-    const template = `
       <div id="modal" class="modal disappear">
         <div class="modal-content">
           <span class="close close-modal">&times;</span>
@@ -41,7 +31,6 @@ export default () => {
           ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
           ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
         </div>
->>>>>>> 07fc5bcfab0e2e577d8981cd9c5a1bc8f3012999
       </div>
       <header>
         <nav role="navigation">
