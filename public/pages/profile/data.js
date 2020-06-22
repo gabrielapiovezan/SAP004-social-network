@@ -1,3 +1,4 @@
+import errorHandling from '../elementos/objetos/authError.js';
 export const dataUser = (profile) => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) profile(user);
@@ -42,7 +43,6 @@ export const fileProfile = (file, name, callback) => {
     const ref = firebase.storage().ref();
     const fileProfile = ref.child(name);
     fileProfile.put(file).then(function(snapshot) {
-        console.log(snapshot);
         callback(fileProfile.fullPath);
     });
 };
@@ -81,15 +81,65 @@ export const logout = () => {
     window.location.hash = '';
 };
 
-export const updatePassword = (newPassword) => {
-    var user = firebase.auth().currentUser;
+const reauthenticate = (currentPassword) => {
+    const user = firebase.auth().currentUser;
+    const cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+};
 
-    user
-        .updatePassword(newPassword)
+export const updatePassword = (currentPassword, newPassword, printError) => {
+    reauthenticate(currentPassword)
+        .then(() => {
+            const user = firebase.auth().currentUser;
+            user
+                .updatePassword(newPassword)
+                .then(() => {
+                    const answer = 'Senha alterada com sucesso!';
+                    printError(answer);
+                })
+                .catch((error) => {
+                    console.log(error.code);
+                    printError(errorHandling(error.code));
+                });
+        })
+        .catch((error) => {
+            printError(errorHandling(error.code));
+        });
+};
+
+export const loadProfile = (profile) => {
+    firebase
+        .firestore()
+        .collection('users')
+        .onSnapshot((snap) => {
+            snap.forEach((user) => {
+                if (firebase.auth().currentUser.uid === user.data().userUid) {
+                    profile(user);
+                }
+            });
+        });
+};
+
+export const userDelete = (user) => {
+    firebase
+        .firestore()
+        .collection('users')
+        .doc(user)
+        .delete()
         .then(function() {
-            console.log('Update successful.');
+            console.log('User successfully deleted!');
         })
         .catch(function(error) {
-            console.log(error);
+            console.error('Error removing user: ', error);
         });
+};
+
+export const updateCollection = (user, userData) => {
+    firebase.firestore().collection('users').doc(`${user}`).update({
+        photo: userData.photo,
+        userName: userData.userName,
+        //     email: userData.email,
+        profession: userData.profession,
+        age: userData.age,
+    });
 };
