@@ -20,7 +20,7 @@ export default () => {
     function addProfile(user) {
         const userData = user.data();
 
-        const template = `<div id="modal" class="modal disappear">
+    const template = `<div id="modal" class="modal disappear">
         <div class="modal-content">
           <span class="close close-modal">&times;</span>
           <h2>Tem certeza que deseja deletar?</h2>
@@ -65,7 +65,7 @@ export default () => {
         })}
       </figure>
       <h2>${userData.userName}</h2>
-      <h3>${userData.profession}</h3>
+      <h3>Profissão: ${userData.profession}</h3>
       <h4 id='print-age'></h4>
       <form class='form-profile'>
         ${button({ name: 'Alterar dados', id: 'change-profile' })}
