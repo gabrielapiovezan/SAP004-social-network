@@ -1,13 +1,13 @@
 import {
-  loadProfile,
-  dataUser,
-  updateProfile,
-  fileProfile,
-  deleteConta,
-  userDelete,
-  logout,
-  updatePassword,
-  updateCollection,
+    loadProfile,
+    dataUser,
+    updateProfile,
+    fileProfile,
+    deleteConta,
+    userDelete,
+    logout,
+    updatePassword,
+    updateCollection,
 } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
@@ -16,14 +16,14 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 export default () => {
-  const container = document.createElement('div');
-  //   container.classList.add('container-profile');
-  container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
+    const container = document.createElement('div');
+    //   container.classList.add('container-profile');
+    container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
-  function addProfile(user) {
-    const userData = user.data();
+    function addProfile(user) {
+        const userData = user.data();
 
-    const template = `
+        const template = `
       <div id="modal" class="modal disappear">
         <div class="modal-content">
           <span class="close close-modal">&times;</span>
