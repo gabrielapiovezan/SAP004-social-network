@@ -5,6 +5,7 @@ import { link } from '../elementos/objetos/link.js';
 import { image } from '../elementos/objetos/image.js';
 
 export default () => {
+
 	const container = document.createElement('div');
 	container.classList.add("container");
 
@@ -49,3 +50,4 @@ export default () => {
 
 	return container;
 }
+
