@@ -1,104 +1,6 @@
-export const logout = () => {
-    firebase.auth().signOut();
-    window.location.hash = '';
-};
-
-// export const loadPost = (
-//     //  checkedPrivacy,
-//     clearPost,
-//     addPosts,
-//     like,
-//     likeClass,
-//     deletePost,
-//     editPost,
-//     lokerPost,
-//     commenter,
-//     printComment,
-//     textareaAdaptable
-// ) => {
-//     firebase
-//         .firestore()
-//         .collection('posts')
-//         .orderBy('time', 'desc')
-//         .onSnapshot((snap) => {
-//             clearPost();
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     addPosts(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     iconVerific(post, likeClass);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     like(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     deletePost(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     editPost(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     lokerPost(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     textareaAdaptable(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     commenter(post);
-//                 }
-//             });
-//             snap.forEach((post) => {
-//                 if (
-//                     post.data().privacy === false ||
-//                     firebase.auth().currentUser.uid === post.data().user_id
-//                 ) {
-//                     printComment(post);
-//                 }
-//             });
-//         });
-// };
+export const logout = () => firebase.auth().signOut();
 
 export const loadPost = (
-    //  checkedPrivacy,
     clearPost,
     addPosts,
     like,
@@ -122,10 +24,6 @@ export const loadPost = (
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
                     addPosts(post);
-                    //   iconVerific(post, likeClass);
-                    //     like(post);
-                    //  deletePost(post);
-                    //    textareaAdaptable(post);
                 }
             });
             snap.forEach((post) => {
@@ -133,81 +31,16 @@ export const loadPost = (
                     post.data().privacy === false ||
                     firebase.auth().currentUser.uid === post.data().user_id
                 ) {
-                    //  addPosts(post);
                     iconVerific(post, likeClass);
                     like(post);
-                    deletePost(post);
                     editPost(post);
-                    textareaAdaptable(post);
                     lokerPost(post);
                     commenter(post);
                     printComment(post);
+                    textareaAdaptable(post);
+                    deletePost(post);
                 }
             });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         iconVerific(post, likeClass);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         like(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         deletePost(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         editPost(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         lokerPost(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         textareaAdaptable(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         commenter(post);
-            //     }
-            // });
-            // snap.forEach((post) => {
-            //     if (
-            //         post.data().privacy === false ||
-            //         firebase.auth().currentUser.uid === post.data().user_id
-            //     ) {
-            //         printComment(post);
-            //     }
-            // });
         });
 };
 
@@ -220,12 +53,6 @@ export const updateCollection = (post, data) => {
         text: data.text,
     });
 };
-
-// export const dataUser = (profile) => {
-//     firebase.auth().onAuthStateChanged(function(user) {
-//         if (user) profile(user.displayName, user.photoURL);
-//     });
-// };
 
 export const postDelete = (post) => {
     firebase
@@ -245,12 +72,6 @@ export const createPost = (post) => {
     firebase.firestore().collection('posts').add(post);
 };
 
-// export const updatePost = (id, post) => {
-//     return firebase.firestore().collection('posts').doc(id).update({
-//         text: post,
-//     });
-// };
-
 export const filePost = (file, name, callback, privacy) => {
     const ref = firebase.storage().ref();
     const filePostar = ref.child(name);
@@ -262,32 +83,24 @@ export const filePost = (file, name, callback, privacy) => {
 function iconVerific(post, likeClass) {
     post.data().liked.forEach((a) => {
         if (a === firebase.auth().currentUser.uid) {
-            likeClass(post.id, true);
+            likeClass(`like-${post.id}`, true);
         }
     });
     likeClass(`loker-${post.id}`, post.data().privacy);
 }
 
 export const loadUserPost = (callback, postUser) => {
-    //  let dataUser;
     firebase
         .firestore()
         .collection('users')
         .onSnapshot((snap) => {
             snap.forEach((user) => {
-                //  if (post) {
                 if (
                     postUser === user.data().userUid ||
                     (firebase.auth().currentUser.uid === user.data().userUid && !postUser)
                 ) {
-                    const dataUser = user.data();
                     callback(user.data());
                 }
-                //    }
-                //  else if (firebase.auth().currentUser.uid === user.data().userUid) {
-                //     const dataUser = user.data();
-                //     callback(dataUser);
-                // }
             });
         });
 };
