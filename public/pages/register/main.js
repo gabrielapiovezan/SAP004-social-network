@@ -10,7 +10,7 @@ export default () => {
 
   container.innerHTML =
     `<figure>
-    ${image({ src: '/pages/elementos/imagens/IMG2.png', class: 'img-login', alt: 'logo-umâmi' })}
+      ${image({ src: '/pages/elementos/imagens/IMG2.png', class: 'img-login', alt: 'logo-umâmi' })}
     </figure>
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
@@ -23,8 +23,8 @@ export default () => {
         ${input({ type: 'password', id: 'password', placeholder: 'Senha' })} 
         ${input({ type: 'password', id: 'confirm-password', placeholder: 'Confirmar senha' })} 
         ${button({ name: 'Registrar' })}
-    <div id="error" class="error"></div>
-    </form>
+        <div id="error" class="error"></div>
+      </form>
       ${link({ href: '#', name: 'Voltar', title: 'voltar', target: '_self' })}
     </div>`;
 
