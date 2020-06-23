@@ -6,32 +6,47 @@ body {
   padding: 0;
 }
 
-.flex-row {
+.flex-row,
+header,
+.profile,
+.btn-post {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .container-profile,
 .container-home,
-.container {
+.container,
+.container form,
+.posts,
+.timeline,
+.login,
+.post-box,
+.text,
+.form-profile,
+.icons-comment,
+.footer,
+.footer div {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+}
+.send-post,
+.user-post,
+.comment {
+  display: flex;
+  justify-content: space-between;
 }
 
 .img-login {
-  width: 100%;
+  width: 75%;
   min-width: 250px;
   margin-top: 50px;
 }
 
 .login {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
   padding-top: 50px;
 }
@@ -48,11 +63,6 @@ header h1,
 }
 
 .container form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
   width: 80%;
 }
 
@@ -76,8 +86,10 @@ header h1,
   width: 83%;
   background-color: #ffd932;
   font-weight: 700;
+  transition: background-color 3ms ease;
 }
 
+.button:active,
 .button:hover {
   background-color: #3c2415;
 }
@@ -97,28 +109,28 @@ header h1,
   max-width: 32px;
   max-height: 32px;
   padding: 5px;
+  transition: background-color 1ms;
 }
 
+.icon-google:active,
 .icon-google:hover {
   background-color: #dbd7d7;
-  -moz-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
 .link {
   color: #3c2415;
   margin-bottom: 30px;
+  transition: color 30ms font-weight 2s;
 }
 
+.link:active,
 .link:hover {
   font-weight: 700;
   color: #ffd932;
 }
 
 header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   background-color: #3c2415;
   width: 100%;
@@ -149,6 +161,7 @@ header h1 {
   transition: color 0.3s ease;
 }
 
+#menuToggle a:active,
 #menuToggle a:hover {
   color: #3c2415;
 }
@@ -205,11 +218,9 @@ header h1 {
 
 #menu {
   position: absolute;
-
   width: 40px;
   margin: -100px 0 0 -50px;
   padding: 125px 50px 10px;
-
   background: #ffd932;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
@@ -234,21 +245,23 @@ header h1 {
 
 .posts,
 .timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
 .profile {
-  display: flex;
-  justify-content: center;
   align-items: flex-end;
 }
 
 .profile div {
   padding: 0 0 10px 15px;
+}
+
+.profile h3 {
+  font-size: 25px;
+}
+
+.profile h4 {
+  font-size: 20px;
 }
 
 .profile h3,
@@ -274,7 +287,7 @@ figure {
 }
 
 .img-profile {
-  width: 85px;
+  width: 100px;
 }
 
 .post,
@@ -287,7 +300,6 @@ figure {
   border: solid 1px #3c2415;
   width: 90%;
   align-content: center;
-  background-color: #faf7f3;
 }
 
 .box .textarea {
@@ -308,8 +320,10 @@ figure {
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   align-self: center;
+  transition: background-color 0.5s ease;
 }
 
+.textarea:active,
 .textarea:hover {
   background-color: #faf7f3;
 }
@@ -319,8 +333,6 @@ input[type='file'] {
 }
 
 .send-post {
-  display: flex;
-  justify-content: space-between;
   margin: 10px 0 0 0;
 }
 
@@ -335,12 +347,13 @@ input[type='file'] {
 }
 
 .icon {
-  width: 27px;
+  max-width: 27px;
   padding: 0 10px 5px 3px;
 }
 
+.icon:active,
 .icon:hover {
-  width: 29px;
+  transform: scale(1.2);
 }
 
 .post {
@@ -348,10 +361,6 @@ input[type='file'] {
 }
 
 .post-box {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   list-style-type: none;
   width: 100%;
   padding: 0;
@@ -359,12 +368,9 @@ input[type='file'] {
 }
 
 .user-post {
-  display: flex;
-  justify-content: space-between;
   padding: 10px 10px;
   background-color: #ffd932;
   border-radius: 7px 7px 0 0;
-  color: #3c2415;
   align-items: center;
 }
 
@@ -391,21 +397,10 @@ input[type='file'] {
 }
 
 .btn-post {
-  display: flex;
-  align-items: center;
+  justify-content: flex-start;
 }
 
-/* .text {
-    height: auto;
-    min-height: 50px;
-    padding: 10px;
-    color: #4e4e4e;
-} */
-
 .text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: auto;
   padding: 10px;
   color: #4e4e4e;
@@ -415,8 +410,10 @@ input[type='file'] {
   resize: none;
   width: 100%;
   overflow-y: auto;
-  /* min-height: 100px; */
   border: none;
+  background-color: #faf7f3;
+  color: #363636;
+  font-size: 16px;
 }
 
 .img-post {
@@ -452,10 +449,6 @@ hr {
 }
 
 .comment {
-  display: flex;
-  justify-content: space-around;
-  /* flex-direction: column; */
-  /* background-color: #ffd932; */
   padding: 10px;
   margin-top: 10px;
 }
@@ -486,15 +479,7 @@ hr {
   background-color: transparent;
 }
 
-.icons-comment {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 90%;
 }
 
@@ -521,10 +506,6 @@ hr {
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   background-color: #ffd932;
   margin: 0;
   margin-top: 20px;
@@ -536,8 +517,6 @@ hr {
 }
 
 .footer div {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding-top: 15px;
   width: auto;
@@ -549,11 +528,6 @@ hr {
   padding: 5px, 0;
 }
 
-.icon-footer:hover {
-  height: 24px;
-  width: 24px;
-}
-
 .link-footer {
   font-size: 15px;
   font-weight: 700;
@@ -562,6 +536,7 @@ hr {
   color: #3c2415;
 }
 
+.link-footer:active,
 .link-footer:hover {
   color: #3c2415;
   text-decoration: underline;
@@ -596,6 +571,7 @@ hr {
   font-weight: bold;
 }
 
+.close:active,
 .close:hover,
 .close:focus {
   color: #000;
@@ -621,12 +597,14 @@ hr {
     top: 90px;
   }
   .img-login {
-    max-width: 500px;
-    max-height: 500px;
-    padding: 0 100px;
+    min-width: 550px;
+    padding-left: 100px;
   }
   .input {
     width: 50%;
+  }
+  .login {
+    padding-top: 70px;
   }
   .button {
     width: 52%;
@@ -636,7 +614,6 @@ hr {
   }
   header h1 {
     font-weight: normal;
-
     margin-left: 3%;
   }
   .timeline {

@@ -1,14 +1,4 @@
-import {
-  loadProfile,
-  dataUser,
-  updateProfile,
-  fileProfile,
-  deleteConta,
-  userDelete,
-  logout,
-  updatePassword,
-  updateCollection,
-} from './data.js';
+import { loadProfile, updateProfile, fileProfile, deleteAccount, logout, updatePassword, updateCollection, } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
@@ -17,22 +7,20 @@ import icon from '../elementos/objetos/icon.js';
 
 export default () => {
   const container = document.createElement('div');
-  //   container.classList.add('container-profile');
   container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
   function addProfile(user) {
     const userData = user.data();
 
-    const template = `
-        
-        <div id="modal" class="modal disappear">
-      <div class="modal-content">
-        <span class="close close-modal">&times;</span>
-        <h2>Tem certeza que deseja deletar?</h2>
-        ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
-        ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
+    const template =
+      `<div id="modal" class="modal disappear">
+        <div class="modal-content">
+          <span class="close close-modal">&times;</span>
+          <h2>Tem certeza que deseja deletar?</h2>
+          ${button({ name: 'Sim', id: 'delete-yes', class: 'close-modal' })}
+          ${button({ name: 'Cancelar', id: 'delete-no', class: 'close-modal' })}
+        </div>
       </div>
-    </div>
       <header>
         <nav role="navigation">
           <div id="menuToggle">
@@ -42,112 +30,57 @@ export default () => {
             <span></span>
             <ul id="menu">
               <li>
-                ${link({
-                  href: '#home',
-                  name: 'Voltar',
-                  title: 'voltar',
-                  target: '_self',
-                })}
+                ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self', })}
               </li>
               <li>
-                ${link({
-                  id: 'logout-btn',
-                  name: 'Sair',
-                  title: 'deslogar',
-                  target: '_self',
-                })}
+                ${link({ id: 'logout-btn', name: 'Sair', title: 'deslogar', target: '_self', })}
               </li>
             </ul>
           </div>
         </nav>
         <h1> &lt; Umâmi &gt; </h1>
         <figure>
-          ${image({
-            src: '/pages/elementos/imagens/logo.png',
-            class: 'img-header',
-            alt: 'logo-umâmi',
-          })}
+          ${image({ src: '/pages/elementos/imagens/logo.png', class: 'img-header', alt: 'logo-umâmi', })}
         </figure>
       </header>
-  ${image({
-    src: '/pages/elementos/imagens/fundo.png',
-    class: 'disappear image-back',
-  })}
-    <h2>Perfil</h2>
-    
+      ${image({ src: '/pages/elementos/imagens/fundo.png', class: 'disappear image-back', })}
+      <h2>Perfil</h2>
       <figure>
-        ${image({
-          id: 'photo',
-          alt: 'foto do usuário',
-          class: 'img-profile-change',
-          src: userData.photo,
-        })}
+        ${image({ id: 'photo', alt: 'foto do usuário', class: 'img-profile-change', src: userData.photo, })}
       </figure>
       <h2>${userData.userName}</h2>
       <h3>${userData.profession}</h3>
-      <h4>${userData.age}</h4>
+      <h4 id='print-age'></h4>
       <form class='form-profile'>
-      ${button({ name: 'Alterar dados', id: 'change-profile' })}
-      ${button({ name: 'Configurações da conta', id: 'change-password' })}
-      <div id='profile-div' class='disappear'>
-      <div class='flex-row'>
-        <input type="file" id="file" accept="image/*">
-          <label for="file">
-            ${image({
-              id: 'img-upload',
-              class: 'icon',
-              src: './pages/elementos/icones/img-1.png',
-            })}
-          </label>
-    ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
-  </div>
-        
-          ${input({
-            type: 'name',
-            id: 'name',
-            placeholder: ' Nome',
-            value: `${userData.userName}`,
-          })}
-          ${input({
-            type: 'email',
-            id: 'email',
-            placeholder: 'E-mail',
-            value: `${userData.email}`,
-          })}
+        ${button({ name: 'Alterar dados', id: 'change-profile' })}
+        ${button({ name: 'Configurações da conta', id: 'change-password' })}
+        <div id='profile-div' class='disappear'>
+          <div class='flex-row'>
+            <input type="file" id="file" accept="image/*">
+            <label for="file">
+              ${image({ id: 'img-upload', class: 'icon', src: './pages/elementos/icones/img-1.png', })}
+            </label>
+            ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
+          </div>
+          ${input({ type: 'text', id: 'name', placeholder: ' Nome', value: `${userData.userName}`, })}
+          ${input({ type: 'email', id: 'email', placeholder: 'E-mail', value: `${userData.email}`, })}
           ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
-          ${input({
-            type: 'text',
-            id: 'profession',
-            placeholder: 'Profissão',
-            value: `${userData.profession}`,
-          })}
-    ${button({ name: 'Salvar alterações', id: 'save-profile' })}
-    ${button({ name: 'Cancelar', id: 'cancel-profile' })}
-    
-    </div>
-    <div id='password-div' class='disappear'>
-    ${input({
-      type: 'password',
-      id: 'current-password',
-      placeholder: 'Senha atual',
-    })} 
-    ${input({
-      type: 'password',
-      id: 'new-password',
-      placeholder: 'Nova senha',
-    })}
-    ${input({
-      type: 'password',
-      id: 'confirm-password',
-      placeholder: 'Confirme a senha',
-    })}
-    <div id="error" class="error"></div>
-    ${button({ name: 'Enviar', id: 'save-password' })}
-    ${button({ name: 'Cancelar', id: 'cancel-password' })}
-    ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'btn-delete' })}
-  </div>
-        </form>
-  ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
+          ${input({ type: 'text', id: 'profession', placeholder: 'Profissão', value: `${userData.profession}`, })}
+          ${button({ name: 'Salvar alterações', id: 'save-profile' })}
+          ${button({ name: 'Cancelar', id: 'cancel-profile' })}
+        </div>
+        <div id='password-div' class='disappear'>
+          ${input({ type: 'password', id: 'current-password', placeholder: 'Senha atual', })} 
+          ${input({ type: 'password', id: 'new-password', placeholder: 'Nova senha', })}
+          ${input({ type: 'password', id: 'confirm-password', placeholder: 'Confirme a senha', })}
+        <div id="error" class="error"></div>
+        ${button({ name: 'Enviar', id: 'save-password' })}
+        ${button({ name: 'Cancelar', id: 'cancel-password' })}
+        ${button({ name: 'Deletar a conta', id: 'delete-profile', class: 'btn-delete' })}
+      </div>
+      </form>
+      ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}`;
+
     container.querySelector('#profile-template').innerHTML = template;
 
     container.querySelector('#file').addEventListener('change', (event) => {
@@ -198,37 +131,26 @@ export default () => {
       container.querySelector('#change-profile').classList.remove('disappear');
       container.querySelector('#change-password').classList.remove('disappear');
     });
-    // // function profile(user) {
-    // container.querySelector('#name').value = userData.userName;
-    // container.querySelector('#email').value = userData.email;
-    // container.querySelector('#profession').value = userData.profession;
-    // // container.querySelector('#password').value = user.password;
-    // container.querySelector('#age').value = userData.age;
-    // container.querySelector('#photo').src = userData.photo;
 
     container.querySelector('#save-profile').addEventListener('click', (event) => {
       event.preventDefault();
-      const fileInpxut = container.querySelector('#file');
-      if (fileInpxut.files[0]) {
-        fileProfile(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveProfile);
+      const fileInput = container.querySelector('#file');
+      if (fileInput.files[0]) {
+        fileProfile(fileInput.files[0], `images${fileInput.files[0].name}`, saveProfile);
       } else {
         saveProfile(null);
       }
 
       function saveProfile(urlFile) {
         const profile = {
-          photoURL: urlFile
-            ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
-            : firebase.auth().currentUser.photoURL,
+          photoURL: urlFile ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` : firebase.auth().currentUser.photoURL,
           displayName: container.querySelector('#name').value,
           uid: firebase.auth().currentUser.uid,
         };
         userData.photo = profile.photoURL;
         userData.userName = profile.displayName;
-        //  userData.userUid = profile.uid;
         userData.profession = container.querySelector('#profession').value;
         userData.age = container.querySelector('#age').value;
-        //userData.email = firebase.auth().currentUser.email;
         updateCollection(user.id, userData);
         updateProfile(profile, redirectToHome);
       }
@@ -238,13 +160,13 @@ export default () => {
       window.location.hash = 'home';
     }
 
-    function modal(callback1, callback2, user) {
+    function modal() {
       const modal = container.querySelector('#modal');
       modal.classList.remove('disappear');
       container.querySelector('#delete-yes').addEventListener('click', () => {
-        callback1();
-        callback2(user);
+        removeAccount();
       });
+
       window.addEventListener('dblclick', (event) => {
         if (event.target === modal) {
           modal.classList.add('disappear');
@@ -257,13 +179,16 @@ export default () => {
         });
       });
     }
+
     function removeAccount() {
-      deleteConta(redirectToLogin);
+      deleteAccount(user.id, redirectToLogin);
     }
+
     container.querySelector('#delete-profile').addEventListener('click', (event) => {
       event.preventDefault();
-      modal(removeAccount, userDelete, user.id);
+      modal();
     });
+
     function redirectToLogin() {
       window.location.hash = 'login';
     }
@@ -279,27 +204,36 @@ export default () => {
       const newPassword = container.querySelector('#new-password').value;
       const confirmPassword = container.querySelector('#confirm-password').value;
       const error = 'As senhas devem ser iguais.';
-      newPassword === confirmPassword
-        ? updatePassword(currentPassword, newPassword, printError)
-        : printError(error);
+      newPassword === confirmPassword ? updatePassword(currentPassword, newPassword, printError) : printError(error);
     });
 
     const printError = (answer) => {
       container.querySelector('#error').innerHTML = answer;
     };
 
-    // dataUser(profile);
+    const age = () => {
+      const birth = new Date(userData.age);
+      const dayBirth = birth.getUTCDate();
+      const monthBirth = birth.getUTCMonth() + 1;
+      const today = new Date();
+      const dayToday = today.getUTCDate();
+      const monthToday = today.getUTCMonth() + 1;
+      let difference = '';
 
-    //     // function profile(user) {
-    //     container.querySelector('#name').value = userData.userName;
-    //     container.querySelector('#email').value = userData.email;
-    //     container.querySelector('#profession').value = userData.profession;
-    //     // container.querySelector('#password').value = user.password;
-    //     container.querySelector('#age').value = userData.age;
-    //     container.querySelector('#photo').src = userData.photo;
-    //   }
+      if (monthToday < monthBirth || (monthToday === monthBirth && dayToday < dayBirth)) {
+        difference += today.getFullYear() - birth.getFullYear() - 1;
+      } else {
+        difference += today.getFullYear() - birth.getFullYear();
+      }
+      return difference;
+    };
+
+    const printAge = () => {
+      container.querySelector('#print-age').innerHTML = `${age()} anos`;
+    };
+
+    printAge();
   }
-
   loadProfile(addProfile);
 
   return container;
