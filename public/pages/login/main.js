@@ -8,9 +8,8 @@ export default () => {
     const container = document.createElement('div');
     container.classList.add('container');
 
-    container.innerHTML = `<figure>
-				${image({ src: '/pages/elementos/imagens/IMG2.png', class: 'img-login', alt: 'logo-umâmi' })}
-			</figure>
+    container.innerHTML = `
+				${image({ src: '/pages/elementos/imagens/IMG3.png', class: 'img-login', alt: 'logo-umâmi' })}
 			<div class="login">
 				<h1> &lt; Umâmi &gt; </h1>
 				<h2>Bem vindo!</h2>
