@@ -212,14 +212,14 @@ export default () => {
     }
 
     function saveFirebase(urlFile, privacy) {
-        const postText = container.querySelector('#post-text').value;
+        const postText = container.querySelector('#post-text');
         const post = {
             url_file: urlFile ?
                 `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` :
                 null,
             name: firebase.auth().currentUser.displayName,
             photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-            text: postText,
+            text: postText.value,
             user_id: firebase.auth().currentUser.uid,
             liked: [],
             comments: [],
@@ -227,13 +227,16 @@ export default () => {
             date: new Date().getTime(),
             privacy: privacy,
         };
-        container.querySelector('#post-text').value = '';
-        container.querySelector('#posts').innerHTML = '';
-        container.querySelector('#photo').src = '';
-        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+        postText.value = '';
+        clearPostBox();
         createPost(post);
     }
-
+    const clearPostBox = () => {
+        container.querySelector('#file').value = '';
+        container.querySelector('#photo').src = '';
+        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+        container.querySelector('#iconremove-photo').classList.add('disappear');
+    };
     container.querySelector('#logout-btn').addEventListener('click', (event) => {
         event.preventDefault();
         logout();
@@ -241,11 +244,10 @@ export default () => {
     });
 
     const likeClass = (id, valid) => {
-        let adress = container.querySelector(`#icon-variable-${id}`).src;
-
+        const icon = container.querySelector(`#icon-variable-${id}`);
+        let adress = icon.src;
         valid === true ? (adress = adress.replace('1', '2')) : (adress = adress.replace('2', '1'));
-
-        container.querySelector(`#icon-variable-${id}`).src = adress;
+        icon.src = adress;
     };
 
     function renderImg(url_file) {
@@ -265,10 +267,7 @@ export default () => {
 
     container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
         event.preventDefault();
-        container.querySelector('#file').value = '';
-        container.querySelector('#photo').src = '';
-        container.querySelector('#iconremove-photo').classList.add('disappear');
-        container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+        clearPostBox();
     });
 
     function dateAndHour(date) {
@@ -316,7 +315,14 @@ export default () => {
         </div>
         </div>
         <div class="text">
-          <textarea id="text${post.id}" rows="auto" disabled> ${post.data().text} </textarea>  
+          ${textarea({
+            id: `text${post.id}`,
+            type: 'text',
+            value: `${post.data().text}`,
+            size: '500',
+            placeholder: 'Insira seu comentário!',
+            class: 'textarea-comment',
+          })}
           ${renderImg(post.data().url_file)}
         </div>
         <hr não apagar linha divisória>
@@ -348,6 +354,7 @@ export default () => {
         </div>
       </div>`;
     container.querySelector('#posts').innerHTML += postsTemplate;
+    container.querySelector(`#text${post.id}`).setAttribute('disabled', true);
     const getDataUser = (dataUser) => {
       container.querySelector(`#photo${post.id}`).src = dataUser.photo;
       container.querySelector(
@@ -361,7 +368,7 @@ export default () => {
     let postUser = post.data().user_id;
     if (postUser === firebase.auth().currentUser.uid) {
       loker.classList.remove('disappear');
-      container.querySelector(`#icon-variable-loker-${post.id}`).addEventListener('click', () => {
+      loker.addEventListener('click', () => {
         let data = post.data();
         data.privacy === true ? (data.privacy = false) : (data.privacy = true);
         updateCollection(post.id, data);
@@ -411,16 +418,16 @@ export default () => {
     container.querySelector(`#icon-variable-like-${post.id}`).addEventListener('click', (event) => {
       event.preventDefault();
       let data = post.data();
-      let valid = 1;
+      let valid = true;
 
       for (let i in data.liked) {
         if (data.liked[i] === firebase.auth().currentUser.uid) {
           data.liked.splice(i, 1);
-          valid = -1;
+          valid = false;
         }
       }
 
-      if (valid === 1) {
+      if (valid === true) {
         data.liked.push(firebase.auth().currentUser.uid);
       }
       updateCollection(post.id, data);
@@ -434,56 +441,34 @@ export default () => {
     container.querySelector('#profession').innerHTML = `${dataUser.profession}`;
   }
 
-  let editing = false;
-
   const editPost = (post) => {
     const data = post.data();
     const edit = container.querySelector(`#iconedit-${post.id} `);
     const save = container.querySelector(`#iconsave-${post.id} `);
-
+    const text = container.querySelector(`#text${post.id} `);
+    const icon = container.querySelector(`#icon${post.id} `);
     let postEdit = post.data().user_id;
     if (postEdit === firebase.auth().currentUser.uid) {
       edit.classList.remove('disappear');
 
       edit.addEventListener('click', (event) => {
         event.preventDefault();
-        if (!editing) {
-          editing = true;
+        text.removeAttribute('disabled');
 
-          container.querySelector(`#text${post.id} `).classList.add('disappear');
+        edit.classList.add('disappear');
+        save.classList.remove('disappear');
+        icon.classList.add('disappear');
 
-          const newPost = document.createElement('div');
-          newPost.id = 'edit-post';
-          const textEdit = textarea({
-            id: 'edit-post-text',
-            type: 'text',
-            size: '500',
-            placeholder: 'Compartilhe sua publicação aqui!',
-            value: post.data().text,
-          });
-          newPost.innerHTML = textEdit;
+        save.addEventListener('click', async () => {
+          data.text = text.value;
+          save.classList.add('disappear');
+          edit.classList.remove('disappear');
+          icon.classList.remove('disappear');
+          text.setAttribute('disabled', true);
+          text.classList.remove('disappear');
 
-          container.querySelector(`#text${post.id} `).after(newPost);
-
-          edit.classList.add('disappear');
-          save.classList.remove('disappear');
-          container.querySelector(`#icon${post.id} `).classList.add('disappear');
-
-          save.addEventListener('click', async () => {
-            data.text = newPost.firstElementChild.value;
-            container.querySelector(`#iconsave-${post.id} `).classList.add('disappear');
-            container.querySelector(`#iconedit-${post.id} `).classList.remove('disappear');
-            container.querySelector(`#icon${post.id} `).classList.remove('disappear');
-
-            container.querySelector(`#text${post.id} `).innerHTML = newPost.firstElementChild.value;
-            container.querySelector(`#text${post.id}`).classList.remove('disappear');
-            container.querySelector('#edit-post').remove();
-
-            updateCollection(post.id, data);
-
-            editing = false;
-          });
-        } else alert('Você já está editando!');
+          updateCollection(post.id, data);
+        });
       });
     }
   };
