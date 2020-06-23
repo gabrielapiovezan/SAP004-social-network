@@ -427,7 +427,7 @@ export default () => {
         }
       }
 
-      if (valid === true) {
+      if (valid) {
         data.liked.push(firebase.auth().currentUser.uid);
       }
       updateCollection(post.id, data);
