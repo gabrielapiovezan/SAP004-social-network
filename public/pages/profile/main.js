@@ -1,11 +1,11 @@
 import {
-  loadProfile,
-  updateProfile,
-  fileProfile,
-  deleteAccount,
-  logout,
-  updatePassword,
-  updateCollection,
+    loadProfile,
+    updateProfile,
+    fileProfile,
+    deleteAccount,
+    logout,
+    updatePassword,
+    updateCollection,
 } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
@@ -14,11 +14,11 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 export default () => {
-  const container = document.createElement('div');
-  container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
+    const container = document.createElement('div');
+    container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
-  function addProfile(user) {
-    const userData = user.data();
+    function addProfile(user) {
+        const userData = user.data();
 
     const template = `<div id="modal" class="modal disappear">
         <div class="modal-content">
@@ -268,7 +268,7 @@ export default () => {
     };
 
     const printAge = () => {
-      container.querySelector('#print-age').innerHTML = `Idade: ${age()} anos`;
+      !isNaN(age()) ? (container.querySelector('#print-age').innerHTML = `${age()} anos`) : '';
     };
 
     printAge();

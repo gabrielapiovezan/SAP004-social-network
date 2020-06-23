@@ -5,10 +5,10 @@ import { link } from '../elementos/objetos/link.js';
 import { image } from '../elementos/objetos/image.js';
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add('container');
+    const container = document.createElement('div');
+    container.classList.add('container');
 
-  container.innerHTML = `
+    container.innerHTML = `
 			${image({ src: '/pages/elementos/imagens/IMG3.png', class: 'img-login', alt: 'logo-umâmi' })}
 			<div class="login">
 				<h1> &lt; Umâmi &gt; </h1>
@@ -34,25 +34,25 @@ export default () => {
         })}</p>
 			</div>`;
 
-  container.querySelector('#login-email').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const email = container.querySelector('#email').value;
-    const password = container.querySelector('#password').value;
-    login(email, password, printErrorLogin, redirectHome);
-  });
+    container.querySelector('#login-email').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const email = container.querySelector('#email').value;
+        const password = container.querySelector('#password').value;
+        login(email, password, printErrorLogin, redirectHome);
+    });
 
-  const printErrorLogin = (answer) => {
-    container.querySelector('#error').innerHTML = answer;
-  };
+    const printErrorLogin = (answer) => {
+        container.querySelector('#error').innerHTML = answer;
+    };
 
-  container.querySelector('#gmailBtn').addEventListener('click', (event) => {
-    event.preventDefault();
-    loginGoogle(redirectHome);
-  });
+    container.querySelector('#gmailBtn').addEventListener('click', (event) => {
+        event.preventDefault();
+        loginGoogle(redirectHome);
+    });
 
-  function redirectHome() {
-    window.location.hash = 'home';
-  }
+    function redirectHome() {
+        window.location.hash = 'home';
+    }
 
-  return container;
+    return container;
 };

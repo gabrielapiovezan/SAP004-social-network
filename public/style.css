@@ -16,9 +16,9 @@ hr,
 header,
 .profile,
 .btn-post {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .container,
@@ -147,9 +147,9 @@ header,
 }
 
 .link {
-  color: #3c2415;
-  margin-bottom: 30px;
-  transition: color 30ms font-weight 2s;
+    color: #3c2415;
+    margin-bottom: 30px;
+    transition: color 30ms font-weight 2s;
 }
 
 .link:active,
@@ -169,8 +169,8 @@ header {
 }
 
 header h1 {
-  font-weight: normal;
-  margin-left: 12%;
+    font-weight: normal;
+    margin-left: 12%;
 }
 
 #menuToggle {
@@ -191,7 +191,7 @@ header h1 {
 
 #menuToggle a:active,
 #menuToggle a:hover {
-  color: #3c2415;
+    color: #3c2415;
 }
 
 #menuToggle input {
@@ -219,14 +219,15 @@ header h1 {
     background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
   width: 33px;
   z-index: 1;
+
 }
 
 #menuToggle span:first-child {
-  transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
 }
 
 #menuToggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
 }
 
 #menuToggle input:checked ~ span {
@@ -235,13 +236,13 @@ header h1 {
   transform: rotate(45deg) translate(-2px, -1px);
 }
 
-#menuToggle input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+#menuToggle input:checked~span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-#menuToggle input:checked ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
+#menuToggle input:checked~span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
 }
 
 #menu {
@@ -262,8 +263,8 @@ header h1 {
   padding: 5px 10px;
 }
 
-#menuToggle input:checked ~ ul {
-  transform: none;
+#menuToggle input:checked~ul {
+    transform: none;
 }
 
 .login {
@@ -297,24 +298,24 @@ header h1,
 }
 
 .profile {
-  align-items: flex-end;
+    align-items: flex-end;
 }
 
 .profile div {
-  padding: 0 0 10px 15px;
+    padding: 0 0 10px 15px;
 }
 
 .profile h3 {
-  font-size: 25px;
+    font-size: 25px;
 }
 
 .profile h4 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .profile h3,
 h4 {
-  margin: 0;
+    margin: 0;
 }
 
 .posts,
@@ -335,7 +336,7 @@ h4 {
 }
 
 .box .textarea {
-  min-height: 70px;
+    min-height: 70px;
 }
 
 .textarea {
@@ -353,19 +354,19 @@ h4 {
 
 .textarea:active,
 .textarea:hover {
-  background-color: #faf7f3;
+    background-color: #faf7f3;
 }
 
 input[type='file'] {
-  display: none;
+    display: none;
 }
 
 .send-post {
-  margin: 10px 0 0 0;
+    margin: 10px 0 0 0;
 }
 
 .post {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 .post-box {
@@ -409,7 +410,7 @@ input[type='file'] {
 }
 
 .btn-post {
-  justify-content: flex-start;
+    justify-content: flex-start;
 }
 
 .text {
@@ -477,7 +478,7 @@ hr {
 
 .comment textarea,
 .comment textarea:hover {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .container-profile h2 {
@@ -486,7 +487,7 @@ hr {
 }
 
 .form-profile {
-  width: 90%;
+    width: 90%;
 }
 
 .form-profile input {
@@ -521,9 +522,9 @@ hr {
 }
 
 .footer div {
-  margin: 0;
-  padding-top: 15px;
-  width: auto;
+    margin: 0;
+    padding-top: 15px;
+    width: auto;
 }
 
 .link-footer {
@@ -536,8 +537,8 @@ hr {
 
 .link-footer:active,
 .link-footer:hover {
-  color: #3c2415;
-  text-decoration: underline;
+    color: #3c2415;
+    text-decoration: underline;
 }
 
 .modal {
@@ -563,10 +564,10 @@ hr {
 }
 
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:active,
@@ -578,7 +579,7 @@ hr {
 }
 
 .disappear {
-  display: none;
+    display: none;
 }
 
 @media only screen and (min-width: 770px) {
