@@ -1,4 +1,12 @@
-import { loadProfile, updateProfile, fileProfile, deleteAccount, logout, updatePassword, updateCollection, } from './data.js';
+import {
+    loadProfile,
+    updateProfile,
+    fileProfile,
+    deleteAccount,
+    logout,
+    updatePassword,
+    updateCollection,
+} from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
 import { input } from '../elementos/objetos/input.js';
@@ -6,14 +14,13 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 export default () => {
-  const container = document.createElement('div');
-  container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
+    const container = document.createElement('div');
+    container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
-  function addProfile(user) {
-    const userData = user.data();
+    function addProfile(user) {
+        const userData = user.data();
 
-    const template =
-      `<div id="modal" class="modal disappear">
+        const template = `<div id="modal" class="modal disappear">
         <div class="modal-content">
           <span class="close close-modal">&times;</span>
           <h2>Tem certeza que deseja deletar?</h2>
@@ -30,23 +37,32 @@ export default () => {
             <span></span>
             <ul id="menu">
               <li>
-                ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self', })}
+                ${link({ href: '#home', name: 'Voltar', title: 'voltar', target: '_self' })}
               </li>
               <li>
-                ${link({ id: 'logout-btn', name: 'Sair', title: 'deslogar', target: '_self', })}
+                ${link({ id: 'logout-btn', name: 'Sair', title: 'deslogar', target: '_self' })}
               </li>
             </ul>
           </div>
         </nav>
         <h1> &lt; Umâmi &gt; </h1>
         <figure>
-          ${image({ src: '/pages/elementos/imagens/logo.png', class: 'img-header', alt: 'logo-umâmi', })}
+          ${image({
+            src: '/pages/elementos/imagens/logo.png',
+            class: 'img-header',
+            alt: 'logo-umâmi',
+          })}
         </figure>
       </header>
-      ${image({ src: '/pages/elementos/imagens/fundo.png', class: 'disappear image-back', })}
+      ${image({ src: '/pages/elementos/imagens/fundo.png', class: 'disappear image-back' })}
       <h2>Perfil</h2>
       <figure>
-        ${image({ id: 'photo', alt: 'foto do usuário', class: 'img-profile-change', src: userData.photo, })}
+        ${image({
+          id: 'photo',
+          alt: 'foto do usuário',
+          class: 'img-profile-change',
+          src: userData.photo,
+        })}
       </figure>
       <h2>${userData.userName}</h2>
       <h3>${userData.profession}</h3>
@@ -58,21 +74,40 @@ export default () => {
           <div class='flex-row'>
             <input type="file" id="file" accept="image/*">
             <label for="file">
-              ${image({ id: 'img-upload', class: 'icon', src: './pages/elementos/icones/img-1.png', })}
+              ${image({
+                id: 'img-upload',
+                class: 'icon',
+                src: './pages/elementos/icones/img-1.png',
+              })}
             </label>
             ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
           </div>
-          ${input({ type: 'text', id: 'name', placeholder: ' Nome', value: `${userData.userName}`, })}
-          ${input({ type: 'email', id: 'email', placeholder: 'E-mail', value: `${userData.email}`, })}
+          ${input({
+            type: 'text',
+            id: 'name',
+            placeholder: ' Nome',
+            value: `${userData.userName}`,
+          })}
+          ${input({
+            type: 'email',
+            id: 'email',
+            placeholder: 'E-mail',
+            value: `${userData.email}`,
+          })}
           ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
-          ${input({ type: 'text', id: 'profession', placeholder: 'Profissão', value: `${userData.profession}`, })}
+          ${input({
+            type: 'text',
+            id: 'profession',
+            placeholder: 'Profissão',
+            value: `${userData.profession}`,
+          })}
           ${button({ name: 'Salvar alterações', id: 'save-profile' })}
           ${button({ name: 'Cancelar', id: 'cancel-profile' })}
         </div>
         <div id='password-div' class='disappear'>
-          ${input({ type: 'password', id: 'current-password', placeholder: 'Senha atual', })} 
-          ${input({ type: 'password', id: 'new-password', placeholder: 'Nova senha', })}
-          ${input({ type: 'password', id: 'confirm-password', placeholder: 'Confirme a senha', })}
+          ${input({ type: 'password', id: 'current-password', placeholder: 'Senha atual' })} 
+          ${input({ type: 'password', id: 'new-password', placeholder: 'Nova senha' })}
+          ${input({ type: 'password', id: 'confirm-password', placeholder: 'Confirme a senha' })}
         <div id="error" class="error"></div>
         ${button({ name: 'Enviar', id: 'save-password' })}
         ${button({ name: 'Cancelar', id: 'cancel-password' })}
@@ -143,7 +178,9 @@ export default () => {
 
       function saveProfile(urlFile) {
         const profile = {
-          photoURL: urlFile ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media` : firebase.auth().currentUser.photoURL,
+          photoURL: urlFile
+            ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
+            : firebase.auth().currentUser.photoURL,
           displayName: container.querySelector('#name').value,
           uid: firebase.auth().currentUser.uid,
         };
@@ -204,7 +241,9 @@ export default () => {
       const newPassword = container.querySelector('#new-password').value;
       const confirmPassword = container.querySelector('#confirm-password').value;
       const error = 'As senhas devem ser iguais.';
-      newPassword === confirmPassword ? updatePassword(currentPassword, newPassword, printError) : printError(error);
+      newPassword === confirmPassword
+        ? updatePassword(currentPassword, newPassword, printError)
+        : printError(error);
     });
 
     const printError = (answer) => {
@@ -229,7 +268,7 @@ export default () => {
     };
 
     const printAge = () => {
-      container.querySelector('#print-age').innerHTML = `${age()} anos`;
+      !isNaN(age()) ? (container.querySelector('#print-age').innerHTML = `${age()} anos`) : '';
     };
 
     printAge();
