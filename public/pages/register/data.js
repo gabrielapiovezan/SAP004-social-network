@@ -3,7 +3,7 @@ import errorHandling from '../elementos/objetos/authError.js';
 export const register = (user, password, printErrorLogin) => {
     if (user.userName && user.profession && user.age) {
         firebase.auth().createUserWithEmailAndPassword(user.email, password)
-            .then(function (setUser) {
+            .then(function () {
                 firebase.auth().currentUser.updateProfile({
                     displayName: user.userName,
                 });
