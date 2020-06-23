@@ -22,7 +22,7 @@ body {
 }
 
 .img-login {
-    width: 100%;
+    width: 75%;
     min-width: 250px;
     margin-top: 50px;
 }
@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    padding-top: 50px;
+    padding-top: 25px;
 }
 
 header h1,
