@@ -122,7 +122,7 @@ export default () => {
       event.preventDefault();
       const output = container.querySelector('#photo');
       output.src = URL.createObjectURL(event.target.files[0]);
-      userData.photo = output.src;
+      document.querySelector('#photo').src = output.src;
       container.querySelector('#iconremove-photo').classList.remove('disappear');
       output.onload = function () {
         URL.revokeObjectURL(output.src);
@@ -133,7 +133,7 @@ export default () => {
     container.querySelector('#iconremove-photo').addEventListener('click', (event) => {
       event.preventDefault();
       container.querySelector('#file').value = '';
-      userData.photo = './pages/elementos/imagens/chefe.png';
+      userData.photo = userData.photo || './pages/elementos/imagens/chefe.png';
       container.querySelector('#photo').src = userData.photo;
       container.querySelector('#iconremove-photo').classList.add('disappear');
       container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
@@ -148,9 +148,12 @@ export default () => {
 
     container.querySelector('#cancel-profile').addEventListener('click', (event) => {
       event.preventDefault();
+      container.querySelector('#file').value = '';
       container.querySelector('#profile-div').classList.add('disappear');
       container.querySelector('#change-profile').classList.remove('disappear');
       container.querySelector('#change-password').classList.remove('disappear');
+      container.querySelector('#img-upload').src = './pages/elementos/icones/img-1.png';
+      container.querySelector('#iconremove-photo').classList.add('disappear');
     });
 
     container.querySelector('#change-password').addEventListener('click', (event) => {
