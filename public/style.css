@@ -140,6 +140,7 @@ header,
 .button:active,
 .button:hover {
     background-color: #3c2415;
+    cursor: pointer;
 }
 
 .btn-delete {
