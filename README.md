@@ -65,7 +65,9 @@ As cores principais foram escolhidas para trazer a sensação de conforto e acol
 <img src='./readme/desktop1.png' width='780px' alt='desktop 1'> 
 </p>
 
-[print timeline]
+<p align='center'>
+<img src='./readme/desktop2.png' width='780px' alt='desktop 2'> 
+</p>
 
 ### Cores
 
