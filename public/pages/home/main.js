@@ -167,7 +167,7 @@ export default () => {
           </span>
         <div>
           ${link({
-            href: 'https://marianambarros.github.io/portifolio/src/',
+            href: 'https://marianambarros.github.io/portifolio/',
             name: 'Mariana Barros',
             class: 'link-footer',
             title: 'Mariana Barros',
@@ -322,7 +322,7 @@ export default () => {
             type: 'text',
             value: `${post.data().text}`,
             size: '500',
-            placeholder: 'Insira seu comentário!',
+            placeholder: '',
             class: 'textarea-comment',
           })}
           ${renderImg(post.data().url_file)}
