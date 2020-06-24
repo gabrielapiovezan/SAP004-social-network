@@ -40,9 +40,7 @@ export default () => {
     const password = container.querySelector('#password').value;
     const confirmPassword = container.querySelector('#confirm-password').value;
     const error = 'As senhas não conferem.';
-    password === confirmPassword
-      ? register(user, password, printErrorLogin)
-      : printErrorLogin(error);
+    password === confirmPassword ? register(user, password, printErrorLogin) : printErrorLogin(error);
     window.location.hash = '#login';
   });
 
