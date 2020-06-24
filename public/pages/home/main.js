@@ -90,6 +90,7 @@ export default () => {
             type: 'text',
             size: '500',
             placeholder: 'Compartilhe sua publicação aqui!',
+            value: null,
           })}
           ${image({
             id: 'icon-variable-loker',
@@ -203,7 +204,8 @@ export default () => {
         });
         container.querySelector('#post-btn').addEventListener('click', (event) => {
             event.preventDefault();
-            if (container.querySelector(`#post-text`).value || container.querySelector('#file')) {
+            console.log(container.querySelector('#file').value);
+            if (container.querySelector(`#post-text`).value || container.querySelector('#file').value) {
                 const fileInpxut = container.querySelector('#file');
                 if (fileInpxut.files[0]) {
                     filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase, privacy);
@@ -222,7 +224,7 @@ export default () => {
                 null,
             name: firebase.auth().currentUser.displayName,
             photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-            text: postText.value,
+            text: postText.value || '',
             user_id: firebase.auth().currentUser.uid,
             liked: [],
             comments: [],
@@ -481,15 +483,18 @@ export default () => {
     });
     const data = post.data();
     container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
-      const comment = {
-        text: container.querySelector(`#comment-text${post.id}`).value,
-        user_id: firebase.auth().currentUser.uid,
-        user_name: firebase.auth().currentUser.displayName,
-        photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-        date: new Date().getTime(),
-      };
-      data.comments.unshift(comment);
-      updateCollection(post.id, data);
+      const message = container.querySelector(`#comment-text${post.id}`).value;
+      if (message) {
+        const comment = {
+          text: message,
+          user_id: firebase.auth().currentUser.uid,
+          user_name: firebase.auth().currentUser.displayName,
+          photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
+          date: new Date().getTime(),
+        };
+        data.comments.unshift(comment);
+        updateCollection(post.id, data);
+      }
     });
   };
 
@@ -590,7 +595,6 @@ export default () => {
     container.querySelector('#posts').innerHTML = '';
   };
 
-  isLogin();
   createNewPost();
   loadUserPost(profile);
   loadPost(
@@ -605,5 +609,7 @@ export default () => {
     printComment,
     textareaAdaptable
   );
+
+  isLogin();
   return container;
 };
