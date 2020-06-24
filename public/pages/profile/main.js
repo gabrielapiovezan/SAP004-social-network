@@ -1,11 +1,11 @@
 import {
-  loadProfile,
-  updateProfile,
-  fileProfile,
-  deleteAccount,
-  logout,
-  updatePassword,
-  updateCollection,
+    loadProfile,
+    updateProfile,
+    fileProfile,
+    deleteAccount,
+    logout,
+    updatePassword,
+    updateCollection,
 } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
@@ -14,13 +14,13 @@ import { link } from '../elementos/objetos/link.js';
 import icon from '../elementos/objetos/icon.js';
 
 export default () => {
-  const container = document.createElement('div');
-  container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
+    const container = document.createElement('div');
+    container.innerHTML = `<div id="profile-template" class="container-profile"></div>`;
 
-  function addProfile(user) {
-    const userData = user.data();
+    function addProfile(user) {
+        const userData = user.data();
 
-    const template = `<div id="modal" class="modal disappear">
+        const template = `<div id="modal" class="modal disappear">
         <div class="modal-content">
           <span class="close close-modal">&times;</span>
           <h2>Tem certeza que deseja deletar?</h2>
@@ -48,24 +48,24 @@ export default () => {
         <h1> &lt; Umâmi &gt; </h1>
         <figure>
           ${image({
-      src: '/pages/elementos/imagens/logo.png',
-      class: 'img-header',
-      alt: 'logo-umâmi',
-    })}
+            src: '/pages/elementos/imagens/logo.png',
+            class: 'img-header',
+            alt: 'logo-umâmi',
+          })}
         </figure>
       </header>
       ${image({ src: '/pages/elementos/imagens/fundo.png', class: 'disappear image-back' })}
       <h2>Perfil</h2>
       <figure>
         ${image({
-      id: 'photo',
-      alt: 'foto do usuário',
-      class: 'img-profile-change',
-      src: userData.photo,
-    })}
+          id: 'photo',
+          alt: 'foto do usuário',
+          class: 'img-profile-change',
+          src: userData.photo,
+        })}
       </figure>
       <h2>${userData.userName}</h2>
-      <h3>Profissão: ${userData.profession}</h3>
+      <h3>${userData.profession}</h3>
       <h4 id='print-age'></h4>
       <form class='form-profile'>
         ${button({ name: 'Alterar dados', id: 'change-profile' })}
@@ -75,32 +75,32 @@ export default () => {
             <input type="file" id="file" accept="image/*">
             <label for="file">
               ${image({
-      id: 'img-upload',
-      class: 'icon',
-      src: './pages/elementos/icones/img-1.png',
-    })}
+                id: 'img-upload',
+                class: 'icon',
+                src: './pages/elementos/icones/img-1.png',
+              })}
             </label>
             ${icon({ name: 'talher', id: 'remove-photo', class: 'disappear' })}
           </div>
           ${input({
-      type: 'text',
-      id: 'name',
-      placeholder: ' Nome',
-      value: `${userData.userName}`,
-    })}
+            type: 'text',
+            id: 'name',
+            placeholder: ' Nome',
+            value: `${userData.userName}`,
+          })}
           ${input({
-      type: 'email',
-      id: 'email',
-      placeholder: 'E-mail',
-      value: `${userData.email}`,
-    })}
+            type: 'email',
+            id: 'email',
+            placeholder: 'E-mail',
+            value: `${userData.email}`,
+          })}
           ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
           ${input({
-      type: 'text',
-      id: 'profession',
-      placeholder: 'Profissão',
-      value: `${userData.profession}`,
-    })}
+            type: 'text',
+            id: 'profession',
+            placeholder: 'Profissão',
+            value: `${userData.profession}`,
+          })}
           ${button({ name: 'Salvar alterações', id: 'save-profile' })}
           ${button({ name: 'Cancelar', id: 'cancel-profile' })}
         </div>
@@ -175,29 +175,28 @@ export default () => {
       } else {
         saveProfile(null);
       }
-
-      const saveProfile = (urlFile) => {
-        const profile = {
-          photoURL: urlFile
-            ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
-            : firebase.auth().currentUser.photoURL,
-          displayName: container.querySelector('#name').value,
-          uid: firebase.auth().currentUser.uid,
-        };
-        userData.photo = profile.photoURL;
-        userData.userName = profile.displayName;
-        userData.profession = container.querySelector('#profession').value;
-        userData.age = container.querySelector('#age').value;
-        updateCollection(user.id, userData);
-        updateProfile(profile, redirectToHome);
-      }
     });
+    function saveProfile(urlFile) {
+      const profile = {
+        photoURL: urlFile
+          ? `https://firebasestorage.googleapis.com/v0/b/social-networt.appspot.com/o/${urlFile}?alt=media`
+          : firebase.auth().currentUser.photoURL,
+        displayName: container.querySelector('#name').value,
+        uid: firebase.auth().currentUser.uid,
+      };
+      userData.photo = profile.photoURL;
+      userData.userName = profile.displayName;
+      userData.profession = container.querySelector('#profession').value;
+      userData.age = container.querySelector('#age').value;
+      updateCollection(user.id, userData);
+      updateProfile(profile, redirectToHome);
+    }
 
-    const redirectToHome = () => {
+    function redirectToHome() {
       window.location.hash = 'home';
     }
 
-    const modal = () => {
+    function modal() {
       const modal = container.querySelector('#modal');
       modal.classList.remove('disappear');
       container.querySelector('#delete-yes').addEventListener('click', () => {
@@ -217,7 +216,7 @@ export default () => {
       });
     }
 
-    const removeAccount = () => {
+    function removeAccount() {
       deleteAccount(user.id, redirectToLogin);
     }
 
@@ -226,7 +225,7 @@ export default () => {
       modal();
     });
 
-    const redirectToLogin = () => {
+    function redirectToLogin() {
       window.location.hash = 'login';
     }
 
