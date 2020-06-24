@@ -6,6 +6,7 @@ import {
     logout,
     updatePassword,
     updateCollection,
+    isLogin,
 } from './data.js';
 import { image } from '../elementos/objetos/image.js';
 import { button } from '../elementos/objetos/button.js';
@@ -275,6 +276,7 @@ export default () => {
 
     printAge();
   }
+  isLogin();
   loadProfile(addProfile);
 
   return container;
