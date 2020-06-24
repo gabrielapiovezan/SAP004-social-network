@@ -6,6 +6,7 @@ import {
     postDelete,
     filePost,
     loadUserPost,
+    isLogin,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -167,7 +168,7 @@ export default () => {
           </span>
         <div>
           ${link({
-            href: 'https://marianambarros.github.io/portifolio/src/',
+            href: 'https://marianambarros.github.io/portifolio/',
             name: 'Mariana Barros',
             class: 'link-footer',
             title: 'Mariana Barros',
@@ -322,7 +323,7 @@ export default () => {
             type: 'text',
             value: `${post.data().text}`,
             size: '500',
-            placeholder: 'Insira seu comentário!',
+            placeholder: '',
             class: 'textarea-comment',
           })}
           ${renderImg(post.data().url_file)}
@@ -588,10 +589,10 @@ export default () => {
   const clearPost = () => {
     container.querySelector('#posts').innerHTML = '';
   };
+
+  isLogin();
   createNewPost();
-
   loadUserPost(profile);
-
   loadPost(
     clearPost,
     addPosts,
