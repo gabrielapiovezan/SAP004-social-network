@@ -90,7 +90,9 @@ export const loadProfile = (profile) => {
         .onSnapshot((snap) => {
             snap.forEach((user) => {
                 if (firebase.auth().currentUser.uid === user.data().userUid) {
+                    console.log(user);
                     profile(user);
+                    console.log(user);
                 }
             });
         });
@@ -110,9 +112,9 @@ export const logout = () => {
     window.location.hash = '';
 };
 
-export const isLogin = () => {
-    if (!firebase.auth().currentUser) {
-        window.location.hash = '#';
-        window.location.reload();
-    }
-};
+// export const isLogin = () => {
+//     if (!firebase.auth().currentUser) {
+//         window.location.hash = '#';
+//         window.location.reload();
+//     }
+// };

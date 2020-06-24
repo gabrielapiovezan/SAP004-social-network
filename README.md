@@ -1,123 +1,170 @@
 # Umâmi
 
-Para acessar a página [clique aqui](https://...). :computer:
+Para acessar a página [clique aqui](https://social-networt.web.app/). :computer:
+
+<p align='center'>
+<img src='./public/pages/elementos/imagens/IMG3.png' alt='logo do projeto' height='300px'> 
+</p>
 
 ## Índice
 
-[arrumar]
-
 - [1. Introdução](#1-introdução)
-- [2. Resumo do projeto](#2-resumo-do-projeto)
-- [3. Objetivos de aprendizagem](#3-objetivos-de-aprendizagem)
-- [4. Considerações gerais](#4-considerações-gerais)
-- [5. Entrega](#5-entrega)
-- [6. Guias, dicas e leituras
-  complementares](#6-guias-dicas-e-leituras-complementares)
+- [2. Definições do projeto](#2-definições-do-projeto)
+- [3. Desenvolvimento](#3-desenvolvimento)
+- [4. Estrutura e funcionalidades](#4-estrutura-e-funcionalidades)
+- [5. Considerações técnicas](#5-considerações-técnicas)
+- [6. Implementações futuras](#6-implementações-futuras)
+- [7. Autoria](#7-autoria)
+- [8. Agradecimentos](#8-agradecimentos)
 
 ---
 
-## 1.Introdução - Resumo do projeto
+## 1. Introdução
 
-O projeto **Umâmi**, se trata de uma rede social
-
-Múltiplas telas, persistência de dados, Single-Page Application
+O projeto **Umâmi**, se trata de uma rede social com foco em gastronomia :fork_and_knife:.  
+Desenvolvida com múltiplas telas (SPA) e persistência de dados, permite ao usuário criar uma conta, postar receitas, posts ou fotos de forma privada ou pública, dar like e comentar nas publicações, além de criar seu perfil, editar ou remover todas essas informações.
 
 <p align='center'>
 <img src='https://media.giphy.com/media/10u6gt11vnm812/giphy.gif' alt='gif cozinheiro'> 
 </p>
 
-[foto desktop]
+## 2. Definições do projeto
 
-## 2.Definições do projeto
+### Principais usuários
 
-### Identificação do usuário - Principais usuários
-
-Chefes, aspirantes, cozinheiros amadores...
+Chefes, aspirantes, cozinheiros amadores e qualquer pessoa que se interesse por culinária.
 
 ### Objetivo
 
-Reunir informações e receitas...
+Criar uma ambiente onde é possível a troca de experiências culinárias, receitas, aventuras, dicas e achados sobre o mundo gastronômico.
 
-### Solução ???
+**Objetivo indireto**
 
-## 3.Desenvolvimento
+O usuário da rede social **Umâmi** pode:
+
+- Se registrar
+- Logar
+- Postar textos e imagens
+- Alterar seu perfil
+- Comentar e dar like nas postagens
+- Editar e excluir os comentários e postagens
+- Mudar sua senha e deletar sua conta
+
+## 3. Desenvolvimento
 
 ### Sobre a página
 
-O nome foi escolhido ...
-As cores foram pensadas...
+**Umâmi** é um dos cinco gostos básicos do paladar humano, como o ácido, doce, amargo e salgado, e é uma palavra de origem japonesa (うま味?), que significa "gosto saboroso e agradável", o que tem tudo a ver com a aplicação, onde o usuário pode trocar experiências para vivenciar todas essas sensações.  
+As cores principais foram escolhidas para trazer a sensação de conforto e acolhimento (marrom) e estimular o apetite (amarelo).
 
 <p align='center'>
 <img src='./readme/mobile1.png' height='400px' alt='mobile 1'> <img src='./readme/mobile2.png' height='400px' alt='mobile 2'> <img src='./readme/mobile3.png' height='400px' alt='mobile 3'> <img src='./readme/mobile4.png' height='400px' alt='mobile 4'> 
 </p>
 
 <p align='center'>
-<img src='./readme/desktop1.png' height='365px' alt='desktop 1'> 
+<img src='./readme/desktop1.png' width='780px' alt='desktop 1'> 
 </p>
+
+[print timeline]
 
 ### Cores
 
-![Cores](./readme/cores.png)
+<p align='center'>
+<img src='./readme/cores.png' width='600px' alt='cores'> 
+</p>
 
 ### Protótipo
 
-Protótipo previamente fornecido ....
+Os protótipos gerais foram previamente fornecidos na descrição do projeto.
 
 - Tela mobile
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/32286663/56174616-ec9f6100-5fb8-11e9-9edb-d5ef7c251d9c.png' alt='mobile' height='500px'> 
+<img src='./readme/prototipo-mobile.png' alt='mobile' width='700px'> 
 </p>
-  <!-- ![mobile](https://user-images.githubusercontent.com/32286663/56174616-ec9f6100-5fb8-11e9-9edb-d5ef7c251d9c.png) -->
 
 - Tela Desktop
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/32286663/56174626-fcb74080-5fb8-11e9-8854-26e8d9c4e25f.png' alt='desktop' width='600px'> 
+<img src='./readme/prototipo-desktop.png' alt='desktop' width='700px'> 
 </p>
-  <!-- ![desktop](https://user-images.githubusercontent.com/32286663/56174626-fcb74080-5fb8-11e9-8854-26e8d9c4e25f.png) -->
 
 ### Histórias de Usuário
 
-- Como usuário novo, devo poder criar uma conta com email e senha válidos para poder iniciar uma sessão e ingressar na Rede Social.
+**História de usuário 01**
 
-- Como usuário novo, devo poder ter a opção de iniciar sessão com minha conta do Google para ingressar na Rede Social sem necessidade de criar uma conta de email válido.
+> Como usuário novo, devo poder criar uma conta com email e senha válidos para poder iniciar uma sessão e ingressar na Rede Social.
 
-- Como usuário logado devo poder criar, guardar, modificar no mesmo lugar (in place) e deletar publicações (post) privadas ou públicas.
+**História de usuário 02**
 
-- Como usuário logado devo poder ver todos os posts públicos e privados que criei até o momento, do mais recente para o mais antigo, assim como a opção de trocar a configuração de privacidade dos meus posts.
+> Como usuário novo, devo poder ter a opção de iniciar sessão com minha conta do Google para ingressar na Rede Social sem necessidade de criar uma conta de email válido.
 
-- Eu como usuário logado, posso dar like e ver a contagem de likes em minhas publicações
+**História de usuário 03**
 
-- Eu como usuário logado, posso escrever, salvar, editar ou deletar um comentário em minhas publicações.
+> Como usuário logado devo poder criar, guardar, modificar no mesmo lugar (in place) e deletar publicações (post) privadas ou públicas.
 
-- Eu como usuário logado, posso visualizar os dados de meu perfil criado, editá-los e incluir minha foto de perfil.
+**História de usuário 04**
 
-- Eu como usuário logado, posso adicionar fotos aos meus posts.
+> Como usuário logado devo poder ver todos os posts públicos e privados que criei até o momento, do mais recente para o mais antigo, assim como a opção de trocar a configuração de privacidade dos meus posts.
 
-Todas as histórias implementadas levam em consideração critérios de aceitação e definições de pronto.
+**História de usuário 05**
 
-## 4.Estrutura e funcionalidades - Funcionamento
+> Eu como usuário logado, posso dar like e ver a contagem de likes em minhas publicações
 
-Temos ao total 4 telas, sendo elas: login, registro, linha do tempo e perfil.  
-O usuário pode logar com email e senha, e pelo Google, também pode se registrar com um novo usuário.  
-Como usuário logado consegue fazer post públicos e privados, com texto e imagens, além de editá-los, exclui-los e alterar a privacidade, pode visualizar os posts feitos até o momento por ele e outros usuários, dar _like_ e comentar nas postagens, editar e excluir estes comentários, visualiza os posts por ordem cronológica do mais recente para o mais antigo.  
-No seu perfil consegue visualizar e alterar seus dados pessoais (Nome, foto, profissão, data de nascimento, email e senha) além de deletar sua conta.
+**História de usuário 06**
 
-## 5.Considerações técnicas
+> Eu como usuário logado, posso escrever, salvar, editar ou deletar um comentário em minhas publicações.
 
-Para a construção do site foi utilizado o software Visual Studio Code com a extenção do Node-js.  
-Sua marcação foi feita em HTML5 utilizando tags semânticas e sistema de rotas, sua estilização foi feita em CSS3 utilizando o conceito de mobile first e utilizando flexbox para o posicionamento dos elementos.  
-Utilizamos o vanilla JavaScript na manipulação dos dados, funções assincronas, manipulação do DOM, modularização, uso de callbacks, consumo de Promises e template strings, levando em conta a separação de responsabilidade nos arquivos e criação de elementos.  
-A manipulação e persistência dos dados foi feita através de um banco de dados não relacional, em tempo real, implementando operações CRUD (Criação, Leitura, Atualização e Remoção) de dados.  
-Utilizamos o [Firebase](https://firebase.google.com/) (Hosting, Auth, Database e Firestore).  
-Colaboração e organização com Trello, Git e GitHub.  
-Interface hospedada usando Firebase Hosting.
+**História de usuário 07**
+
+> Eu como usuário logado, posso visualizar os dados de meu perfil criado, editá-los e incluir minha foto de perfil.
+
+**História de usuário 08**
+
+> Eu como usuário logado, posso adicionar fotos aos meus posts.
+
+Todas as histórias implementadas levam em consideração _critérios de aceitação_ e _definições de pronto_.
+
+## 4. Estrutura e funcionalidades
+
+A aplicação possui 4 telas: login, registro, linha do tempo e perfil, onde:
+
+- O usuário pode logar com email e senha, e pelo Google.
+- Também pode se registrar como um novo usuário.
+
+Como usuário logado é permitido:
+
+- Visualizar todos os posts em ordem cronológica.
+- Fazer post públicos e privados, com texto e imagens.
+- Editar, excluir e alterar a privacidade dos posts.
+- Dar _like_ e comentar nas postagens.
+- Editar e excluir os comentários.
+
+No seu perfil é permitido:
+
+- Visualizar e alterar seus dados pessoais (nome, foto, profissão, data de nascimento, email e senha).
+- Deletar sua conta.
+
+<p align='center'>
+<img src='./readme/desktop3.png' width='780px' alt='desktop 3'> 
+</p>
+
+## 5. Considerações técnicas
+
+Para a construção do site foi utilizado o software _Visual Studio Code_ com a extenção do _NPM_, _Node.js_ e _Git_.  
+Sua marcação foi feita em _HTML5_ utilizando tags semânticas e sistema de rotas.  
+Sua estilização foi feita em _CSS3_ utilizando o conceito de mobile first e utilizando flexbox para o posicionamento dos elementos.  
+Foi utilizado o vanilla _JavaScript_ na manipulação dos dados, funções assíncronas, manipulação do DOM, modularização, uso de callbacks, consumo de promises e template strings, levando em conta a separação de responsabilidade nos arquivos e criação de elementos.  
+A manipulação e persistência dos dados foi feita com Firebase através de um banco de dados não relacional, em tempo real, implementando operações CRUD (Criação, Leitura, Atualização e Remoção) de dados.
+_[Firebase](https://firebase.google.com/)_ (Hosting, Auth, Database e Firestore).  
+Colaboração e armazenamento com _GitHub_.  
+Organização com _Trello_.  
+Interface hospedada usando _Firebase Hosting_.
 
 ### Instalação e execução. :octocat:
 
 - [Clone](https://help.github.com/articles/cloning-a-repository/) o projeto na sua máquina executando o seguinte comando no seu terminal:
 
 ```sh
-git clone (link do repositório)
+git clone (link-do-repositório)
 ```
 
 - Instale as dependências do projeto com o comando:
@@ -138,10 +185,29 @@ npm start
 http://localhost:5000
 ```
 
-## 6.Considerações gerais
+## 6. Implementações futuras
 
-## 7.Implementações futuras
+Futuramente serão implementadas funcionalidades para melhoria da experiência do usuário:
 
-## 8.Autoria
+- Compartilhar as publicações.
+- Salvar publicações.
+- Pesquisar por hashtags e usuários.
+- Curtir comentários.
+- Seguidores e seguir.
+- Implementar a página de perfil.
+- Incluir vídeos nos posts.
+- Implementar stories (vídeos e fotos).
+- Visualizar usuários que curtiram.
+- Visualizar os próprios posts no perfil.
+- Sugestões de amizade e postagens.
+- Marcar usuários nos posts.
+- Explorar posts.
 
-Este projeto foi feito por [Camila Cunha](https://github.com/camilagerarde), Gabriela Piovezam e Mariana Barros com base no projeto da Laboratoria.
+## 7. Autoria
+
+Este projeto foi feito por [Camila Cunha](https://github.com/camilagerarde), [Gabriela Piovezan](https://github.com/gabrielapiovezan) e [Mariana Barros](https://github.com/MarianaMBarros) com base no projeto da [Laboratoria](https://github.com/Laboratoria).
+
+## 8. Agradecimentos
+
+- [Laboratoria](https://github.com/Laboratoria).
+- Ícones: [Freepik](https://www.flaticon.com/br/autores/freepik), [Pixel Perfect](https://www.flaticon.com/br/autores/pixel-perfect) e [Those Icons](https://www.flaticon.com/br/autores/those-icons).
