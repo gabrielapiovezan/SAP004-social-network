@@ -4,8 +4,6 @@ export const isLogin = () => {
     if (!firebase.auth().currentUser) {
         window.location.hash = '#';
         window.location.reload();
-    } else {
-        window.location.hash = '#home';
     }
 };
 export const loadPost = (

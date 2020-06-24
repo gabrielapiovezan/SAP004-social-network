@@ -483,15 +483,18 @@ export default () => {
     });
     const data = post.data();
     container.querySelector(`#iconsend-comment-${post.id}`).addEventListener('click', () => {
-      const comment = {
-        text: container.querySelector(`#comment-text${post.id}`).value,
-        user_id: firebase.auth().currentUser.uid,
-        user_name: firebase.auth().currentUser.displayName,
-        photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-        date: new Date().getTime(),
-      };
-      data.comments.unshift(comment);
-      updateCollection(post.id, data);
+      const message = container.querySelector(`#comment-text${post.id}`).value;
+      if (message) {
+        const comment = {
+          text: message,
+          user_id: firebase.auth().currentUser.uid,
+          user_name: firebase.auth().currentUser.displayName,
+          photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
+          date: new Date().getTime(),
+        };
+        data.comments.unshift(comment);
+        updateCollection(post.id, data);
+      }
     });
   };
 
@@ -592,7 +595,6 @@ export default () => {
     container.querySelector('#posts').innerHTML = '';
   };
 
-  isLogin();
   createNewPost();
   loadUserPost(profile);
   loadPost(
@@ -607,5 +609,7 @@ export default () => {
     printComment,
     textareaAdaptable
   );
+
+  isLogin();
   return container;
 };
