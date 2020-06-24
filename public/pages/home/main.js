@@ -90,6 +90,7 @@ export default () => {
             type: 'text',
             size: '500',
             placeholder: 'Compartilhe sua publicação aqui!',
+            value: null,
           })}
           ${image({
             id: 'icon-variable-loker',
@@ -203,7 +204,8 @@ export default () => {
         });
         container.querySelector('#post-btn').addEventListener('click', (event) => {
             event.preventDefault();
-            if (container.querySelector(`#post-text`).value || container.querySelector('#file')) {
+            console.log(container.querySelector('#file').value);
+            if (container.querySelector(`#post-text`).value || container.querySelector('#file').value) {
                 const fileInpxut = container.querySelector('#file');
                 if (fileInpxut.files[0]) {
                     filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase, privacy);
@@ -222,7 +224,7 @@ export default () => {
                 null,
             name: firebase.auth().currentUser.displayName,
             photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
-            text: postText.value,
+            text: postText.value || '',
             user_id: firebase.auth().currentUser.uid,
             liked: [],
             comments: [],
