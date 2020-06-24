@@ -6,6 +6,7 @@ import {
     postDelete,
     filePost,
     loadUserPost,
+    isLogin,
 } from './data.js';
 import { button } from '../elementos/objetos/button.js';
 import { link } from '../elementos/objetos/link.js';
@@ -588,10 +589,10 @@ export default () => {
   const clearPost = () => {
     container.querySelector('#posts').innerHTML = '';
   };
+
+  isLogin();
   createNewPost();
-
   loadUserPost(profile);
-
   loadPost(
     clearPost,
     addPosts,
