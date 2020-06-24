@@ -21,17 +21,17 @@ export default () => {
 				<div id="error" class="error"></div>
 				<p>Entrar com Google</p>
 				${input({
-          type: 'image',
-          src: './pages/elementos/icones/icon-google-32.png',
-          id: 'gmailBtn',
-          class: 'icon-google',
-        })}
+        type: 'image',
+        src: './pages/elementos/icones/icon-google-32.png',
+        id: 'gmailBtn',
+        class: 'icon-google',
+    })}
 				<p>Não tem uma conta? ${link({
-          href: '#register',
-          name: 'Cadastre-se',
-          title: 'cadastre-se',
-          target: '_self',
-        })}</p>
+        href: '#register',
+        name: 'Cadastre-se',
+        title: 'cadastre-se',
+        target: '_self',
+    })}</p>
 			</div>`;
 
     container.querySelector('#login-email').addEventListener('submit', (event) => {
@@ -50,7 +50,7 @@ export default () => {
         loginGoogle(redirectHome);
     });
 
-    function redirectHome() {
+    const redirectHome = () => {
         window.location.hash = 'home';
     }
 
