@@ -202,7 +202,7 @@ export default () => {
         });
         container.querySelector('#post-btn').addEventListener('click', (event) => {
             event.preventDefault();
-            if (container.querySelector(`#post-text`).value) {
+            if (container.querySelector(`#post-text`).value || container.querySelector('#file')) {
                 const fileInpxut = container.querySelector('#file');
                 if (fileInpxut.files[0]) {
                     filePost(fileInpxut.files[0], `images${fileInpxut.files[0].name}`, saveFirebase, privacy);
