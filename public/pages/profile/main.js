@@ -89,12 +89,6 @@ export default () => {
             placeholder: ' Nome',
             value: `${userData.userName}`,
           })}
-          ${input({
-            type: 'email',
-            id: 'email',
-            placeholder: 'E-mail',
-            value: `${userData.email}`,
-          })}
           ${input({ type: 'date', id: 'age', value: `${userData.age}` })}
           ${input({
             type: 'text',

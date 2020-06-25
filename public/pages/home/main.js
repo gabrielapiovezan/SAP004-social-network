@@ -87,7 +87,7 @@ export default () => {
           ${textarea({
             id: 'post-text',
             type: 'text',
-            size: '500',
+            rows: '5',
             placeholder: 'Compartilhe sua publicação aqui!',
             value: null,
           })}
@@ -231,6 +231,7 @@ export default () => {
             privacy: privacy,
         };
         postText.value = '';
+        postText.style.height = 'auto';
         clearPostBox();
         createPost(post);
     };
@@ -322,7 +323,7 @@ export default () => {
             id: `text${post.id}`,
             type: 'text',
             value: `${post.data().text}`,
-            size: '500',
+            rows: 3,
             placeholder: '',
             class: 'textarea-comment',
           })}
@@ -344,7 +345,7 @@ export default () => {
           ${textarea({
             id: `comment-text${post.id}`,
             type: 'text',
-            size: '500',
+            rows: 3,
             placeholder: 'Insira seu comentário!',
             class: 'textarea-comment',
           })}
@@ -546,7 +547,7 @@ export default () => {
           ${textarea({
             value: `${data.comments[i].text}`,
             id: `comment-${i}-${post.id}`,
-            size: 50,
+            rows: 3,
             placeholder: '',
           })}
         </div>
