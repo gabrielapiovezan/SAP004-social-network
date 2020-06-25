@@ -20,7 +20,6 @@ export default () => {
     container.classList.add('container-home');
 
     container.innerHTML = `
-
     <div id="modal" class="modal disappear">
       <div class="modal-content">
         <span class="close close-modal">&times;</span>
@@ -566,7 +565,6 @@ export default () => {
             class: 'disappear',
           })}
         </div>
-
       </div>`;
       container.querySelector(`#comment-${i}-${post.id}`).setAttribute('disabled', true);
       if (firebase.auth().currentUser.uid === data.comments[i].user_id) {

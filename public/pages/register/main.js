@@ -5,10 +5,10 @@ import { link } from '../elementos/objetos/link.js';
 import { image } from '../elementos/objetos/image.js';
 
 export default () => {
-  const container = document.createElement('div');
-  container.classList.add('container');
+    const container = document.createElement('div');
+    container.classList.add('container');
 
-  container.innerHTML = `
+    container.innerHTML = `
       ${image({ src: '/pages/elementos/imagens/IMG3.png', class: 'img-login', alt: 'logo-umâmi' })}
     <div class="login">
       <h1> &lt; Umâmi &gt; </h1>
@@ -26,27 +26,29 @@ export default () => {
       ${link({ href: '#', name: 'Voltar', title: 'voltar', target: '_self' })}
     </div>`;
 
-  container.querySelector('#register').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const user = {
-      userUid: '',
-      photo: './pages/elementos/imagens/chefe.png',
-      userName: container.querySelector('#name').value,
-      email: container.querySelector('#email').value,
-      profession: container.querySelector('#profession').value,
-      age: container.querySelector('#age').value,
+    container.querySelector('#register').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const user = {
+            userUid: '',
+            photo: './pages/elementos/imagens/chefe.png',
+            userName: container.querySelector('#name').value,
+            email: container.querySelector('#email').value,
+            profession: container.querySelector('#profession').value,
+            age: container.querySelector('#age').value,
+        };
+
+        const password = container.querySelector('#password').value;
+        const confirmPassword = container.querySelector('#confirm-password').value;
+        const error = 'As senhas não conferem.';
+        password === confirmPassword ?
+            register(user, password, printErrorLogin) :
+            printErrorLogin(error);
+        window.location.hash = '#login';
+    });
+
+    const printErrorLogin = (answer) => {
+        container.querySelector('#error').innerHTML = answer;
     };
 
-    const password = container.querySelector('#password').value;
-    const confirmPassword = container.querySelector('#confirm-password').value;
-    const error = 'As senhas não conferem.';
-    password === confirmPassword ? register(user, password, printErrorLogin) : printErrorLogin(error);
-    window.location.hash = '#login';
-  });
-
-  const printErrorLogin = (answer) => {
-    container.querySelector('#error').innerHTML = answer;
-  };
-
-  return container;
+    return container;
 };

@@ -63,11 +63,16 @@ As cores principais foram escolhidas para trazer a sensação de conforto e acol
 
 <p align='center'>
 <img src='./readme/desktop1.png' width='780px' alt='desktop 1'> 
+<<<<<<< HEAD
+=======
 </p>
 
 <p align='center'>
 <img src='./readme/desktop2.png' width='780px' alt='desktop 2'> 
+>>>>>>> 6b4b5cad7eb57b56d6e9ae8a14215a04b41ec3db
 </p>
+
+[print timeline]
 
 ### Cores
 
@@ -98,6 +103,7 @@ Os protótipos gerais foram previamente fornecidos na descrição do projeto.
 **História de usuário 02**
 
 > Como usuário novo, devo poder ter a opção de iniciar sessão com minha conta do Google para ingressar na Rede Social sem necessidade de criar uma conta de email válido.
+<<<<<<< HEAD
 
 **História de usuário 03**
 
@@ -123,6 +129,33 @@ Os protótipos gerais foram previamente fornecidos na descrição do projeto.
 
 > Eu como usuário logado, posso adicionar fotos aos meus posts.
 
+=======
+
+**História de usuário 03**
+
+> Como usuário logado devo poder criar, guardar, modificar no mesmo lugar (in place) e deletar publicações (post) privadas ou públicas.
+
+**História de usuário 04**
+
+> Como usuário logado devo poder ver todos os posts públicos e privados que criei até o momento, do mais recente para o mais antigo, assim como a opção de trocar a configuração de privacidade dos meus posts.
+
+**História de usuário 05**
+
+> Eu como usuário logado, posso dar like e ver a contagem de likes em minhas publicações
+
+**História de usuário 06**
+
+> Eu como usuário logado, posso escrever, salvar, editar ou deletar um comentário em minhas publicações.
+
+**História de usuário 07**
+
+> Eu como usuário logado, posso visualizar os dados de meu perfil criado, editá-los e incluir minha foto de perfil.
+
+**História de usuário 08**
+
+> Eu como usuário logado, posso adicionar fotos aos meus posts.
+
+>>>>>>> 6b4b5cad7eb57b56d6e9ae8a14215a04b41ec3db
 Todas as histórias implementadas levam em consideração _critérios de aceitação_ e _definições de pronto_.
 
 ## 4. Estrutura e funcionalidades
