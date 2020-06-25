@@ -203,7 +203,6 @@ export default () => {
         });
         container.querySelector('#post-btn').addEventListener('click', (event) => {
             event.preventDefault();
-            console.log(container.querySelector('#file').value);
             if (container.querySelector(`#post-text`).value || container.querySelector('#file').value) {
                 const fileInpxut = container.querySelector('#file');
                 if (fileInpxut.files[0]) {
@@ -367,6 +366,7 @@ export default () => {
     };
     loadUserPost(getDataUser, post.data().user_id);
   };
+
   const lokerPost = (post) => {
     const loker = container.querySelector(`#icon-variable-loker-${post.id}`);
     let postUser = post.data().user_id;
@@ -534,18 +534,20 @@ export default () => {
       <div  class="comment">
         <figure>
           ${image({
+            id: `imgUserComment${data.comments[i].user_id}`,
             class: 'img-profile-comment',
             alt: 'foto-usuário',
-            src: `${data.comments[i].photo}`,
+            src: ``,
           })}
         </figure>
         <div class='comment-box'>
-          <h3>${data.comments[i].user_name}</h3> 
+          <h3 id="nameUserComment${data.comments[i].user_id}"></h3> 
           <time>${dateAndHour(date)}</time> 
           ${textarea({
             value: `${data.comments[i].text}`,
             id: `comment-${i}-${post.id}`,
             size: 50,
+            placeholder: '',
           })}
         </div>
         <div class='icons-comment'>
@@ -571,7 +573,15 @@ export default () => {
         container.querySelector(`#iconclose-${i}-${post.id}`).classList.remove('disappear');
         container.querySelector(`#iconedit-${i}-${post.id}`).classList.remove('disappear');
       }
+
+      const userComment = (dataUser) => {
+        document.querySelector(`#imgUserComment${data.comments[i].user_id}`).src = dataUser.photo;
+        document.querySelector(`#nameUserComment${data.comments[i].user_id}`).innerHTML =
+          dataUser.userName;
+      };
+      loadUserPost(userComment, data.comments[i].user_id);
     }
+
     deleteComents(data, post);
     editComments(data, post);
   };

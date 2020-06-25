@@ -13,7 +13,6 @@ export const register = (user, password, printErrorLogin) => {
                 firebase.firestore().collection('users').add(user);
             })
             .catch(function(error) {
-                console.log(error.code);
                 printErrorLogin(errorHandling(error.code));
             });
     } else {
