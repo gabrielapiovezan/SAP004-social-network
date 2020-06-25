@@ -534,14 +534,14 @@ export default () => {
       <div  class="comment">
         <figure>
           ${image({
-            id: `imgUserComment${data.comments[i].user_id}`,
+            id: `imgUserComment-${i}-${data.comments[i].user_id}`,
             class: 'img-profile-comment',
             alt: 'foto-usuário',
             src: ``,
           })}
         </figure>
         <div class='comment-box'>
-          <h3 id="nameUserComment${data.comments[i].user_id}"></h3> 
+          <h3 id="nameUserComment-${i}-${data.comments[i].user_id}"></h3> 
           <time>${dateAndHour(date)}</time> 
           ${textarea({
             value: `${data.comments[i].text}`,
@@ -575,8 +575,9 @@ export default () => {
       }
 
       const userComment = (dataUser) => {
-        document.querySelector(`#imgUserComment${data.comments[i].user_id}`).src = dataUser.photo;
-        document.querySelector(`#nameUserComment${data.comments[i].user_id}`).innerHTML =
+        document.querySelector(`#imgUserComment-${i}-${data.comments[i].user_id}`).src =
+          dataUser.photo;
+        document.querySelector(`#nameUserComment-${i}-${data.comments[i].user_id}`).innerHTML =
           dataUser.userName;
       };
       loadUserPost(userComment, data.comments[i].user_id);
