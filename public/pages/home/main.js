@@ -203,7 +203,6 @@ export default () => {
         });
         container.querySelector('#post-btn').addEventListener('click', (event) => {
             event.preventDefault();
-            console.log(container.querySelector('#file').value);
             if (container.querySelector(`#post-text`).value || container.querySelector('#file').value) {
                 const fileInpxut = container.querySelector('#file');
                 if (fileInpxut.files[0]) {
