@@ -1,11 +1,5 @@
 export const logout = () => firebase.auth().signOut();
 
-export const isLogin = () => {
-    if (!firebase.auth().currentUser) {
-        window.location.hash = '#';
-        window.location.reload();
-    }
-};
 export const loadPost = (
     clearPost,
     addPosts,
@@ -109,4 +103,13 @@ export const loadUserPost = (callback, postUser) => {
                 }
             });
         });
+};
+
+export const isLogin = () => {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (!user) {
+            window.location.hash = '#';
+            window.location.reload();
+        }
+    });
 };

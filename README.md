@@ -214,4 +214,4 @@ Este projeto foi feito por [Camila Cunha](https://github.com/camilagerarde), [Ga
 ## 8. Agradecimentos
 
 - [Laboratoria](https://github.com/Laboratoria).
-- Ícones: [Freepik](https://www.flaticon.com/br/autores/freepik), [Pixel Perfect](https://www.flaticon.com/br/autores/pixel-perfect) e [Those Icons](https://www.flaticon.com/br/autores/those-icons).
+- Ícones e vetores: [Freepik](https://www.flaticon.com/br/autores/freepik), [Pixel Perfect](https://www.flaticon.com/br/autores/pixel-perfect) e [Those Icons](https://www.flaticon.com/br/autores/those-icons).
