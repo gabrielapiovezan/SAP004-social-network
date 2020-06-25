@@ -5,6 +5,9 @@ export const login = (email, password, printErrorLogin, callback) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(function() {
+            isUser();
+        })
+        .then(function() {
             callback();
         })
         .catch(function(error) {
@@ -40,4 +43,33 @@ export const loginGoogle = (callback) => {
                 callback();
             }
         });
+};
+
+export const isUser = () => {
+    firebase
+        .firestore()
+        .collection('users')
+        .onSnapshot((snap) => {
+            let valid = false;
+            snap.forEach((user) => {
+                if (firebase.auth().currentUser.uid === user.data().userUid) {
+                    valid = true;
+                }
+            });
+            creatUser(valid);
+        });
+};
+
+const creatUser = (condition) => {
+    if (!condition) {
+        const user = {
+            userUid: firebase.auth().currentUser.uid,
+            photo: firebase.auth().currentUser.photoURL || './pages/elementos/imagens/chefe.png',
+            userName: firebase.auth().currentUser.displayName,
+            email: firebase.auth().currentUser.email,
+            profession: '',
+            age: '',
+        };
+        firebase.firestore().collection('users').add(user);
+    }
 };
