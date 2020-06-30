@@ -207,7 +207,7 @@ header h1,
 }
 
 .profile {
-  align-items: flex-end;
+  align-items: center;
 }
 
 .profile div {
@@ -488,7 +488,6 @@ hr {
     justify-content: center;
   }
   .profile {
-    align-items: flex-end;
     align-self: baseline;
     background-color: #ffd932;
     border: solid 1px #3c2415;
