@@ -153,7 +153,7 @@ No seu perfil é permitido:
 
 ## 5. Considerações técnicas
 
-Para a construção do site foi utilizado o software _Visual Studio Code_ com a extenção do _NPM_, _Node.js_ e _Git_.  
+Para a construção do site foi utilizado o software _Visual Studio Code_ com _NPM_ e _Git_.  
 Sua marcação foi feita em _HTML5_ utilizando tags semânticas e sistema de rotas.  
 Sua estilização foi feita em _CSS3_ utilizando o conceito de mobile first e utilizando flexbox para o posicionamento dos elementos.  
 Foi utilizado o vanilla _JavaScript_ na manipulação dos dados, funções assíncronas, manipulação do DOM, modularização, uso de callbacks, consumo de promises e template strings, levando em conta a separação de responsabilidade nos arquivos e criação de elementos.  
