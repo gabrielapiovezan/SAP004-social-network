@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "social-networt"
+    "default": "social-networt",
+    "umami-social-network": "umami-social-network"
   }
 }
