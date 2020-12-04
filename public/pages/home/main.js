@@ -255,7 +255,7 @@ export default () => {
   };
 
   const renderImg = (url_file) => {
-    return url_file ? `${image({ src: url_file, class: 'img-post' })}` : '';
+    return `${image({ src: url_file, class: 'img-post' })}` || '';
   };
 
   container.querySelector('#file').addEventListener('change', (event) => {
@@ -295,7 +295,7 @@ export default () => {
             })}
           </figure>
           <div>
-            <h3 id="nameUser${post.id}"></h3>
+            <h3 id="nameUser${post.id}">${post.name}</h3>
             <time>${dateAndHour(date)}</time>
           </div>
               ${image({
@@ -327,7 +327,8 @@ export default () => {
           placeholder: '',
           class: 'textarea-comment',
         })}
-       <figure> ${renderImg(post.data().url_file)}</figure>
+
+      ${renderImg(post.data().url_file)}
       </div>
       <hr não apagar linha divisória>
       <div class="icon-post" >
